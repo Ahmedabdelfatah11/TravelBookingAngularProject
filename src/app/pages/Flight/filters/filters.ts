@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filters',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './filters.html',
   styleUrl: './filters.css'
 })
 export class Filters {
-  filterForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.filterForm = this.fb.group({
-      priceRange: [null],
-      departureTime: [null],
-      rating: [[]],
-      airlines: [[]],
-      tripType: [[]]
-    });
+  departureAirport = signal('');
+  arrivalAirport = signal('');
+  departureTime = signal('');
+  arrivalTime = signal('');
+  sort = signal('');
+
+  @Output() filterChange = new EventEmitter<any>();
+
+  applyFilters() {
+    const filters = {
+      DepartureAirport: this.departureAirport(),
+      ArrivalAirport: this.arrivalAirport(),
+      DepartureTime: this.departureTime(),
+      ArrivalTime: this.arrivalTime(),
+      Sort: this.sort()
+    };
+    this.filterChange.emit(filters);
+  }
+  updateSignal(signalVar: WritableSignal<string>, event: Event) {
+    const input = event.target as HTMLInputElement;
+    signalVar.set(input.value);
   }
 }

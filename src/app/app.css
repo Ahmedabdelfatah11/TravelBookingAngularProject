@@ -2,3 +2,7 @@
     --main-color: #8dd3bb;
     --secondary-color: #f0f0f0;
 }
+
+.src {
+    background-color: var(--main-color);
+}

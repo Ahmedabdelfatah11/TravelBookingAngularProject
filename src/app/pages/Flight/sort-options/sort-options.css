@@ -1,18 +1,34 @@
-.nav-link {
-    /* color: rgb(141, 211, 187); */
-    color: #000;
+/* Custom select styling */
+.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.nav-link:hover {
-    color: #000;
-    background-color: rgb(141, 211, 187);
+.form-select:focus {
+    border-color: rgb(141, 211, 187);
+    box-shadow: 0 0 0 3px rgba(163, 248, 203, 0.67);
+    outline: none;
 }
 
-.nav-link.active {
-    color: #000;
-    background-color: rgb(141, 211, 187);
+.form-select option {
+    padding: 0.5rem 1rem;
 }
 
-.nav-link.disabled {
-    color: #ccc;
+/* Custom dropdown arrow cannot be styled directly, so we hide it */
+.form-select::-ms-expand {
+    display: none;
+}
+
+/* Hover state */
+.form-select:hover {
+    border-color: #cbd5e0;
 }

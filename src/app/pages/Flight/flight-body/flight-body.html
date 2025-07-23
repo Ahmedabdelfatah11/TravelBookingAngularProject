@@ -1,16 +1,80 @@
-<div class="row m-2">
+<!-- <div class="row m-2">
     <div class="col-md-3">
-        <app-filters></app-filters>
+        <app-filters (filterChange)="onFilterChange($event)"></app-filters>
     </div>
     <div class="col-md-9">
         <app-sort-options></app-sort-options>
         <div class="mb-3">
-            <p>Showing 4 of 22 places</p>
+            <p>There are {{flightcount}} available Flights</p>
         </div>
-        @for (flight of flights; track $index) {
-        <app-flight-card [flight]="flight"></app-flight-card>
+        <div class="row g-4 opacity-100" [class.opacity-25]="loading">
+            @for (flight of flights; track flight.flightNumber) {
+            <app-flight-card [flight]="flight"></app-flight-card>
+            }
+        </div>
+        @if(loading){
+        <div class="text-center my-4">
+            <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         }
 
-        <button class="btn btn-primary w-100">Show more results</button>
+        @if (flightcount > pageSize) {
+        <nav>
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                    <button class="page-link" (click)="prevPage()">Previous</button>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">Page {{ currentPage }}</span>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage * pageSize >= flightcount">
+                    <button class="page-link" (click)="nextPage()">Next</button>
+                </li>
+            </ul>
+        </nav>
+        }
+    </div>
+</div> -->
+<div class="row m-2">
+    <div class="col-md-3">
+        <app-filters (filterChange)="onFilterChange($event)"></app-filters>
+    </div>
+    <div class="col-md-9">
+        <app-sort-options (sortChange)="onSortChange($event)"></app-sort-options>
+        <div class="mb-3">
+            <p>There are {{flightcount()}} available Flights</p>
+        </div>
+        <div class="row g-4 opacity-100" [class.opacity-25]="loading()">
+            @for (flight of flights(); track flight.flightNumber) {
+            <app-flight-card [flight]="flight"></app-flight-card>
+            }
+        </div>
+        @if(loading()){
+        <div class="text-center my-4">
+            <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        }
+
+        @if (flightcount() > pageSize()) {
+        <nav>
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item" [class.disabled]="currentPage() === 1">
+                    <button class="page-link" (click)="prevPage()">Previous</button>
+                </li>
+                @for (page of pages; track page) {
+                <li class="page-item" [class.active]="page === currentPage()">
+                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                </li>
+                }
+                <li class="page-item" [class.disabled]="currentPage() * pageSize() >= flightcount()">
+                    <button class="page-link" (click)="nextPage()">Next</button>
+                </li>
+            </ul>
+        </nav>
+        }
     </div>
 </div>
