@@ -1,0 +1,288 @@
+.flight-details-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.flight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.airline-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+}
+
+.rating-badge {
+    background: #4CAF50;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.flight-number {
+    text-align: right;
+
+    span {
+        display: block;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    h3 {
+        margin: 0.25rem 0 0;
+        font-size: 1.8rem;
+        color: #333;
+    }
+}
+
+.flight-route {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.route-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.airport {
+    flex: 1;
+    text-align: center;
+
+    h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .time {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 0;
+        color: #222;
+    }
+
+    .date {
+        color: #666;
+        margin: 0.25rem 0 0;
+    }
+}
+
+.route-line {
+    position: relative;
+    flex: 2;
+    height: 2px;
+    background: #ddd;
+    margin: 0 1rem;
+
+    .plane-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 0.5rem;
+        border-radius: 50%;
+        color: #3f51b5;
+        font-size: 1.2rem;
+    }
+
+    .duration {
+        position: absolute;
+        top: -2.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: #666;
+    }
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+
+    i {
+        font-size: 1.5rem;
+        color: #3f51b5;
+    }
+
+    h4 {
+        margin: 0 0 0.25rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    p {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+}
+
+.price-card {
+    background: #e8f5e9;
+
+    .price {
+        color: #4CAF50;
+        font-size: 1.3rem;
+    }
+}
+
+.class-selection h5 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.class-options {
+    flex-wrap: wrap;
+}
+
+.class-option {
+    display: flex;
+    align-items: center;
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 180px;
+    background-color: white;
+}
+
+.class-option:hover {
+    border-color: #198754;
+    transform: translateY(-2px);
+}
+
+.class-option input {
+    display: none;
+}
+
+.class-option .option-content .title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.class-option .option-content small {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+/* حالة التحديد */
+.class-option.economy input:checked~.option-content {
+    border-color: #198754;
+    color: #198754;
+}
+
+.class-option.first-class input:checked~.option-content {
+    border-color: #198754;
+    color: #0d6efd;
+}
+
+.class-option.business-class input:checked~.option-content {
+    border-color: #198754;
+    color: #fd7e14;
+}
+
+.class-option input:checked {
+    border-color: currentColor;
+}
+
+.amenities-section {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+}
+
+.amenity-icon {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.amenity-icon::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background-color: #ddd;
+}
+
+.amenity-icon:last-child::after {
+    display: none;
+}
+
+/* Responsive adjustments */
+/* @media (max-width: 768px) {
+    .flight-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .flight-number {
+        text-align: left;
+    }
+
+    .route-details {
+        flex-direction: column;
+        gap: 2rem;
+
+        .route-line {
+            width: 2px;
+            height: 60px;
+            margin: 0.5rem 0;
+        }
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+} */

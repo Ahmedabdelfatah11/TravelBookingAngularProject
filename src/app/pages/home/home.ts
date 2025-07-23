@@ -11,7 +11,7 @@ import { FlightBody } from "../Flight/flight-body/flight-body";
 
 @Component({
   selector: 'app-home',
-  imports: [Header, Card, Newsletter, Footer, Body, SearchBarComponent, ReactiveFormsModule, FlightBody],
+  imports: [Header, Footer, Body, SearchBarComponent, ReactiveFormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

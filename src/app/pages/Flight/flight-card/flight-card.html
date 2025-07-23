@@ -2,31 +2,30 @@
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
             <img [src]="flight?.imageUrl" alt="{{ flight?.airlineName }}" width="50">
-            <span class="text-success"><i class="fas fa-heart"></i></span>
             <span class="text-danger h5 float-end">starting from ${{ flight?.price }}</span>
         </div>
         <div class="mt-2">
             <h6>{{ flight?.airlineName }}</h6>
             <p><strong>{{ flight?.rating }}</strong> </p>
-
         </div>
         <div class="mt-2">
-
             <div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
-                    <label class="form-check-label">
-                        {{ flight?.departureTime }} - {{ flight?.arrivalTime }}<br>
+                    <p class="form-check-label">
+                        {{ flight?.departureTime | date:'d MMMM yyyy - hh:mm a' }} - {{ flight?.arrivalTime | date:'d
+                        MMMM
+                        yyyy - hh:mm a' }}<br>
                         <!-- <small>{{ segment.duration }} non stop</small> -->
-                    </label>
+                    </p>
                 </div>
             </div>
-
-
         </div>
-        <div class="mt-2 d-flex justify-content-between align-items-center">
-            <button class="btn btn-success w-100">View Deals</button>
-
+        <div class="mt-2 d-flex justify-content-lg-start align-items-center">
+            <button [routerLink]="['/FlightDetails',flight?.flightNumber]" class="btn btn-success ">View
+                Deals</button>
+            <button class="btn btn-outline-secondary ms-2" (click)="saveForLater(flight?.flightNumber)">
+                <i class="fas fa-heart"></i> Save for Later
+            </button>
         </div>
     </div>
 </div>

@@ -1,0 +1,30 @@
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(34, 149, 109, 0.945);
+}
+
+.shadow {
+    box-shadow: 0 4px 8px rgb(78, 149, 81);
+}
+
+.img-fixed-size {
+    height: 300px;
+    object-fit: cover;
+}
+
+.btn {
+
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #71c0a4;
+}

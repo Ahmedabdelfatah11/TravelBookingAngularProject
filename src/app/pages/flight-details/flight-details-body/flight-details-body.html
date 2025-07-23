@@ -1,0 +1,81 @@
+<div class="row g-4">
+    <app-flight-details-card class="col-md-8" [flight]="flight()"></app-flight-details-card>
+
+    <!-- Action Buttons & Reviews -->
+    <div class="col-md-4">
+        <div class="action-buttons mb-4">
+            <button class="btn btn-outline-secondary">
+                <i class="fas fa-heart"></i> Save for Later
+            </button>
+            <button class="btn btn-primary book-btn">
+                <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+        </div>
+    </div>
+    <!-- Reviews Section -->
+    <div class="col-md-8 reviews-container">
+        <h4 class="mb-3">
+            <i class="fas fa-star text-warning"></i>
+            Customer Reviews
+            <span class="badge bg-light text-dark"> reviews</span>
+        </h4>
+        <!-- {{ flight()?.reviews?.length || 0 }} -->
+        <!-- Overall Rating -->
+        <div class="overall-rating mb-3">
+            <div class="d-flex align-items-center">
+                <div class="rating-display">
+                    <span class="rating-number">2</span>
+                    <span class="rating-out-of">/5</span>
+                </div>
+                <div class="ms-3">
+                    <div class="stars">
+                        <div class="stars-filled"></div>
+                    </div>
+                    <small class="text-muted">Based on 223 reviews</small>
+                </div>
+            </div>
+        </div>
+        <!-- [style.width.%]="(flight()?.flightCompany?.rating / 5) * 100" -->
+        <!-- Reviews List -->
+
+        <!-- {{ review.userInitials }}  {{ review.userName }} {{ review.date | date:'mediumDate' }} {{ review.rating }} 
+             {{ review.comment }} {{ review.helpfulCount }} -->
+
+        <div class="reviews-list">
+            @for(review of flight()?.flightCompany?.rating; track review) {
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="user-avatar">
+
+                    </div>
+                    <div class="user-info">
+                        <strong> OldMaTe </strong>
+                        <div class="review-date"> 22/10/2025</div>
+                    </div>
+                    <div class="review-rating">
+                        <span class="badge bg-success">5</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-content">
+                    pull shit
+                </div>
+                <div class="review-footer">
+                    <span class="helpful-count">
+                        <i class="far fa-thumbs-up"></i> 52 found this helpful
+                    </span>
+                </div>
+            </div>
+            }
+
+
+
+            <!-- View All Reviews Button -->
+            @if(flight()?.flightCompany?.flightCount) {
+            <button class="btn btn-link view-all-reviews">
+                View all 44 reviews <i class="fas fa-chevron-right"></i>
+            </button>
+            }
+        </div>
+    </div>
+</div>
