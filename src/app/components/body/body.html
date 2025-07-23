@@ -1,0 +1,38 @@
+<div class="container my-5">
+    <h3 class="mb-4">Plan your perfect trip</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (trip of trips; track $index) {
+        <div class="col">
+            <div class="card h-100">
+                <img [src]="trip.image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ trip.title }}</h5>
+                    <p class="card-text">{{ trip.description }}</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <img src="assets/flights.jpg" class="card-img-top" alt="Flights">
+                <div class="card-body">
+                    <h5 class="card-title">Flights</h5>
+                    <a href="/flights" class="btn btn-outline-success">Explore Flights</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center">
+                <img src="assets/hotels.jpg" class="card-img-top" alt="Hotels">
+                <div class="card-body">
+                    <h5 class="card-title">Hotels</h5>
+                    <a href="#" class="btn btn-outline-success">Explore Hotels</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row m-2">
+    <div class="col-md-3">
+        <app-filters></app-filters>
+    </div>
+    <div class="col-md-9">
+        <app-sort-options></app-sort-options>
+        <div class="mb-3">
+            <p>Showing 4 of 22 places</p>
+        </div>
+        @for (flight of flights; track $index) {
+        <app-flight-card [flight]="flight"></app-flight-card>
+        }
+
+        <button class="btn btn-primary w-100">Show more results</button>
+    </div>
+</div>

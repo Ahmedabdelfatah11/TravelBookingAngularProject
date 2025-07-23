@@ -1,0 +1,80 @@
+<div class="card">
+    <h6 class="card-header">Filters</h6>
+    <div class="card-body">
+        <!-- Price -->
+        <div class="mb-3">
+            <label for="price-range" class="form-label">Price</label>
+            <input type="range" class="form-range" min="0" max="1000" formControlName="priceRange">
+            <p>{{ filterForm.value.priceRange }}</p>
+        </div>
+
+        <!-- Departure Time -->
+        <div class="mb-3">
+            <label for="departure-time" class="form-label">Departure Time</label>
+            <input type="datetime-local" class="form-control" formControlName="departureTime">
+        </div>
+
+        <!-- Rating -->
+        <div class="mb-3">
+            <label class="form-check-label">Rating</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" formControlName="rating">
+                <label class="form-check-label">1+</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="2" formControlName="rating">
+                <label class="form-check-label">2+</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="3" formControlName="rating">
+                <label class="form-check-label">3+</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="4" formControlName="rating">
+                <label class="form-check-label">4+</label>
+            </div>
+        </div>
+
+        <!-- Airlines -->
+        <div class="mb-3">
+            <label class="form-check-label">Airlines</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Emirates" formControlName="airlines">
+                <label class="form-check-label">Emirates</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="FlyDubai" formControlName="airlines">
+                <label class="form-check-label">Fly Dubai</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Qatar" formControlName="airlines">
+                <label class="form-check-label">Qatar</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Etihad" formControlName="airlines">
+                <label class="form-check-label">Etihad</label>
+            </div>
+        </div>
+
+        <!-- Trip Types -->
+        <div class="mb-3">
+            <label class="form-check-label">Trips</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="round-trip" formControlName="tripType">
+                <label class="form-check-label">Round trip</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="one-way" formControlName="tripType">
+                <label class="form-check-label">One Way</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="multi-city" formControlName="tripType">
+                <label class="form-check-label">Multi-City</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="flexible-dates" formControlName="tripType">
+                <label class="form-check-label">My Dates Are Flexible</label>
+            </div>
+        </div>
+    </div>
+</div>

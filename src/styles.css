@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stars i {
+    color: #FFD700;
+    /* Gold color for stars */
+}
+
+.search-bar {
+    margin-top: -50px;
+    z-index: 1000;
+    position: relative;
+}

@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <ul class="nav nav-pills me-auto">
+        @for (option of sortOptions; track option) {
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="selectedSortOption === option.value"
+                (click)="selectedSortOption = option.value">{{ option.label }}</a>
+        </li>
+        }
+    </ul>
+    <div class="dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Sort by {{ selectedSortOption }}
+        </button>
+        <ul class="dropdown-menu">
+            @for (option of sortOptions; track $index) {
+            <li>
+                <a class="dropdown-item" href="#" (click)="selectedSortOption = option.value">{{ option.label }}</a>
+            </li>
+            }
+
+        </ul>
+    </div>
+</div>
