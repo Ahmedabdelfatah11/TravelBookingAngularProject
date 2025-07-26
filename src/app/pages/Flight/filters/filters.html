@@ -6,34 +6,28 @@
             <input type="text" class="form-control" [value]="departureAirport()"
                 (input)='updateSignal(departureAirport, $event)'>
         </div>
+        <hr class="my-3" style="opacity: 0.3;">
 
         <div class="mb-3">
             <label>Arrival Airport</label>
             <input type="text" class="form-control" [value]="arrivalAirport()"
                 (input)="updateSignal(arrivalAirport, $event)">
         </div>
-
+        <hr class="my-3" style="opacity: 0.3;">
         <div class="mb-3">
             <label>Departure Time</label>
-            <input type="datetime-local" class="form-control" [value]="departureTime()"
+            <input type="date" class="form-control" [value]="departureTime()"
                 (input)="updateSignal(departureTime, $event)">
         </div>
-
+        <hr class="my-3" style="opacity: 0.3;">
         <div class="mb-3">
             <label>Arrival Time</label>
-            <input type="datetime-local" class="form-control" [value]="arrivalTime()"
+            <input type="date" class="form-control" [value]="arrivalTime()"
                 (input)="updateSignal(arrivalTime, $event)">
         </div>
 
-        <div class="mb-3">
-            <label>Sort</label>
-            <select class="form-select" [value]="sort()" (change)="updateSignal(sort, $event)">
-                <option value="">Default</option>
-                <option value="priceAsc">Price: Low to High</option>
-                <option value="priceDesc">Price: High to Low</option>
-            </select>
-        </div>
 
-        <button class="btn btn-primary w-100" (click)="applyFilters()">Apply Filters</button>
+        <hr class="my-3" style="opacity: 0.3;">
+        <button class="btn btn-primary text-black w-100" (click)="applyFilters()">Apply Filters</button>
     </div>
 </div>

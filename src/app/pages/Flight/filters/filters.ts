@@ -16,7 +16,7 @@ export class Filters {
   sort = signal('');
 
   @Output() filterChange = new EventEmitter<any>();
-
+  
   applyFilters() {
     const filters = {
       DepartureAirport: this.departureAirport(),

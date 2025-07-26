@@ -1,4 +1,4 @@
-.action-buttons {
+/* .action-buttons {
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -16,7 +16,7 @@
     }
 }
 
-/* Reviews Container */
+
 .reviews-container {
     background: white;
     border-radius: 12px;
@@ -24,7 +24,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Overall Rating */
+
 .overall-rating {
     background: #f8f9fa;
     padding: 15px;
@@ -74,7 +74,6 @@
     background-size: 20px 20px;
 }
 
-/* Review Cards */
 .review-card {
     border-bottom: 1px solid #eee;
     padding: 15px 0;
@@ -157,4 +156,82 @@
 
 .view-all-reviews:hover {
     text-decoration: underline;
+} */
+/* Main Styles */
+.flight-detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Flight Card Container */
+.flight-card-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Button Styles */
+.btn-gradient-primary {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(135deg, #3e8e41 0%, #1B5E20 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Rating Circle */
+.rating-circle {
+    background-color: var(--main-color);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+/* Star Rating */
+.star-rating {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='lightgray'%3E%3Cpath d='M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+}
+
+.stars-filled {
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23FFC107'%3E%3Cpath d='M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+}
+
+/* User Avatar */
+.user-avatar {
+    background-color:var(--main-color);
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .flight-detail-page {
+        padding: 15px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .rating-circle {
+        width: 60px;
+        height: 60px;
+    }
 }

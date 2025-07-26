@@ -1,31 +1,48 @@
 <div class="card mb-3">
     <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <img [src]="flight?.imageUrl" alt="{{ flight?.airlineName }}" width="50">
-            <span class="text-danger h5 float-end">starting from ${{ flight?.price }}</span>
-        </div>
-        <div class="mt-2">
-            <h6>{{ flight?.airlineName }}</h6>
-            <p><strong>{{ flight?.rating }}</strong> </p>
-        </div>
-        <div class="mt-2">
-            <div>
-                <div class="form-check">
-                    <p class="form-check-label">
-                        {{ flight?.departureTime | date:'d MMMM yyyy - hh:mm a' }} - {{ flight?.arrivalTime | date:'d
-                        MMMM
-                        yyyy - hh:mm a' }}<br>
-                        <!-- <small>{{ segment.duration }} non stop</small> -->
-                    </p>
+        <div class="row">
+            <!-- Logo Column (Left) -->
+            <div class="col-md-1 d-flex align-items-lg-start mt-2">
+                <img [src]="flight?.imageUrl" alt="{{ flight?.airlineName }}" width="80" class="img-fluid">
+            </div>
+
+            <!-- Content Column (Right) -->
+            <div class="col-md-11">
+                <!-- Price at top right -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">{{ flight?.airlineName }}</h3>
+                    <span class="text-danger h5">starting from ${{ flight?.price }}</span>
+                </div>
+
+                <!-- Rating -->
+                <p class="mt-1"><strong>{{ flight?.rating }}</strong></p>
+                <div class="mt-2">
+                    <div>
+                        <div class="form-check">
+                            <p class="form-check-label">
+                                {{ flight?.departureTime | date:'d MMMM yyyy - hh:mm a' }} : {{ flight?.arrivalTime |
+                                date:' hh:mm a' }}
+                                -- <small> non stop</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider line -->
+                <hr class="my-3" style="opacity: 0.3;">
+
+                <!-- Buttons -->
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-danger me-2 d-flex justify-content-center align-items-center"
+                        style="width: 40px; height: 40px;"  (click)="saveForLater(flight?.flightNumber)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button [routerLink]="['/FlightDetails',flight?.flightNumber]"
+                     class="btn btn-success w-100 text-black">
+                        View Deals
+                    </button>
                 </div>
             </div>
-        </div>
-        <div class="mt-2 d-flex justify-content-lg-start align-items-center">
-            <button [routerLink]="['/FlightDetails',flight?.flightNumber]" class="btn btn-success ">View
-                Deals</button>
-            <button class="btn btn-outline-secondary ms-2" (click)="saveForLater(flight?.flightNumber)">
-                <i class="fas fa-heart"></i> Save for Later
-            </button>
         </div>
     </div>
 </div>

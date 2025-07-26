@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FlightService } from '../../../services/flightService';
 import { ActivatedRoute } from '@angular/router';
 import { FlightDetailsCard } from "../flight-details-card/flight-details-card";
-import { FlightDetails } from '../../../services/flight-model';
+import { FlightDetails } from '../../../Models/flight-model';
 import { DatePipe } from '@angular/common';
 
 @Component({
