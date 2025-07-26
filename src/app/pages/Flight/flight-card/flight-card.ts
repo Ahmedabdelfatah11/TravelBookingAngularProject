@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Flight } from '../../../services/flight-model';
+import { Flight } from '../../../Models/flight-model';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 

@@ -26,3 +26,12 @@
     background-color: #123512;
     border-color: #ffffff;
 }
+
+.dropdown-menu {
+    min-width: 220px;
+    border-radius: 1rem !important;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}

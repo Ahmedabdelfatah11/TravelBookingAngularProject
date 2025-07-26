@@ -1,9 +1,10 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { Flight, FlightFilterParams } from '../../../services/flight-model';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Flight, FlightFilterParams } from '../../../Models/flight-model';
 import { Filters } from "../filters/filters";
 import { SortOptions } from "../sort-options/sort-options";
 import { FlightCard } from "../flight-card/flight-card";
 import { FlightService } from '../../../services/flightService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-body',
@@ -11,20 +12,72 @@ import { FlightService } from '../../../services/flightService';
   templateUrl: './flight-body.html',
   styleUrl: './flight-body.css'
 })
-export class FlightBody {
+export class FlightBody implements OnInit {
   flights = signal<any[]>([]);
   currentPage = signal(1);
   pageSize = signal(5);
   flightcount = signal(0);
   loading = signal(false);
-
   filters = signal<FlightFilterParams>({});
-  flightService = inject(FlightService);
+  searchData = signal<any>(null); // سيتم تعبئتها من حالة الراوتر
 
-  // تفعيل تحميل البيانات عند تغيير الفلاتر أو الصفحة
+  flightService = inject(FlightService);
+  private router = inject(Router);
+
+  constructor() {
+    // تهيئة الفلاتر الافتراضية
+    this.filters.set({
+      DepartureAirport: '',
+      ArrivalAirport: '',
+      DepartureTime: '',
+      ArrivalTime: '',
+      Sort: ''
+    });
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+
+    if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
+
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        DepartureAirport: this.searchData().DepatureAirport,
+        ArrivalAirport: this.searchData().ArrivalAirport,
+        DepartureTime: this.searchData().DepartureTime,
+        ArrivalTime: this.searchData().ArrivalTime
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadFlights();
+    }
+  }
+  ngOnInit() {
+    // استقبال بيانات البحث من حالة الراوتر
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+
+    if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
+
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        DepartureAirport: this.searchData().DepatureAirport,
+        ArrivalAirport: this.searchData().ArrivalAirport,
+        DepartureTime: this.searchData().DepartureTime,
+        ArrivalTime: this.searchData().ArrivalTime
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadFlights();
+    }
+  }
   loadEffect = effect(() => {
+    // this.LoadsearchData();
     this.loadFlights();
   });
+
 
   loadFlights() {
     this.loading.set(true);
@@ -35,6 +88,7 @@ export class FlightBody {
       PageSize: this.pageSize()
     };
 
+    console.log('Loading flights with params:', params);
     this.flightService.getFlights(params).subscribe({
       next: (data) => {
         this.flights.set(data.data);
@@ -48,6 +102,7 @@ export class FlightBody {
     });
   }
 
+  // باقي الدوال كما هي...
   nextPage() {
     if (this.currentPage() * this.pageSize() < this.flightcount()) {
       this.currentPage.update(p => p + 1);
@@ -81,5 +136,4 @@ export class FlightBody {
   goToPage(page: number) {
     this.currentPage.set(page);
   }
-
 }

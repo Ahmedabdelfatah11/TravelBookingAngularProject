@@ -10,3 +10,6 @@
 .btn:hover {
     background-color: #1e4034;
 }
+img {
+  object-fit: contain;
+}

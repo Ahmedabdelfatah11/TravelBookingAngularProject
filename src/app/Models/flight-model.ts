@@ -9,6 +9,15 @@ export interface Flight {
     imageUrl: string
     rating: string;
 }
+export interface FlightCompany {
+    id: number;
+    imageUrl: string;
+    name: string;
+    location: string;
+    rating: string; // Rating out of 5 or a descriptive rating like "Excellent", "Good", etc.
+    flightCount: string;
+}
+
 
 
 export interface FlightFilterParams {
@@ -30,7 +39,7 @@ export interface FlightResponse {
 
 export interface FlightCompany {
     id: number;
-    image: string;
+    imageUrl: string;
     name: string;
     location: string;
     rating: string;

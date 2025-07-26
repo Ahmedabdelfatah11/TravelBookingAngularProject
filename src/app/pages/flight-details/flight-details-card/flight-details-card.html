@@ -2,7 +2,7 @@
     <!-- Flight Header Section -->
     <div class="flight-header">
         <div class="airline-info">
-            <img [src]="flight?.flightCompany?.image" alt="Airline Logo" class="airline-logo">
+            <img [src]="flight?.flightCompany?.imageUrl" alt="Airline Logo" class="airline-logo">
             <div>
                 <h2>{{ flight?.flightCompany?.name }}</h2>
                 <span class="rating-badge bg-transparent text-black">{{ flight?.flightCompany?.rating }}</span>
@@ -76,7 +76,6 @@
                 <input type="radio" name="travelClass" value="business" (change)="onClassChange($event)">
                 <div class="option-content">
                     <span class="title">Business</span>
-
                 </div>
             </label>
         </div>

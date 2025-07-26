@@ -1,6 +1,6 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, computed, Input, input, signal } from '@angular/core';
-import { FlightDetails } from '../../../services/flight-model';
+import { FlightDetails } from '../../../Models/flight-model';
 export type TravelClass = 'economy' | 'first' | 'business';
 @Component({
   selector: 'app-flight-details-card',
