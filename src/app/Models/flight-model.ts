@@ -1,20 +1,20 @@
 export interface Flight {
-    flightNumber: number
+    flightId: number
     departureAirport: string
     arrivalAirport: string
     departureTime: string
     arrivalTime: string
-    price: number
+    economyPrice: number
     airlineName: string
     imageUrl: string
-    rating: string;
+    rating: number;
 }
 export interface FlightCompany {
     id: number;
     imageUrl: string;
     name: string;
     location: string;
-    rating: string; // Rating out of 5 or a descriptive rating like "Excellent", "Good", etc.
+    rating: number; // Rating out of 5 or a descriptive rating like "Excellent", "Good", etc.
     flightCount: string;
 }
 
@@ -37,14 +37,7 @@ export interface FlightResponse {
     data: Flight[];
 }
 
-export interface FlightCompany {
-    id: number;
-    imageUrl: string;
-    name: string;
-    location: string;
-    rating: string;
-    flightCount: string;
-}
+
 
 export interface FlightDetails {
     flightNumber: number;
@@ -52,7 +45,11 @@ export interface FlightDetails {
     arrivalAirport: string;
     departureTime: string;
     arrivalTime: string;
-    price: number;
-    availableSeats: number;
+    economySeats: number;
+    businessSeats: number;
+    firstClassSeats: number;
+    economyPrice: number;
+    firstClassPrice: number;
+    businessPrice: number;
     flightCompany: FlightCompany;
 }

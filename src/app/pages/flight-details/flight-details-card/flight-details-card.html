@@ -5,7 +5,8 @@
             <img [src]="flight?.flightCompany?.imageUrl" alt="Airline Logo" class="airline-logo">
             <div>
                 <h2>{{ flight?.flightCompany?.name }}</h2>
-                <span class="rating-badge bg-transparent text-black">{{ flight?.flightCompany?.rating }}</span>
+                <span class="rating-badge bg-transparent text-black">{{ flight?.flightCompany?.rating }} <i
+                        class="fas fa-star text-warning me-2"></i></span>
             </div>
         </div>
         <div class="flight-number">
@@ -54,31 +55,33 @@
         <h5>Select Class</h5>
         <div class="class-options d-flex gap-3">
             <!-- Economy -->
-            <label class="class-option economy">
+            <label class="class-option economy p-3 rounded border shadow-sm">
                 <input type="radio" name="travelClass" value="economy" checked (change)="onClassChange($event)">
                 <div class="option-content">
-                    <span class="title">Economy</span>
-
+                    <span class="title fw-bold">Economy</span><br>
+                    <span class="seats text-muted small">Available: {{ flight?.economySeats }}</span>
                 </div>
             </label>
 
             <!-- First Class -->
-            <label class="class-option first-class">
+            <label class="class-option first-class p-3 rounded border shadow-sm">
                 <input type="radio" name="travelClass" value="first" (change)="onClassChange($event)">
                 <div class="option-content">
-                    <span class="title">First Class</span>
-
+                    <span class="title fw-bold">First Class</span><br>
+                    <span class="seats text-muted small">Available: {{ flight?.firstClassSeats }}</span>
                 </div>
             </label>
 
             <!-- Business Class -->
-            <label class="class-option business-class">
+            <label class="class-option business-class p-3 rounded border shadow-sm ">
                 <input type="radio" name="travelClass" value="business" (change)="onClassChange($event)">
-                <div class="option-content">
-                    <span class="title">Business</span>
+                <div class="option-content justify-content-center align-content-center">
+                    <span class="title fw-bold ">Business</span><br>
+                    <span class="seats text-muted small ">Available: {{ flight?.businessSeats }}</span>
                 </div>
             </label>
         </div>
+
     </div>
 
     <!-- Flight Info Cards -->
@@ -87,7 +90,7 @@
             <i class="fas fa-chair"></i>
             <div>
                 <h4>Available Seats</h4>
-                <p>{{ flight?.availableSeats }}</p>
+                <p>{{ availableSeats }}</p>
             </div>
         </div>
 

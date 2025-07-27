@@ -94,10 +94,10 @@
         breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
         class="d-block px-2">
 
-        @for (f of flightCompany(); track f.id) {
+        @for (c of cars; track $index) {
         <swiper-slide>
             <div class="logo-card text-center">
-                <img [src]="f.imageUrl" [alt]="f.name" height="50">
+                <img [src]="c" [alt]="'car'" height="50">
             </div>
         </swiper-slide>
         }
@@ -131,7 +131,7 @@
                         alt="Flights">
                     <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center">
                         <h5 class="card-title text-light">{{trip.title}}</h5>
-                        <a href="/flight" class="btn btn-outline-success">{{trip.sub}}</a>
+                        <a [routerLink]="[trip.link]" class="btn btn-outline-success">{{trip.sub}}</a>
                     </div>
                 </div>
             </div>
