@@ -1,162 +1,4 @@
-/* .action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
 
-    .btn {
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        font-weight: 500;
-    }
-
-    .book-btn {
-        background: #4CAF50;
-        border-color: #4CAF50;
-    }
-}
-
-
-.reviews-container {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-
-.overall-rating {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.rating-display {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.rating-number {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
-
-.rating-out-of {
-    font-size: 14px;
-    color: #6c757d;
-    align-self: flex-end;
-    margin-bottom: 5px;
-}
-
-.stars {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23e0e0e0'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
-    background-size: 20px 20px;
-}
-
-.stars-filled {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23FFD700'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
-    background-size: 20px 20px;
-}
-
-.review-card {
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-}
-
-.review-card:last-child {
-    border-bottom: none;
-}
-
-.review-header {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #0d6efd;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-right: 12px;
-}
-
-.user-info {
-    flex: 1;
-}
-
-.reviews-container {
-    max-width: 800px;
-    margin: 1rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.review-date {
-    font-size: 12px;
-    color: #6c757d;
-}
-
-.review-rating {
-    display: flex;
-    align-items: center;
-}
-
-.review-rating .badge {
-    margin-right: 5px;
-}
-
-.review-content {
-    margin-bottom: 10px;
-    color: #333;
-    line-height: 1.5;
-}
-
-.review-footer {
-    font-size: 13px;
-    color: #6c757d;
-}
-
-.helpful-count {
-    cursor: pointer;
-}
-
-.helpful-count:hover {
-    color: #0d6efd;
-}
-
-.view-all-reviews {
-    color: #0d6efd;
-    text-decoration: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-.view-all-reviews:hover {
-    text-decoration: underline;
-} */
 /* Main Styles */
 .flight-detail-page {
     max-width: 1200px;
@@ -193,23 +35,7 @@
     text-align: center;
 }
 
-/* Star Rating */
-.star-rating {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='lightgray'%3E%3Cpath d='M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 20px 20px;
-}
 
-.stars-filled {
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23FFC107'%3E%3Cpath d='M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 20px 20px;
-}
 
 /* User Avatar */
 .user-avatar {
@@ -219,7 +45,50 @@
     font-size: 14px;
     font-weight: bold;
 }
+/* No Reviews Styling */
+.no-reviews {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
 
+.no-reviews i {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+/* Rating Stars */
+.star-rating {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 24px;
+}
+
+.stars-empty, .stars-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.stars-empty {
+    width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .rating-circle {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .display-4 {
+        font-size: 1.8rem;
+    }
+}
 /* Responsive Adjustments */
 @media (max-width: 992px) {
     .flight-detail-page {

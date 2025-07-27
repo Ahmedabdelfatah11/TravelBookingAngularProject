@@ -1,16 +1,31 @@
-<div class="container flight-detail-page py-4">
+<nav aria-label="breadcrumb" class="py-3 border-bottom bg-white">
+    <div class="container">
+        <ol class="breadcrumb mb-0" style="--bs-breadcrumb-divider: '>';">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/home']" class="text-decoration-none text-dark">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/flight']" class="text-decoration-none text-dark">Flights</a>
+            </li>
+            <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">Details</li>
+        </ol>
+    </div>
+</nav>
+<div class="container flight-detail-page py-1 mt-3">
     <div class="row g-4">
         <!-- Flight Details Section -->
-        <div class="col-lg-8">
+        <div class="col-md-8">
             <div class="flight-card-container">
                 <app-flight-details-card [flight]="flight()"></app-flight-details-card>
-                
+
                 <div class="action-buttons d-flex flex-column flex-md-row gap-3 mt-4 p-3 bg-light rounded-3">
-                    <button class="btn btn-outline-danger flex-grow-1 py-2 d-flex align-items-center justify-content-center">
+                    <button
+                        class="btn btn-outline-danger flex-grow-1 py-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-heart me-2"></i>
                         <span>Save for Later</span>
                     </button>
-                    <button class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center">
+                    <button
+                        class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-ticket-alt me-2"></i>
                         <span>Book Now</span>
                     </button>
@@ -19,6 +34,7 @@
         </div>
 
         <!-- Reviews Section -->
+
         <div class="col-lg-4">
             <div class="reviews-section bg-white p-4 rounded-4 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -26,58 +42,95 @@
                         <i class="fas fa-star text-warning me-2"></i>
                         <span>Reviews</span>
                     </h3>
-                    <span class="badge rounded-pill bg-light text-dark fs-6">223 reviews</span>
+                    @if (reviewStats()) {
+                    <span class="badge rounded-pill bg-light text-dark fs-6">
+                        {{ reviewStats()?.totalReviews }} reviews
+                    </span>
+                    }
                 </div>
 
                 <!-- Overall Rating -->
+                @if (reviewStats()?.totalReviews ?? 0 > 0) {
                 <div class="overall-rating bg-light p-3 rounded-3 mb-4">
                     <div class="d-flex align-items-center">
-                        <div class="rating-circle d-flex flex-column align-items-center justify-content-center me-3">
-                            <span class="display-4 fw-bold">2</span>
+                        <div class="rating-circle text-white d-flex flex-column align-items-center justify-content-center me-3"
+                            style="width: 80px; height: 80px;">
+                            <span class="display-4 fw-bold">{{ reviewStats()?.averageRating }}</span>
                             <span class="small">/5</span>
                         </div>
                         <div>
-                            <div class="star-rating mb-2">
-                                <div class="stars-filled" style="width: 40%;"></div>
+                            <div class="star-rating mb-2 position-relative" style="height: 20px;">
+                                <div class="stars-empty" style="color: #e4e5e9;">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stars-filled position-absolute top-0 start-0"
+                                    [style.width.%]="(reviewStats()?.averageRating ?? 0) * 20" style="color: #ffc107;">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
-                            <p class="text-muted mb-0">Based on 223 traveler reviews</p>
+                            <p class="text-muted mb-0">Based on {{ reviewStats()?.totalReviews }} traveler reviews</p>
                         </div>
                     </div>
                 </div>
+                } @else {
+                <div class="no-reviews text-center py-4">
+                    <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2rem;"></i>
+                    <h5 class="text-muted">No Reviews Yet</h5>
+                    <p class="text-muted">Be the first to share your experience!</p>
+                    <button class="btn btn-primary mt-2" routerLink="/add-review/flight/{{flightid}}">
+                        <i class="fas fa-plus me-2"></i> Add Review
+                    </button>
+                </div>
+                }
 
                 <!-- Reviews List -->
+                @if (isLoading().reviews) {
+                <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading reviews...</p>
+                </div>
+                } @else if (reviewStats()?.totalReviews ?? 0 > 0) {
                 <div class="reviews-list">
+                    @for (review of reviewStats()?.recentReviews; track review.id) {
                     <div class="review-item bg-light p-3 rounded-3 mb-3">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div class="d-flex align-items-center">
-                                <div class="user-avatar text-white rounded-circle d-flex align-items-center justify-content-center me-3">
-                                    OM
+                                <div class="user-avatar text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 40px; height: 40px; background: #0d6efd;">
+                                    {{ review.userName?.charAt(0)?.toUpperCase() }}
                                 </div>
                                 <div>
-                                    <h6 class="m-0 fw-bold">OldMaTe</h6>
-                                    <small class="text-muted">22 Oct 2025</small>
+                                    <h6 class="m-0 fw-bold">{{ review.userName }}</h6>
+                                    <small class="text-muted"> {{ review.createdAt | date:'dd MMM yyyy' }}</small>
                                 </div>
-                               
                             </div>
                             <span class="badge bg-success">
-                                <i class="fas fa-star me-1"></i> 5.0
+                                <i class="fas fa-star me-1"></i> {{ review.rating }}
                             </span>
-                            
                         </div>
                         <hr class="my-3" style="opacity: 0.3;">
                         <div class="review-content py-2">
-                            <p class="m-0">This flight exceeded all my expectations. The service was impeccable and the comfort level was outstanding.</p>
+                            <p class="m-0">{{ review.comment }}</p>
                         </div>
                         <div class="review-actions d-flex justify-content-end">
-                            <button class="btn btn-sm btn-text">
-                                <i class="far fa-thumbs-up me-1"></i> Helpful (52)
+                            <button class="btn btn-sm btn-text text-primary">
+                                <i class="far fa-thumbs-up me-1"></i> Helpful ({{ getHelpfulCount(review.id) }})
                             </button>
                         </div>
                     </div>
-
-                    <!-- Additional review items would go here -->
-               
+                    }
+                </div>
+                }
             </div>
         </div>
     </div>
-</div>
