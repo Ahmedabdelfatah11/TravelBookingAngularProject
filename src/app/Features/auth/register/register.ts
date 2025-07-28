@@ -2,8 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../../Service/auth';
-import { Iregister } from '../../../Interfaces/iregister';
+import { Auth } from '../../../Service/auth'; 
 import { Router, RouterModule } from '@angular/router'; 
 import { strongPasswordValidator } from '../../../custom-validators';
 

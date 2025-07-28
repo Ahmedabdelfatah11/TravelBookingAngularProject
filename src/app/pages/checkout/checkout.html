@@ -1,20 +1,31 @@
-<div class="card shadow p-4 w-100 w-md-50 mx-auto mt-5">
-  <h3 class="mb-4 text-center">💳 Payment Checkout</h3>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card-form shadow p-4 w-100" style="max-width: 500px">
+    <h3 class="mb-4 text-center">💳 Payment Checkout</h3>
 
-  <ngx-stripe-card
-    [options]="cardOptions"
-    [elementsOptions]="elementsOptions"
-  ></ngx-stripe-card>
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="alert alert-danger text-center">
+      {{ errorMessage }}
+    </div>
 
-  <button
-    class="btn btn-primary mt-4 w-100"
-    (click)="pay()"
-    [disabled]="isLoading || !paymentIntentClientSecret"
-  >
-    {{ isLoading ? 'Processing...' : 'Pay Now' }}
-  </button>
+    <!-- Payment success -->
+    <div *ngIf="paymentSuccess" class="alert alert-success text-center">
+      ✅ Payment successful!
+    </div>
 
-  <div *ngIf="paymentSuccess" class="alert alert-success mt-3 text-center">
-    🎉 Payment Successful!
+    <!-- Stripe Card -->
+    <div *ngIf="!paymentSuccess">
+      <ngx-stripe-card
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+      ></ngx-stripe-card>
+
+      <button
+        class="btn btn-primary mt-4 w-100"
+        (click)="pay()"
+        [disabled]="isLoading || !paymentIntentClientSecret"
+      >
+        {{ isLoading ? 'Processing...' : 'Pay Now' }}
+      </button>
+    </div>
   </div>
 </div>

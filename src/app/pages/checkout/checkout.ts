@@ -1,22 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  StripeService,
-  StripeCardComponent,
-} from 'ngx-stripe';
+import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import {
   StripeCardElementOptions,
   StripeElementsOptions,
 } from '@stripe/stripe-js';
 import { PaymentService } from '../../core/services/payment';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.html',
   styleUrls: ['./checkout.css'],
   standalone: true,
-  imports: [StripeCardComponent],
+  imports: [CommonModule, StripeCardComponent],
 })
-export class CheckoutComponent implements OnInit {
+export class Checkout implements OnInit {
   @ViewChild(StripeCardComponent) card!: StripeCardComponent;
 
   cardOptions: StripeCardElementOptions = {
@@ -39,29 +37,33 @@ export class CheckoutComponent implements OnInit {
   };
 
   paymentIntentClientSecret = '';
-  bookingId = 8;
+  bookingId = 1; // Replace with actual booking ID
   isLoading = false;
   paymentSuccess = false;
+  errorMessage = '';
 
   constructor(
     private paymentService: PaymentService,
     private stripeService: StripeService
   ) {}
 
+
   ngOnInit(): void {
     this.paymentService.createPaymentIntent(this.bookingId).subscribe({
-      next: (response) => {
-        this.paymentIntentClientSecret = response.clientSecret;
+      next: (res) => {
+        this.paymentIntentClientSecret = res.clientSecret;
       },
       error: (err) => {
-        console.error('Failed to create PaymentIntent:', err);
+        this.errorMessage = '❌ فشل إنشاء الدفع.';
+        console.error(err);
       },
     });
   }
 
   pay(): void {
-    this.isLoading = true;
+    if (!this.paymentIntentClientSecret || !this.card) return;
 
+    this.isLoading = true;
     this.stripeService
       .confirmCardPayment(this.paymentIntentClientSecret, {
         payment_method: {
@@ -70,13 +72,12 @@ export class CheckoutComponent implements OnInit {
       })
       .subscribe((result) => {
         this.isLoading = false;
-
-        if (result.paymentIntent?.status === 'succeeded') {
+        if (result.error) {
+          this.errorMessage = result.error.message || 'حدث خطأ أثناء الدفع.';
+          console.error('Stripe Error:', result.error.message);
+        } else if (result.paymentIntent?.status === 'succeeded') {
           this.paymentSuccess = true;
-          alert('✅ Payment succeeded!');
-        } else {
-          console.error(result.error?.message);
-          alert('❌ Payment failed!');
+          this.errorMessage = '';
         }
       });
   }

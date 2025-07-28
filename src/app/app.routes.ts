@@ -12,12 +12,12 @@ import { Invalid } from './components/invalid/invalid';
 import { Flight } from './pages/Flight/flight/flight';
 import { FlightDetails } from './pages/flight-details/flight-details';
 import { HotelDetails } from './pages/hotel-details/hotel-details';
-import { Hotel } from './pages/Hotel/hotel/hotel';
+import { Hotel } from './pages/Hotel/hotel/hotel'; 
+import { Checkout } from './pages/checkout/checkout';
 
 
 export const routes: Routes =
   [ 
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
     {path: 'home', component: Home ,title: 'Home'}, 
     { path: 'login', component: Login ,title: 'Login' },
     { path: 'register', component: Register ,title: 'Register' },
@@ -26,7 +26,9 @@ export const routes: Routes =
     { path: 'forget', component: ForgetPassword ,title: 'Forget Password' },
     { path: 'reset', component: ResetPassword ,title: 'Reset Password' },  
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: Home },
+    {path: 'payment/:id',component: Checkout, title: 'Payment'},
+
+      { path: 'home', component: Home },
     { path: 'invalid', component: Invalid },
     { path: 'flight', component: Flight },
     { path: 'FlightDetails/:id', component: FlightDetails },
