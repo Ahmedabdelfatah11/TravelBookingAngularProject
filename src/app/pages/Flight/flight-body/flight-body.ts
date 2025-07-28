@@ -3,7 +3,7 @@ import { Flight, FlightFilterParams } from '../../../Models/flight-model';
 import { Filters } from "../filters/filters";
 import { SortOptions } from "../sort-options/sort-options";
 import { FlightCard } from "../flight-card/flight-card";
-import { FlightService } from '../../../services/flightService';
+import { FlightService } from '../../../Service/flightService';
 import { Router } from '@angular/router';
 
 @Component({

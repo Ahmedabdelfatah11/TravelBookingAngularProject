@@ -35,3 +35,27 @@
 .dropdown-item:hover {
     background-color: #f8f9fa;
 }
+
+.dropdown-menu.custom-shift {
+    transform: translateX(-100px);
+    /* عدل حسب الحاجة */
+}
+.custom-dropdown {
+  left: auto !important;
+  right: 0 !important;
+  top: 100% !important;
+  transform: none !important;
+  min-width: 220px;
+  z-index: 1050; /* تأكد إنها فوق أي عنصر تاني */
+}
+
+
+
+/* لما الشاشة تصغر جدًا (موبايل)، خليها تحت بالكامل */
+@media (max-width: 768px) {
+  .custom-dropdown {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+}
