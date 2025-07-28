@@ -10,8 +10,12 @@ export type TravelClass = 'economy' | 'first' | 'business';
 })
 export class FlightDetailsCard {
   private flightSignal = signal<FlightDetails | null>(null);
+
   @Input() set flight(value: FlightDetails | null) {
     this.flightSignal.set(value);
+  }
+  get availableSeats() {
+    return this.flightSignal()!.economySeats + this.flightSignal()!.businessSeats + this.flightSignal()!.firstClassSeats;
   }
   get flight() {
     return this.flightSignal();
@@ -22,15 +26,16 @@ export class FlightDetailsCard {
   // Signal لحساب السعر حسب الدرجة
   displayPrice = computed(() => {
     const flight = this.flightSignal();
+    console.log(flight);
     if (!flight) return 0;
-
-
-    const basePrice = flight!.price;
+    let basePrice = flight.economyPrice;
     switch (this.selectedClass()) {
       case 'first':
-        return basePrice * 1.8;
+        basePrice = flight.firstClassPrice;
+        return basePrice;
       case 'business':
-        return basePrice * 2.0;
+        basePrice = flight.businessPrice;
+        return basePrice;
       default:
         return basePrice;
     }
@@ -40,14 +45,6 @@ export class FlightDetailsCard {
   onClassChange(e: any) {
     this.selectedClass.set(e?.target?.value as TravelClass);
     console.log(e?.target?.value);
-  }
-  getClassPrice(multiplier: number): string {
-    // if (!this.flight) return '$0.00';
-    const price = this.flight!.price * multiplier;
-    return price.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    });
   }
 
   calculateDuration(departure: string, arrival: string): string {

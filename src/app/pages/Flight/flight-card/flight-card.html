@@ -1,17 +1,23 @@
-<div class="card mb-3">
+<div class="card mb-3 mx-3">
     <div class="card-body">
         <div class="row">
             <!-- Logo Column (Left) -->
-            <div class="col-md-1 d-flex align-items-lg-start mt-2">
-                <img [src]="flight?.imageUrl" alt="{{ flight?.airlineName }}" width="80" class="img-fluid">
+            <!-- Logo Column (Left) -->
+            <div class="col-md-2 d-flex align-items-start justify-content-center">
+                <div class="airline-logo-container">
+                    <img [src]="flight?.imageUrl" alt="{{ flight?.airlineName }}">
+                </div>
             </div>
 
             <!-- Content Column (Right) -->
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <!-- Price at top right -->
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">{{ flight?.airlineName }}</h3>
-                    <span class="text-danger h5">starting from ${{ flight?.price }}</span>
+                    <div class="text-end">
+                        <small class="text-muted">starting from</small>
+                        <h5 class="text-danger">${{ flight?.economyPrice}}<small class="text-muted">/person</small></h5>
+                    </div>
                 </div>
 
                 <!-- Rating -->
@@ -34,11 +40,10 @@
                 <!-- Buttons -->
                 <div class="d-flex align-items-center">
                     <button class="btn btn-outline-danger me-2 d-flex justify-content-center align-items-center"
-                        style="width: 40px; height: 40px;"  (click)="saveForLater(flight?.flightNumber)">
+                        style="width: 40px; height: 40px;" (click)="saveForLater(flight?.flightId)">
                         <i class="fas fa-heart"></i>
                     </button>
-                    <button [routerLink]="['/FlightDetails',flight?.flightNumber]"
-                     class="btn btn-success w-100 text-black">
+                    <button [routerLink]="['/FlightDetails',flight?.flightId]" class="btn btn-success w-100 text-black">
                         View Deals
                     </button>
                 </div>
