@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 
-import { Invalid } from './components/invalid/invalid';
+// Update the path below to the correct location of the Invalid component
+// If the correct path is different, replace './pages/invalid/invalid' with the actual path
 import { Flight } from './pages/Flight/flight/flight';
 import { FlightDetails } from './pages/flight-details/flight-details';
 import { HotelDetails } from './pages/hotel-details/hotel-details';
@@ -13,6 +14,7 @@ import { Login } from './Features/auth/login/login';
 import { Register } from './Features/auth/register/register';
 import { ResendConfirmationEmail } from './Features/auth/resend-confirm-email/resend-confirm-email';
 import { ResetPassword } from './Features/auth/reset-password/reset-password';
+import { Invalid } from './shared/invalid/invalid';
 
 
 
@@ -20,7 +22,7 @@ export const routes: Routes =
   [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: Home },
-    { path: 'invalid', component: Invalid },
+    { path: 'invalid', component:Invalid  },
     { path: 'flight', component: Flight },
     { path: 'FlightDetails/:id', component: FlightDetails },
     { path: 'hotel', component: Hotel },

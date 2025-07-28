@@ -25,7 +25,8 @@
                         <span>Save for Later</span>
                     </button>
                     <button
-                        class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center">
+                        class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center"
+                        (click)="openBookingForm()">
                         <i class="fas fa-ticket-alt me-2"></i>
                         <span>Book Now</span>
                     </button>
@@ -53,10 +54,9 @@
                 @if (reviewStats()?.totalReviews ?? 0 > 0) {
                 <div class="overall-rating bg-light p-3 rounded-3 mb-4">
                     <div class="d-flex align-items-center">
-                        <div class="rating-circle text-white d-flex flex-column align-items-center justify-content-center me-3"
-                            style="width: 80px; height: 80px;">
-                            <span class="display-4 fw-bold">{{ reviewStats()?.averageRating }}</span>
-                            <span class="small">/5</span>
+                        <div class="rating-circle text-black d-flex flex-column align-items-center justify-content-center me-3"
+                            style="width: 60px; height:60px;">
+                            <span class="display-6 fw-bold">{{ reviewStats()?.averageRating }}</span>
                         </div>
                         <div>
                             <div class="star-rating mb-2 position-relative" style="height: 20px;">
@@ -85,9 +85,6 @@
                     <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2rem;"></i>
                     <h5 class="text-muted">No Reviews Yet</h5>
                     <p class="text-muted">Be the first to share your experience!</p>
-                    <button class="btn btn-primary mt-2" routerLink="/add-review/flight/{{flightid}}">
-                        <i class="fas fa-plus me-2"></i> Add Review
-                    </button>
                 </div>
                 }
 
@@ -105,8 +102,8 @@
                     <div class="review-item bg-light p-3 rounded-3 mb-3">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div class="d-flex align-items-center">
-                                <div class="user-avatar text-white rounded-circle d-flex align-items-center justify-content-center me-3"
-                                    style="width: 40px; height: 40px; background: #0d6efd;">
+                                <div class="user-avatar text-black rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 40px; height: 40px;">
                                     {{ review.userName?.charAt(0)?.toUpperCase() }}
                                 </div>
                                 <div>
@@ -114,7 +111,7 @@
                                     <small class="text-muted"> {{ review.createdAt | date:'dd MMM yyyy' }}</small>
                                 </div>
                             </div>
-                            <span class="badge bg-success">
+                            <span class="badge bg-success text-black-50">
                                 <i class="fas fa-star me-1"></i> {{ review.rating }}
                             </span>
                         </div>
@@ -122,15 +119,198 @@
                         <div class="review-content py-2">
                             <p class="m-0">{{ review.comment }}</p>
                         </div>
-                        <div class="review-actions d-flex justify-content-end">
-                            <button class="btn btn-sm btn-text text-primary">
-                                <i class="far fa-thumbs-up me-1"></i> Helpful ({{ getHelpfulCount(review.id) }})
-                            </button>
-                        </div>
+
                     </div>
                     }
                 </div>
                 }
+                <!-- Review Form Section -->
+                <!-- Login Required Message -->
+                @if (!authService.isLoggedIn()) {
+                <div class="alert alert-warning border-0 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-sign-in-alt me-3 text-warning"></i>
+                        <div>
+                            <strong>Want to share your experience?</strong><br>
+                            <small>Please <a [routerLink]="['/login']" class="alert-link fw-bold">login</a> to write a
+                                review.</small>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Already Reviewed Message -->
+                @else if (hasReviewed()) {
+                <div class="alert alert-success border-0 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-check-circle me-3 text-success"></i>
+                        <div>
+                            <strong>Thank you for your review!</strong><br>
+                            <small>You have already reviewed this flight company.</small>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Add Review Form -->
+                @else {
+                <div class="add-review-form border rounded-3 p-4 mt-4">
+                    <h5 class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-edit me-2 text-success"></i>
+                        Write a Review
+                    </h5>
+
+                    <!-- Error Message -->
+                    @if (submitError()) {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {{ submitError() }}
+                        <button type="button" class="btn-close" (click)="submitError.set(null)"
+                            aria-label="Close"></button>
+                    </div>
+                    }
+
+                    <!-- Rating Stars -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Your Rating <span class="text-danger">*</span>
+                        </label>
+                        <div class="d-flex align-items-center">
+                            @for(star of [1,2,3,4,5]; track star) {
+                            <i class="fas fa-star me-1" (click)="rating.set(star)"
+                                [class.text-warning]="rating() >= star" [class.text-muted]="rating() < star"
+                                [style.cursor]="isSubmitting() ? 'not-allowed' : 'pointer'"
+                                [style.opacity]="isSubmitting() ? '0.5' : '1'"
+                                style="font-size: 1.5rem; transition: all 0.2s;" [attr.disabled]="isSubmitting()"></i>
+                            }
+                            @if (rating() > 0) {
+                            <span class="ms-2 text-muted small">({{ rating() }}/5)</span>
+                            }
+                        </div>
+                        @if (rating() === 0) {
+                        <small class="text-muted">Click on a star to rate</small>
+                        }
+                    </div>
+
+                    <!-- Comment Textarea -->
+                    <div class="mb-4">
+                        <label for="reviewComment" class="form-label fw-semibold">
+                            Your Comment <span class="text-muted">(optional)</span>
+                        </label>
+                        <textarea id="reviewComment" class="form-control" rows="4" [(ngModel)]="comment"
+                            [disabled]="isSubmitting()"
+                            placeholder="Share your experience with this flight company... What did you like? What could be improved?"
+                            maxlength="500" style="resize: none;"></textarea>
+                        <div class="form-text d-flex justify-content-between">
+                            <small>Help other travelers by sharing your honest feedback</small>
+                            <small class="text-muted">{{ comment.length }}/500</small>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-outline-secondary" (click)="resetReviewForm()"
+                            [disabled]="isSubmitting()">
+                            <i class="fas fa-undo me-2"></i> Reset
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success d-flex align-items-center"
+                            (click)="submitReview(rating(), comment)" [disabled]="isSubmitting() || rating() === 0">
+                            @if (isSubmitting()) {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Submitting...
+                            } @else {
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Submit Review
+                            }
+                        </button>
+                    </div>
+
+
+                </div>
+                }
+
             </div>
         </div>
     </div>
+
+    <!-- Booking Form Container -->
+    @if (showBookingForm()) {
+    <div class="col-12 mt-4">
+        <div class="booking-container bg-white p-4 rounded-4 shadow-sm border">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="m-0 d-flex align-items-center">
+                    <i class="fas fa-ticket-alt text-success me-2"></i>
+                    <span>Book This Flight</span>
+                </h4>
+                <button class="btn btn-sm btn-outline-secondary" (click)="closeBookingForm()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            @if (!bookingSuccess()) {
+            <form>
+                <!-- Seat Class Selection -->
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Select Class</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="seatClass" id="economy" value="Economy"
+                                [checked]="bookingSeatClass() === 'Economy'" (change)="bookingSeatClass.set('Economy')">
+                            <label class="form-check-label" for="economy">
+                                Economy <br><small class="text-muted">From ${{ flight()?.economyPrice }}</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="seatClass" id="business" value="Business"
+                                [checked]="bookingSeatClass() === 'Business'"
+                                (change)="bookingSeatClass.set('Business')">
+                            <label class="form-check-label" for="business">
+                                Business <br><small class="text-muted">From ${{ flight()?.businessPrice }}</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="seatClass" id="firstClass"
+                                value="FirstClass" [checked]="bookingSeatClass() === 'FirstClass'"
+                                (change)="bookingSeatClass.set('FirstClass')">
+                            <label class="form-check-label" for="firstClass">
+                                First Class <br><small class="text-muted">From ${{ flight()?.firstClassPrice }}</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Actions -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-outline-secondary" (click)="closeBookingForm()">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="confirmBooking()" [disabled]="isBooking()">
+                        @if (isBooking()) {
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                        Booking...
+                        } @else {
+                        <i class="fas fa-ticket-alt me-2"></i>
+                        Confirm Booking
+                        }
+                    </button>
+                </div>
+            </form>
+            } @else {
+            <!-- Success Message -->
+            <div class="text-center py-4">
+                <i class="fas fa-check-circle text-success mb-3" style="font-size: 3rem;"></i>
+                <h5 class="text-success">Booking Confirmed!</h5>
+                <p class="text-muted">Your booking has been confirmed. Check your email for details.</p>
+                <button class="btn btn-outline-success" (click)="closeBookingForm()">Close</button>
+            </div>
+            }
+
+            <!-- Error Message -->
+            @if (bookingError()) {
+            <div class="alert alert-danger mt-3 mb-0">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                {{ bookingError() }}
+            </div>
+            }
+        </div>
+    </div>
+    }

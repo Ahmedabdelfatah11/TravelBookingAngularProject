@@ -1,0 +1,32 @@
+/* Custom styles */
+.bg-cover {
+    position: relative;
+}
+
+.bg-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #0d6efd 50%, #ff9800 50%);
+    z-index: -1;
+}
+
+.nav-tabs .nav-link.active {
+    color: #5bd1ac !important;
+    border-color: var(--main-color) !important;
+}
+.nav-tabs:hover {
+    color: #5bd1ac !important;
+    background-color: transparent !important;
+}
+.text-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.text-overlay:hover {
+    opacity: 1;
+}
