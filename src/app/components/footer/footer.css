@@ -1,0 +1,9 @@
+footer a:hover {
+    color: #8dd3bb !important;
+    /* Gold color on hover */
+    text-decoration: underline;
+}
+
+footer h5 {
+    color: #ffffffcc;
+}

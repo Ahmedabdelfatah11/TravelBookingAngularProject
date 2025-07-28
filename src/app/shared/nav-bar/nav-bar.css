@@ -1,0 +1,37 @@
+.home-body :host .navbar .nav-link,
+.home-body :host .navbar .navbar-brand,
+.home-body :host .navbar .btn-outline-light {
+    color: black !important;
+}
+
+/* خلي الزرار أبيض مع حدود سوداء في الصفحة الرئيسية */
+.home-body :host .btn-outline-light {
+    background-color: white;
+    border-color: white;
+    color: black !important;
+}
+
+.home-body :host .btn-outline-light:hover {
+    background-color: #3ab83a;
+    border-color: white;
+    color: black !important;
+}
+
+.home-body :host .btn-success {
+    background-color: #3ab83a;
+    border-color: #ffffff;
+}
+
+.home-body :host .btn-success:hover {
+    background-color: #123512;
+    border-color: #ffffff;
+}
+
+.dropdown-menu {
+    min-width: 220px;
+    border-radius: 1rem !important;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}

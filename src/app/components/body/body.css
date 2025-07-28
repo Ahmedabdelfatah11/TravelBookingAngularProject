@@ -1,0 +1,101 @@
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(156, 151, 151, 0.945);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(34, 149, 109, 0.945);
+}
+
+.shadow {
+    box-shadow: 0 4px 8px rgb(78, 149, 81);
+}
+
+.img-fixed-size {
+    height: 200px;
+    object-fit: cover;
+}
+
+.btn {
+
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #71c0a4;
+}
+
+.carousel-inner img {
+    max-height: 60px;
+    object-fit: contain;
+    filter: grayscale(20%);
+    transition: transform 0.3s ease;
+}
+
+.carousel-inner img:hover {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
+
+.testimonial-card {
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #71c0a4;
+    opacity: 0.6;
+}
+
+.testimonial-card p {
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+}
+
+/* تأثيرات إضافية */
+.transition-hover {
+    transition: all 0.3s ease;
+}
+
+
+.carousel-item {
+    display: flex !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.logo-card {
+    min-width: 120px;
+    max-width: 150px;
+    height: 60px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo-card:hover {
+    transform: scale(1.05);
+}

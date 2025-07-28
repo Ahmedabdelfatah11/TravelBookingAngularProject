@@ -1,0 +1,26 @@
+<div class="mb-4">
+    <label class="form-label d-flex align-items-center">
+        <i class="fas fa-sort-amount-down-alt me-2 text-primary"></i>
+        <!-- <span>Sort Results</span> -->
+    </label>
+<!-- [value]="sort()" (change)="onSortChange($event)" -->
+    <div class="position-relative">
+        <select class="form-select ps-4"  aria-label="Sort results">
+            <option value="" disabled selected>Select sorting option</option>
+            <option value="priceAsc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-up "></i>
+                    Price: Low to High
+                </span>
+            </option>
+            <option value="priceDesc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-down"></i>
+                    Price: High to Low
+                </span>
+            </option>
+        </select>
+
+        <!-- <i class="fas fa-chevron-down position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i> -->
+    </div>
+</div>
