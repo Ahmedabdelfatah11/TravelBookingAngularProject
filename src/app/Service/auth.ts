@@ -27,10 +27,7 @@ export class Auth {
 
   ResendConfirmationEmail(email: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/ResendConfirmEmail`, { email });
-  }
-  // Login(model: Ilogin): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/Login`, model);
-  // }
+  } 
 
   ForgetPassword(model:any):Observable<any>{
     return this.http.post(`${this.baseUrl}/ForgetPassword`,model)
@@ -45,7 +42,7 @@ export class Auth {
       tap(response => {
         if (response.isAuthenticated && response.token) {
           localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userId', response.email!); // أو id لو موجود
+          localStorage.setItem('userId', response.email!);  
           localStorage.setItem('username', response.username!);
           localStorage.setItem('roles', JSON.stringify(response.roles));
         }
