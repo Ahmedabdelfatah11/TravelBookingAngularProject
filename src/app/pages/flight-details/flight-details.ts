@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavBar } from "../../shared/nav-bar/nav-bar";
 import { FlightDetailsBody } from "./flight-details-body/flight-details-body";
 import { Header } from "../../components/header/header";
-import { Footer } from "../../components/footer/footer";
+import { Footer } from "../../shared/footer/footer";
 
 @Component({
   selector: 'app-flight-details',
