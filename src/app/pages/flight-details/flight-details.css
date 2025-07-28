@@ -1,0 +1,12 @@
+:host ::ng-deep .special-page {
+
+    .nav-link,
+    .navbar-brand,
+    .btn-outline-light {
+        color: #000 !important;
+    }
+
+    .navbar-toggler-icon {
+        color: #000;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-sort-options',
@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
   styleUrl: './sort-options.css'
 })
 export class SortOptions {
-  sortOptions = [
-    { label: 'Cheapest', value: 'cheapest' },
-    { label: 'Best', value: 'best' },
-    { label: 'Quickest', value: 'quickest' },
-    { label: 'Recommended', value: 'recommended' }
-  ];
+  sort = signal('');
 
-  selectedSortOption = 'recommended';
+  @Output() sortChange = new EventEmitter<string>();
+
+  onSortChange(event: any) {
+    this.sort();
+    this.sortChange.emit(event.target.value);
+  }
 }

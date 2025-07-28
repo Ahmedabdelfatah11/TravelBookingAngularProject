@@ -1,0 +1,10 @@
+.btn,
+.card-header {
+    background-color: #8dd3bb;
+    border-color: transparent;
+}
+
+.btn:hover {
+    background-color: #103a2c;
+    text-decoration-color: aliceblue;
+}

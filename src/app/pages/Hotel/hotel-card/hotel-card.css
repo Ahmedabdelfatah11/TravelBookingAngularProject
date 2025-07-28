@@ -1,0 +1,47 @@
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(87, 184, 84, 0.841);
+}
+
+.card-body img:hover {
+    filter: brightness(1.1);
+}
+
+/* تأكد أن الأزرار في الأسفل */
+.card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* زر القلب */
+.btn-outline-secondary {
+    border-color: transparent;
+    /* إزالة الحدود */
+}
+
+/* زر العرض */
+.btn-success {
+    background-color: var(--main-color);
+    /* لون خلفية الزر */
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: darkgreen;
+    /* لون خلفية الزر عند التمرير */
+    color: white;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}

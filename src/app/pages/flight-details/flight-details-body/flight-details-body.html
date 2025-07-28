@@ -1,0 +1,83 @@
+<div class="container flight-detail-page py-4">
+    <div class="row g-4">
+        <!-- Flight Details Section -->
+        <div class="col-lg-8">
+            <div class="flight-card-container">
+                <app-flight-details-card [flight]="flight()"></app-flight-details-card>
+                
+                <div class="action-buttons d-flex flex-column flex-md-row gap-3 mt-4 p-3 bg-light rounded-3">
+                    <button class="btn btn-outline-danger flex-grow-1 py-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-heart me-2"></i>
+                        <span>Save for Later</span>
+                    </button>
+                    <button class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-ticket-alt me-2"></i>
+                        <span>Book Now</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="col-lg-4">
+            <div class="reviews-section bg-white p-4 rounded-4 shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="m-0 d-flex align-items-center">
+                        <i class="fas fa-star text-warning me-2"></i>
+                        <span>Reviews</span>
+                    </h3>
+                    <span class="badge rounded-pill bg-light text-dark fs-6">223 reviews</span>
+                </div>
+
+                <!-- Overall Rating -->
+                <div class="overall-rating bg-light p-3 rounded-3 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="rating-circle d-flex flex-column align-items-center justify-content-center me-3">
+                            <span class="display-4 fw-bold">2</span>
+                            <span class="small">/5</span>
+                        </div>
+                        <div>
+                            <div class="star-rating mb-2">
+                                <div class="stars-filled" style="width: 40%;"></div>
+                            </div>
+                            <p class="text-muted mb-0">Based on 223 traveler reviews</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews List -->
+                <div class="reviews-list">
+                    <div class="review-item bg-light p-3 rounded-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="user-avatar text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    OM
+                                </div>
+                                <div>
+                                    <h6 class="m-0 fw-bold">OldMaTe</h6>
+                                    <small class="text-muted">22 Oct 2025</small>
+                                </div>
+                               
+                            </div>
+                            <span class="badge bg-success">
+                                <i class="fas fa-star me-1"></i> 5.0
+                            </span>
+                            
+                        </div>
+                        <hr class="my-3" style="opacity: 0.3;">
+                        <div class="review-content py-2">
+                            <p class="m-0">This flight exceeded all my expectations. The service was impeccable and the comfort level was outstanding.</p>
+                        </div>
+                        <div class="review-actions d-flex justify-content-end">
+                            <button class="btn btn-sm btn-text">
+                                <i class="far fa-thumbs-up me-1"></i> Helpful (52)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Additional review items would go here -->
+               
+            </div>
+        </div>
+    </div>
+</div>

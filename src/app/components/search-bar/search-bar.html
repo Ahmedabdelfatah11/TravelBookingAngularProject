@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-center flex-wrap gap-5">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" formControlName="searchType" id="searchFlights"
-                            value="flights">
+                            value="flight">
                         <label class="form-check-label" for="searchFlights"><i
                                 class="fas fa-plane me-1"></i>Flights</label>
                     </div>
@@ -32,18 +32,21 @@
             </div>
 
             <!-- From -->
-            <div class="col-md-2" [hidden]="!showFromSection()">
+            @if(showFromSection()){
+            <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="From" formControlName="from">
                 @if (f['from'].touched && f['from'].invalid) {
                 <div class="text-danger mt-1">
                     From is required
                 </div>
                 }
-
             </div>
+            }
+
 
             <!-- To -->
-            <div class="col-md-2" [hidden]="!showToSection()">
+            @if(showFromSection()){
+            <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="Destination" formControlName="to">
                 @if (f['to'].touched && f['to'].invalid) {
                 <div class="text-danger mt-1">
@@ -51,9 +54,12 @@
                 </div>
                 }
             </div>
+            }
+
 
             <!-- Departure Date -->
-            <div class="col-md-3" [hidden]="!showDepartureDate()">
+            @if(showDepartureDate() ){
+            <div class="col-md-3">
                 <input type="datetime-local" class="form-control" placeholder="Departure"
                     formControlName="departureDate">
                 @if(f['departureDate'].touched && f['departureDate'].invalid) {
@@ -61,22 +67,31 @@
                     Departure date is required
                 </div>
                 }
-
             </div>
+            }
+
 
             <!-- Return Date -->
-            <div class="col-md-3" [hidden]="!showReturnDate()">
+            @if(showReturnDate() ){
+            <div class="col-md-3">
                 <input type="datetime-local" class="form-control" placeholder="Return" formControlName="returnDate">
+                @if(f['returnDate'].touched && f['returnDate'].invalid) {
+                <div class="text-danger mt-1">
+                    Return date is required
+                </div>
+                }
+                </div>
+            }
+
+            <!-- Guests -->
+            <div class="col-md-2" *ngIf="searchType === 'hotels' || searchType === 'tours'">
+                <input type="number" class="form-control" placeholder="Guests" formControlName="guests" min="1">
             </div>
-
-
-
 
             <!-- Search Button -->
-            <div class="src col-md-2">
-                <button class="btn btn-success w-100" type="submit">Search</button>
+            <div class="col-md-2">
+                <button class="src btn btn-success w-100 text-black" type="submit">Search</button>
             </div>
-
         </div>
     </form>
 </div>

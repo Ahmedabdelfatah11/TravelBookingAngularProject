@@ -1,0 +1,110 @@
+<div class="flight-details-container">
+    <!-- Flight Header Section -->
+    <div class="flight-header">
+        <div class="airline-info">
+            <img [src]="flight?.flightCompany?.imageUrl" alt="Airline Logo" class="airline-logo">
+            <div>
+                <h2>{{ flight?.flightCompany?.name }}</h2>
+                <span class="rating-badge bg-transparent text-black">{{ flight?.flightCompany?.rating }}</span>
+            </div>
+        </div>
+        <div class="flight-number">
+            <span>Flight Number</span>
+            <h3>{{ flight?.flightNumber }}</h3>
+        </div>
+
+
+    </div>
+    <!-- Amenities Section -->
+    <div class="amenities-section d-flex justify-content-center gap-4 my-4">
+        <div class="amenity-icon"><i class="fas fa-plane"></i></div>
+        <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
+        <div class="amenity-icon"><i class="fas fa-stopwatch"></i></div>
+        <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
+        <div class="amenity-icon"><i class="fas fa-wheelchair"></i></div>
+    </div>
+    <!-- Flight Route Section -->
+    <div class="flight-route">
+        <div class="route-details">
+            <div class="airport">
+                <h3>{{ flight?.departureAirport }}</h3>
+                <p class="time">{{ flight?.departureTime | date:'shortTime' }}</p>
+                <p class="date">{{ flight?.departureTime | date:'MMM d, y' }}</p>
+            </div>
+
+            <div class="route-line">
+                <div class="plane-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="duration">
+                    {{ calculateDuration(flight?.departureTime!, flight?.arrivalTime!) }}
+                </div>
+            </div>
+
+            <div class="airport">
+                <h3>{{ flight?.arrivalAirport }}</h3>
+                <p class="time">{{ flight?.arrivalTime | date:'shortTime' }}</p>
+                <p class="date">{{ flight?.arrivalTime | date:'MMM d, y' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Selection Radio Buttons -->
+    <div class="class-selection mb-4">
+        <h5>Select Class</h5>
+        <div class="class-options d-flex gap-3">
+            <!-- Economy -->
+            <label class="class-option economy">
+                <input type="radio" name="travelClass" value="economy" checked (change)="onClassChange($event)">
+                <div class="option-content">
+                    <span class="title">Economy</span>
+
+                </div>
+            </label>
+
+            <!-- First Class -->
+            <label class="class-option first-class">
+                <input type="radio" name="travelClass" value="first" (change)="onClassChange($event)">
+                <div class="option-content">
+                    <span class="title">First Class</span>
+
+                </div>
+            </label>
+
+            <!-- Business Class -->
+            <label class="class-option business-class">
+                <input type="radio" name="travelClass" value="business" (change)="onClassChange($event)">
+                <div class="option-content">
+                    <span class="title">Business</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Flight Info Cards -->
+    <div class="info-cards">
+        <div class="info-card">
+            <i class="fas fa-chair"></i>
+            <div>
+                <h4>Available Seats</h4>
+                <p>{{ flight?.availableSeats }}</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+                <h4>Departure From</h4>
+                <p>{{ flight?.flightCompany?.location }}</p>
+            </div>
+        </div>
+
+        <div class="info-card price-card">
+            <i class="fas fa-tag"></i>
+            <div>
+                <h4>Price</h4>
+                <p class="price">{{ displayPrice() | currency:'USD':'symbol':'1.2-2' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
