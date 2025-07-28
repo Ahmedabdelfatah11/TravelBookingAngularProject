@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
-import { CreateReview, ReviewFilterParams, Reviews, ReviewStats } from '../Models/reviews';
+import { catchError, Observable, tap } from 'rxjs'; 
+import { CreateReview, ReviewFilterParams, ReviewStats, Reviews } from '../Models/reviews'; 
 
 @Injectable({
   providedIn: 'root'

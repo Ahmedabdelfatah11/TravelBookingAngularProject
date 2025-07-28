@@ -36,3 +36,12 @@ export interface ReviewFilterParams {
     pageSize?: number;
     sortBy?: string;
 }
+export class CreateReview {
+    companyType!: string; // required, max 50
+    hotelCompanyId?: number;     // optional
+    flightCompanyId?: number;    // optional
+    carRentalCompanyId?: number; // optional
+    tourCompanyId?: number;      // optional
+    rating!: number;              // required, 1-5
+    comment?: string;            // optional, max 500
+}
