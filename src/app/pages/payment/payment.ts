@@ -1,3 +1,4 @@
+
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -66,8 +67,10 @@ export class Payment {
     }).subscribe(result => {
       if (result.paymentIntent?.status === 'succeeded') {
         this.paymentSuccess = true;
+        console.log('Payment succeeded:', result);
         alert('✅ Payment succeeded');
         this.router.navigate(['/home']);
+
         
       } else {
         alert('❌ Payment failed: ' + result.error?.message);
