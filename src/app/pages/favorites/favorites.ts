@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FavBody } from "./fav-body/fav-body";
 import { NavBar } from "../../shared/nav-bar/nav-bar";
-import { Footer } from "../../components/footer/footer";
+import { Footer } from "../../shared/footer/footer";
 
 @Component({
   selector: 'app-favorites',
