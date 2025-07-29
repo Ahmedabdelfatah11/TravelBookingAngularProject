@@ -74,66 +74,66 @@ export class SearchBarComponent {
   }
 
   ngOnInit() {
-    this.searchForm.get('searchType')?.valueChanges.subscribe(() => {
-      this.updateValidators();
-    });
+    // this.searchForm.get('searchType')?.valueChanges.subscribe(() => {
+    //   this.updateValidators();
+    // });
 
-    this.searchForm.get('departureDate')?.valueChanges.subscribe(() => {
-      this.validateReturnDate();
-    });
+    // this.searchForm.get('departureDate')?.valueChanges.subscribe(() => {
+    //   this.validateReturnDate();
+    // });
   }
 
-  private updateValidators() {
-    const fromCtrl = this.searchForm.get('from');
-    const toCtrl = this.searchForm.get('to');
-    const departureDateCtrl = this.searchForm.get('departureDate');
-    const returnDateCtrl = this.searchForm.get('returnDate');
+  // private updateValidators() {
+  //   const fromCtrl = this.searchForm.get('from');
+  //   const toCtrl = this.searchForm.get('to');
+  //   const departureDateCtrl = this.searchForm.get('departureDate');
+  //   const returnDateCtrl = this.searchForm.get('returnDate');
 
-    if (this.showFromSection()) {
-      fromCtrl?.setValidators([Validators.required]);
-    } else {
-      fromCtrl?.clearValidators();
-      fromCtrl?.setValue('');
-    }
+  //   if (this.showFromSection()) {
+  //     fromCtrl?.setValidators([Validators.required]);
+  //   } else {
+  //     fromCtrl?.clearValidators();
+  //     fromCtrl?.setValue('');
+  //   }
 
-    if (this.showToSection()) {
-      toCtrl?.setValidators([Validators.required]);
-    } else {
-      toCtrl?.clearValidators();
-      toCtrl?.setValue('');
-    }
+  //   if (this.showToSection()) {
+  //     toCtrl?.setValidators([Validators.required]);
+  //   } else {
+  //     toCtrl?.clearValidators();
+  //     toCtrl?.setValue('');
+  //   }
 
-    if (this.showDepartureDate()) {
-      departureDateCtrl?.setValidators([Validators.required]);
-    } else {
-      departureDateCtrl?.clearValidators();
-      departureDateCtrl?.setValue('');
-    }
+  //   if (this.showDepartureDate()) {
+  //     departureDateCtrl?.setValidators([Validators.required]);
+  //   } else {
+  //     departureDateCtrl?.clearValidators();
+  //     departureDateCtrl?.setValue('');
+  //   }
 
-    if (this.showReturnDate()) {
-      returnDateCtrl?.setValidators([Validators.required]);
-    } else {
-      returnDateCtrl?.clearValidators();
-      returnDateCtrl?.setValue('');
-    }
+  //   if (this.showReturnDate()) {
+  //     returnDateCtrl?.setValidators([Validators.required]);
+  //   } else {
+  //     returnDateCtrl?.clearValidators();
+  //     returnDateCtrl?.setValue('');
+  //   }
 
-    fromCtrl?.updateValueAndValidity();
-    toCtrl?.updateValueAndValidity();
-    departureDateCtrl?.updateValueAndValidity();
-    returnDateCtrl?.updateValueAndValidity();
-  }
+  //   fromCtrl?.updateValueAndValidity();
+  //   toCtrl?.updateValueAndValidity();
+  //   departureDateCtrl?.updateValueAndValidity();
+  //   returnDateCtrl?.updateValueAndValidity();
+  // }
 
-  private validateReturnDate() {
-    const returnDateCtrl = this.searchForm.get('returnDate');
-    const departureDate = this.searchForm.get('departureDate')?.value;
+  // private validateReturnDate() {
+  //   const returnDateCtrl = this.searchForm.get('returnDate');
+  //   const departureDate = this.searchForm.get('departureDate')?.value;
 
-    if (['flight', 'cars'].includes(this.searchType)) {
-      if (!departureDate) return;
-      returnDateCtrl?.setValidators([Validators.required]);
-    } else {
-      returnDateCtrl?.clearValidators();
-    }
+  //   if (['flight', 'cars'].includes(this.searchType)) {
+  //     if (!departureDate) return;
+  //     returnDateCtrl?.setValidators([Validators.required]);
+  //   } else {
+  //     returnDateCtrl?.clearValidators();
+  //   }
 
-    returnDateCtrl?.updateValueAndValidity();
-  }
+  //   returnDateCtrl?.updateValueAndValidity();
+  // }
 }

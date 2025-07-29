@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="row">
+        <!-- Cover Image -->
+        <div class="col-12">
+            <div class="text-center position-relative" style="margin-top: 80px;">
+
+                <!-- الخلفية (Cover Image) -->
+                <div class="profile-cover bg-primary"
+                    style="height: 200px; background: linear-gradient(to right, #ed6c34, #5bd043);">
+                </div>
+
+                <!-- صورة البروفايل والنص فوقها -->
+                <div class="position-absolute top-50 start-50 translate-middle text-white text-center"
+                    style="z-index: 5;">
+                    <!-- الصورة -->
+                    <img src="img/1.png" alt="User Profile Picture"
+                        class="rounded-circle mb-2 border border-4 border-white"
+                        style="width: 100px; height: 100px; object-fit: cover;">
+
+                    <!-- النص فوق الصورة -->
+                    <div class="mt-2">
+                        <h5 class="mb-0">John Doe.</h5>
+                        <p class="text-black-50 mb-0">OLLLLLD MAAAAAAAAAAATe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabs -->
+        <div class="col-12 mt-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account"
+                        type="button" role="tab" aria-controls="account" aria-selected="true">Account</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history"
+                        type="button" role="tab" aria-controls="history" aria-selected="false">History</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
+                        type="button" role="tab" aria-controls="payment" aria-selected="false">Payment methods</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" value="John Doe" readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" value="john.doe@gmail.com"
+                                            readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-plus me-1"></i> Add another email</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" value="************"
+                                            readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone number</label>
+                                        <input type="tel" class="form-control" id="phone" value="+1 000-000-0000"
+                                            readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address"
+                                            value="St 32 main downtown, Los Angeles, California, USA" readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="dob" class="form-label">Date of birth</label>
+                                        <input type="text" class="form-control" id="dob" value="01-01-1992" readonly>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
+                                                class="fas fa-edit me-1"></i> Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p>No history available.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p>No payment methods added.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

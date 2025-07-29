@@ -1,5 +1,5 @@
 .btn-success {
-    background-color: #8dd3bb;
+    background-color: var(--main-color);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -8,7 +8,7 @@
 }
 
 .btn-success:hover {
-    background-color: #30a192;
+    background-color: var(--secondary-color);
 }
 .airline-logo-container {
   width: 150px;

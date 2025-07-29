@@ -1,5 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-<nav class="navbar navbar-expand-lg bg-transparent my-2 shadow-sm" [ngClass]="{'special-page': isSpecialPage}">
+<nav class="navbar navbar-expand-lg bg-transparent my-2 shadow" [ngClass]="{'special-page': isSpecialPage}">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -63,9 +63,9 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-person me-2"></i>My
+                    <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/profile']"><i class="bi bi-person me-2"></i>My
                             account</a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i
+                    <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/favorites']"><i
                                 class="bi bi-heart fs-5 me-2"></i> Favorites</a></li>
                     <li><a class="dropdown-item d-flex align-items-center" href="#"><i
                                 class="bi bi-credit-card me-2"></i>Bookings</a></li>
@@ -85,7 +85,7 @@
             } @else {
             <!-- إذا لم يكن مسجل دخول -->
             <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
-            <a routerLink="/register" class="btn btn-success ">Sign Up</a>
+            <a routerLink="/register" class="btn btn-success btn-gradient-primary text-black">Sign Up</a>
             }
         </div>
     </div>

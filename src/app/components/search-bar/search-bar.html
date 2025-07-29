@@ -45,7 +45,7 @@
 
 
             <!-- To -->
-            @if(showFromSection()){
+            @if(showToSection()){
             <div class="col-md-2">
                 <input type="text" class="form-control" placeholder="Destination" formControlName="to">
                 @if (f['to'].touched && f['to'].invalid) {
@@ -60,33 +60,34 @@
             <!-- Departure Date -->
             @if(showDepartureDate() ){
             <div class="col-md-3">
-                <input type="datetime-local" class="form-control" placeholder="Departure"
+                <input type="date" class="form-control" placeholder="Departure"
                     formControlName="departureDate">
-                @if(f['departureDate'].touched && f['departureDate'].invalid) {
+                <!-- @if(f['departureDate'].touched && f['departureDate'].invalid) {
                 <div class="text-danger mt-1">
                     Departure date is required
                 </div>
-                }
+                } -->
             </div>
             }
-
-
             <!-- Return Date -->
             @if(showReturnDate() ){
             <div class="col-md-3">
-                <input type="datetime-local" class="form-control" placeholder="Return" formControlName="returnDate">
-                @if(f['returnDate'].touched && f['returnDate'].invalid) {
+                <input type="date" class="form-control" placeholder="Return" formControlName="returnDate">
+                <!-- @if(f['returnDate'].touched && f['returnDate'].invalid) {
                 <div class="text-danger mt-1">
                     Return date is required
                 </div>
-                }
-                </div>
+                } -->
+            </div>
             }
 
             <!-- Guests -->
-            <div class="col-md-2" *ngIf="searchType === 'hotels' || searchType === 'tours'">
+            <!-- @if(searchType === 'hotels' || searchType === 'tours') {
+            <div class="col-md-2">
                 <input type="number" class="form-control" placeholder="Guests" formControlName="guests" min="1">
             </div>
+            } -->
+
 
             <!-- Search Button -->
             <div class="col-md-2">
