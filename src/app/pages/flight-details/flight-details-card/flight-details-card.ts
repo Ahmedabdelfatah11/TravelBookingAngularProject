@@ -1,7 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, computed, Input, input, signal } from '@angular/core';
 import { FlightDetails } from '../../../Models/flight-model';
-export type TravelClass = 'economy' | 'first' | 'business';
+export type TravelClass = 'economy' | 'firstClass' | 'business';
 @Component({
   selector: 'app-flight-details-card',
   imports: [DatePipe, CurrencyPipe],
@@ -30,7 +30,7 @@ export class FlightDetailsCard {
     if (!flight) return 0;
     let basePrice = flight.economyPrice;
     switch (this.selectedClass()) {
-      case 'first':
+      case 'firstClass':
         basePrice = flight.firstClassPrice;
         return basePrice;
       case 'business':

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HotelBody } from "../hotel-body/hotel-body";
 import { Header } from "../../../components/header/header";
-import { Footer } from "../../../components/footer/footer";
+import { Footer } from "../../../shared/footer/footer";
 
 @Component({
   selector: 'app-hotel',

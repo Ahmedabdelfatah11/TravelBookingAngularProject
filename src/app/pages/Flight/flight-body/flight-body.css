@@ -1,13 +1,13 @@
 .page-link {
     background-color: white;
-    color: rgb(141, 211, 187);
-    border: 1px solid rgb(141, 211, 187);
+    color: rgb(0, 0, 0);
+    border: transparent; 
     transition: all 0.3s ease;
 }
 
 .page-link:hover,
 .page-link:focus {
-    background-color: rgb(141, 211, 187);
+    background-color: var(--main-color);
     color: white;
     box-shadow: 0 0 8px rgba(141, 211, 187, 0.5);
 }

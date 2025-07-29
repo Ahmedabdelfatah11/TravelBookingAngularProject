@@ -19,7 +19,6 @@ export interface FlightCompany {
 }
 
 
-
 export interface FlightFilterParams {
     DepartureAirport?: string;
     Rate?: 'Bad' | 'Normal' | 'Good' | 'Very Good' | 'Excellent';
