@@ -18,12 +18,12 @@
 }
 
 .home-body :host .btn-success {
-    background-color: #3ab83a;
+    background-color: #1bb71b;
     border-color: #ffffff;
 }
 
-.home-body :host .btn-success:hover {
-    background-color: #123512;
+.btn-success:hover {
+    background-color: var(--main-color);
     border-color: #ffffff;
 }
 

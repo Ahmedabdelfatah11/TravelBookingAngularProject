@@ -1,9 +1,9 @@
 .btn,
 .card-header {
-    background-color: #8dd3bb;
+    background-color: var(--main-color);
     border-color: transparent;
 }
 
 .btn:hover {
-    background-color: #103a2c;
+    background-color: var(--secondary-color);
 }

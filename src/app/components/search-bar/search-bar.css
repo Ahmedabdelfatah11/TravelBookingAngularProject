@@ -1,8 +1,8 @@
 .src {
-    background-color: rgb(141, 211, 187);
+    background-color: var(--main-color);
     border-color: aliceblue;
 }
 
 .src:hover {
-    background-color: rgb(16, 140, 98);
+    background-color: var(--secondary-color);
 }

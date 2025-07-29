@@ -28,10 +28,12 @@
     "@angular/router": "^20.0.0",
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@popperjs/core": "^2.11.8",
+    "@stripe/stripe-js": "^7.6.1",
     "aos": "^2.3.4",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",
+    "ngx-stripe": "^20.7.0",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.10",
     "tslib": "^2.3.0"
