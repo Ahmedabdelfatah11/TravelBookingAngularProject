@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { Auth } from '../../../Service/auth';
+import { Bookings } from "../bookings/bookings";
 
 @Component({
   selector: 'app-profile-body',
-  imports: [],
+  imports: [Bookings],
   templateUrl: './profile-body.html',
   styleUrl: './profile-body.css'
 })

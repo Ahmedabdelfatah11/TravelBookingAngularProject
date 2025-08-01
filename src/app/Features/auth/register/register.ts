@@ -31,9 +31,14 @@ togglePasswordVisibility() {
     FirstName:new FormControl('',[Validators.required]),
     LastName:new FormControl('',[Validators.required]),
     UserName:new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
+    PhoneNumber:new FormControl('', [Validators.required, Validators.pattern('^[0-9]{11}$')]),
+    Address:new FormControl('',[Validators.required]),
+    DateOfBirth:new FormControl('',[Validators.required]),
     Email:new FormControl('',[Validators.required,Validators.email]),
     Password:new FormControl('',[Validators.required,strongPasswordValidator])
-  })
+    
+  },);
+  
   //submit form
   submitForm() {
   console.log("Form Submitted", this.registerForm.value);  
