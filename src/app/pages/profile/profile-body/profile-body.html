@@ -6,7 +6,7 @@
 
                 <!-- الخلفية (Cover Image) -->
                 <div class="profile-cover bg-primary"
-                    style="height: 200px; background: linear-gradient(to right, #ed6c34, #5bd043);">
+                    style="height: 200px; background: linear-gradient(to right,#04fceb,#79cddf,#260574 );">
                 </div>
 
                 <!-- صورة البروفايل والنص فوقها -->
@@ -20,7 +20,7 @@
                     <!-- النص فوق الصورة -->
                     <div class="mt-2">
                         <h5 class="mb-0">John Doe.</h5>
-                        <p class="text-black-50 mb-0">OLLLLLD MAAAAAAAAAAATe</p>
+                        <p class="text-black-50 mb-0">{{'AbA@gmail.com'}}</p>
                     </div>
                 </div>
             </div>
@@ -29,15 +29,15 @@
         <div class="col-12 mt-4">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account"
+                    <button class="nav-link text-black active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account"
                         type="button" role="tab" aria-controls="account" aria-selected="true">Account</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history"
-                        type="button" role="tab" aria-controls="history" aria-selected="false">History</button>
+                    <button class="nav-link text-black" id="Bookings-tab" data-bs-toggle="tab" data-bs-target="#Bookings"
+                        type="button" role="tab" aria-controls="Bookings" aria-selected="false">Bookings</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
+                    <button class="nav-link text-black" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
                         type="button" role="tab" aria-controls="payment" aria-selected="false">Payment methods</button>
                 </li>
             </ul>
@@ -55,7 +55,7 @@
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" value="John Doe" readonly>
                                         <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
+                                                class="fas fa-edit me-1"></i>Change</button>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -109,12 +109,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <p>No history available.</p>
-                    </div>
-                </div>
+            <div class="tab-pane fade" id="Bookings" role="tabpanel" aria-labelledby="Bookings-tab">
+                <app-bookings></app-bookings>
             </div>
             <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                 <div class="card mt-3">

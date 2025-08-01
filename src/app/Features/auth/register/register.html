@@ -2,84 +2,124 @@
   <div class="row w-100">
     <!-- Register Form Section -->
     <div class="col-md-6 d-flex justify-content-center align-items-center">
-      <div class="d-flex flex-column justify-content-between p-4 w-100"
-            style="max-width:600px; min-height: 480px;">
+      <div class="d-flex flex-column justify-content-between p-4 w-100" style="max-width:600px; min-height: 480px;">
         <div>
           <!-- <img src="1.png" alt="Golobe Logo" class="mb-4" style="width: 100px; height: auto;" /> -->
           <h2 class="mb-2">Register</h2>
-          <p class="mb-4">Create a new Golobe account</p>  
+          <p class="mb-4">Create a new Golobe account</p>
           <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
           <div *ngIf="errMessage" class="alert alert-danger mt-3">{{ errMessage }}</div>
           <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
             <div class="row">
               <div class="col-md-6 mb-3">
-                  <label class="form-label">First Name</label>
-                  <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name" />
-                  @if(registerForm.get('FirstName')?.touched && registerForm.get('FirstName')?.invalid) {
-                    <div class="mb-2">
-                      <p class="text-danger ">First Name is required.</p> 
-                    </div>
-                  } 
+                <label class="form-label">First Name</label>
+                <input type="text" formControlName="FirstName" class="form-control" placeholder="First Name" />
+                @if(registerForm.get('FirstName')?.touched && registerForm.get('FirstName')?.invalid) {
+                <div class="mb-2">
+                  <p class="text-danger ">First Name is required.</p>
+                </div>
+                }
               </div>
 
-                <div class="col-md-6 mb-3">
-                  <label class="form-label">Last Name</label>
-                  <input type="text" formControlName="LastName" class="form-control" placeholder="Last Name" />
-                  @if(registerForm.get('LastName')?.touched && registerForm.get('LastName')?.invalid) {
-                    <div class="mb-2">
-                      <p class="text-danger ">Last Name is required.</p> 
-                    </div>
-                  }
-                </div> 
-
-                <div class="col-md-6 mb-3">
-                  <label class="form-label">Username</label>
-                  <input type="text" formControlName="UserName" class="form-control" placeholder="Username" />
-                  @if(registerForm.get('UserName')?.errors && registerForm.get('UserName')?.touched) {
-                    <div class="mb-2"> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('UserName')?.errors?.['required']">Username is required.</p> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('UserName')?.errors?.['pattern']">Username can only contain letters and numbers.</p> 
-                    </div>
-                  } 
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" formControlName="LastName" class="form-control" placeholder="Last Name" />
+                @if(registerForm.get('LastName')?.touched && registerForm.get('LastName')?.invalid) {
+                <div class="mb-2">
+                  <p class="text-danger ">Last Name is required.</p>
                 </div>
+                }
+              </div>
 
-                <div class="col-md-6 mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" formControlName="Email" class="form-control" placeholder="Email" />
-
-                  @if(registerForm.get('Email')?.errors && registerForm.get('Email')?.touched) {
-                    <div class="mb-2"> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('Email')?.errors?.['required']"> Email is required.</p> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('Email')?.errors?.['email']"> Please enter a valid email address.</p> 
-                    </div>
-                  } 
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" formControlName="UserName" class="form-control" placeholder="Username" />
+                @if(registerForm.get('UserName')?.errors && registerForm.get('UserName')?.touched) {
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('UserName')?.errors?.['required']">Username is
+                    required.</p>
+                  <p class="text-danger" *ngIf="this.registerForm.get('UserName')?.errors?.['pattern']">Username can
+                    only contain letters and numbers.</p>
                 </div>
+                }
+              </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Password</label>
-                  <div class="input-group">
-                    <input [type]="showPassword ? 'text' : 'password'" formControlName="Password" class="form-control" placeholder="********" />
-                    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
-                      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
-                    </button>
-                  </div>
-                  @if(registerForm.get('Password')?.errors && registerForm.get('Password')?.touched){
-                    <div class="mb-2"> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('Password')?.errors?.['required']"> Password is required.</p> 
-                      <p class="text-danger" *ngIf="this.registerForm.get('Password')?.errors?.['weakPassword']"> Password must contain at least 8 characters, including uppercase, lowercase, number, and symbol.</p> 
-                    </div>
-                  }
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" formControlName="Email" class="form-control" placeholder="Email" />
+
+                @if(registerForm.get('Email')?.errors && registerForm.get('Email')?.touched) {
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('Email')?.errors?.['required']"> Email is
+                    required.</p>
+                  <p class="text-danger" *ngIf="this.registerForm.get('Email')?.errors?.['email']"> Please enter a valid
+                    email address.</p>
                 </div>
+                }
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="text" formControlName="PhoneNumber" class="form-control"
+                  placeholder="Phone Number (10 digits)" />
+                @if(registerForm.get('PhoneNumber')?.errors && registerForm.get('PhoneNumber')?.touched) {
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('PhoneNumber')?.errors?.['required']"> Phone
+                    Number is required.</p>
+                  <p class="text-danger" *ngIf="this.registerForm.get('PhoneNumber')?.errors?.['pattern']"> Phone Number
+                    must be 11 digits.</p>
+                </div>
+                }
+              </div>
 
-            </div>  
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Address</label>
+                <input type="text" formControlName="Address" class="form-control" placeholder="Address" />
+                @if(registerForm.get('Address')?.errors && registerForm.get('Address')?.touched) {
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('Address')?.errors?.['required']"> Address is
+                    required.</p>
+                </div>
+                }
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" formControlName="DateOfBirth" class="form-control" placeholder="Date of Birth" />
+                @if(registerForm.get('DateOfBirth')?.errors && registerForm.get('DateOfBirth')?.touched) {
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('DateOfBirth')?.errors?.['required']"> Date of
+                    Birth is required.</p>
+                </div>
+                }
+              </div>
 
-            <button  class="btn btn-login mt-3" type="submit"> 
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                  <input [type]="showPassword ? 'text' : 'password'" formControlName="Password" class="form-control"
+                    placeholder="********" />
+                  <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+                    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                  </button>
+                </div>
+                @if(registerForm.get('Password')?.errors && registerForm.get('Password')?.touched){
+                <div class="mb-2">
+                  <p class="text-danger" *ngIf="this.registerForm.get('Password')?.errors?.['required']"> Password is
+                    required.</p>
+                  <p class="text-danger" *ngIf="this.registerForm.get('Password')?.errors?.['weakPassword']"> Password
+                    must contain at least 8 characters, including uppercase, lowercase, number, and symbol.</p>
+                </div>
+                }
+              </div>
+
+            </div>
+
+            <button class="btn btn-login mt-3" type="submit">
               @if(isLoading){
               <i class="fa fa-spinner fa-spin me-2"></i>
               Registering...
               } @else {
               Register
-              } 
+              }
             </button>
           </form>
         </div>

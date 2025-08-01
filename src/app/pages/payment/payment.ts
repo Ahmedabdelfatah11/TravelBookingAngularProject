@@ -42,9 +42,10 @@ export class Payment {
   };
 
   clientSecret = '';
-  paymentSuccess = false; 
- constructor(private router: Router) {}
+  paymentSuccess = false;
+  constructor(private router: Router) { }
   ngOnInit(): void {
+    
     const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
     if (bookingId) {
       this.paymentService.createPaymentIntent(bookingId).subscribe({
@@ -60,6 +61,10 @@ export class Payment {
   }
 
   pay(): void {
+    if (!this.clientSecret) {
+      alert("⚠️ Payment not ready yet. Please wait a moment.");
+      return;
+    }
     this.stripeService.confirmCardPayment(this.clientSecret, {
       payment_method: {
         card: this.card.element, // ← ✅ ده مربوط بالـ StripeCardComponent من الـ template
@@ -71,7 +76,7 @@ export class Payment {
         alert('✅ Payment succeeded');
         this.router.navigate(['/home']);
 
-        
+
       } else {
         alert('❌ Payment failed: ' + result.error?.message);
       }

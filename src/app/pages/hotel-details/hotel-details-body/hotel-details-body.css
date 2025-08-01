@@ -1,0 +1,120 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+    color: #333;
+  }
+
+  .hotel-container {
+    max-width: 1140px;
+    margin: auto;
+    padding: 2rem 1rem;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    color: #999;
+  }
+
+  .hotel-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+
+ .object-fit-cover {
+  object-fit: cover;
+}
+
+.image-grid .img-fluid {
+  min-height: 150px;
+}
+
+/* For the main large image */
+.col-md-8 .img-fluid {
+  min-height: 300px;
+}
+
+/* Style for the "View all photos" button */
+.image-grid .btn-dark {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+}
+
+.image-grid .btn-dark:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+  overview-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Rating Badge Styling */
+  .rating-badge {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #dee2e6;
+  }
+  
+  .rating-badge .score {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .rating-badge .label {
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  /* Tag Grid Styling */
+  .tag-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .tag-item {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #dee2e6;
+  }
+  
+  .tag-item i {
+    color: #28a745; /* Green color for icons */
+  }
+  .Room-image-container {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+.Room-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.book-now-btn {
+    font-size: 15px; /* أو أي حجم يناسبك */
+    padding: 0.6rem 0.8rem; /* اختياري لتقليل حجم الزر نفسه */
+}
+.btn {
+background-color: var(--main-color);
+}
+.btn:hover{
+  background-color: var(--secondary-color);
+}
+.bi-calendar2-range-fill{
+  color: var(--secondary-color);
+}

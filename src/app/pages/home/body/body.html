@@ -19,7 +19,7 @@
 
     <!-- Section: FLIGHT -->
 
-    <h4 class="mb-3 text-center" data-aos="fade-down">Flights</h4>
+    <h4 class="mb-3 text-center" id="flight" data-aos="fade-down">Flights</h4>
 
     <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
@@ -70,8 +70,8 @@
 
 
     <!-- Section: HOTELS -->
-    <h4 class="mt-5 mb-3 text-center" data-aos="fade-down">Hotels</h4>
-    <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
+    <h4 class="mt-5 mb-3 text-center" id="hotel" data-aos="fade-down">Hotels</h4>
+    <!-- <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
         breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
         class="d-block px-2">
@@ -84,7 +84,7 @@
         </swiper-slide>
         }
 
-    </swiper-container>
+    </swiper-container> -->
     <div class="container my-5">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -117,7 +117,7 @@
                             and ways of living.
                         </p>
                     </div>
-                    <button class="btn btn-light mt-3">Book Room</button>
+                    <button class="btn btn-light mt-3" [routerLink]="['/hotel']">Book Room</button>
                 </div>
             </div>
 
@@ -135,7 +135,7 @@
 
 
         <!-- Section: CARS -->
-        <h4 class="mt-5 mb-3 text-center" data-aos="fade-down">Cars</h4>
+        <h4 class="mt-5 mb-3 text-center" id="car" data-aos="fade-down">Cars</h4>
         <swiper-container slides-per-view="5" space-between="20" loop="true" autoplay-delay="2500"
             autoplay-disable-on-interaction="false"
             breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
@@ -182,7 +182,7 @@
         </div>
 
         <!-- Section: TOURS -->
-        <h4 class="mt-5 mb-3 text-center" data-aos="fade-down">Tours</h4>
+        <h4 class="mt-5 mb-3 text-center" id="tour" data-aos="fade-down">Tours</h4>
         <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
             autoplay-disable-on-interaction="false"
             breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'

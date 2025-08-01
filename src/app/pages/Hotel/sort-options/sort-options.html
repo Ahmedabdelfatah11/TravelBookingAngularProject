@@ -3,22 +3,47 @@
         <i class="fas fa-sort-amount-down-alt me-2 text-primary"></i>
         <!-- <span>Sort Results</span> -->
     </label>
-<!-- [value]="sort()" (change)="onSortChange($event)" -->
+    
     <div class="position-relative">
-        <select class="form-select ps-4"  aria-label="Sort results">
+        <select class="form-select ps-4" [value]="sort()" (change)="onSortChange($event)" aria-label="Sort results">
             <option value="" disabled selected>Select sorting option</option>
-            <option value="priceAsc">
+            <option value="nameasc">
                 <span class="d-flex align-items-center">
                     <i class="fas fa-arrow-up "></i>
-                    Price: Low to High
+                    Name: Asc
                 </span>
             </option>
-            <option value="priceDesc">
+            <option value="namedesc">
                 <span class="d-flex align-items-center">
                     <i class="fas fa-arrow-down"></i>
-                    Price: High to Low
+                    Name: Desc
                 </span>
             </option>
+            <option value="locationasc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-down"></i>
+                    Location: Asc
+                </span>
+            </option>
+            <option value="locationdesc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-down"></i>
+                    Location: Desc
+                </span>
+            </option>
+            <option value="ratingasc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-down"></i>
+                    Rating: Asc
+                </span>
+            </option>
+            <option value="ratingdesc">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-arrow-down"></i>
+                    Rating: Desc
+                </span>
+            </option>
+
         </select>
 
         <!-- <i class="fas fa-chevron-down position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i> -->
