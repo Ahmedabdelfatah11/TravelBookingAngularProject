@@ -40,13 +40,17 @@
     transform: translateX(-100px);
     /* عدل حسب الحاجة */
 }
+nav
+{
+      z-index: 105000000;
+}
 .custom-dropdown {
   left: auto !important;
   right: 0 !important;
   top: 100% !important;
   transform: none !important;
   min-width: 220px;
-  z-index: 1050; /* تأكد إنها فوق أي عنصر تاني */
+ /* تأكد إنها فوق أي عنصر تاني */
 }
 
 
