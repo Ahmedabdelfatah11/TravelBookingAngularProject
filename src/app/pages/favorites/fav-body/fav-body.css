@@ -1,0 +1,16 @@
+.nav-tabs .nav-link.active {
+    color: #5bd1ac !important;
+    border-color: var(--main-color) !important;
+}
+.nav-tabs:hover {
+    color: #5bd1ac !important;
+    background-color: transparent !important;
+}
+.text-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.text-overlay:hover {
+    opacity: 1;
+}

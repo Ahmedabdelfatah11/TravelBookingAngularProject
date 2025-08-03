@@ -13,6 +13,7 @@ import { ResetPassword } from './Features/auth/reset-password/reset-password';
 import { Invalid } from './shared/invalid/invalid';
 import { Payment } from './pages/payment/payment';
 import { Profile } from './pages/profile/profile';
+import { Favorites } from './pages/favorites/favorites';
 
 
 export const routes: Routes =
@@ -31,6 +32,7 @@ export const routes: Routes =
     { path: 'flight', component: Flight },
     { path: 'FlightDetails/:id', component: FlightDetails },
     { path: 'hotel', component: Hotel },
-    { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details
+    { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details\
+    { path:'favorites',component:Favorites},
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ];
