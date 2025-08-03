@@ -281,18 +281,14 @@ export class HotelDetailsBody {
     this.hotelService.bookRoom(this.hotelId, startDate, endDate).subscribe({
       next: (response) => {
         console.log('Booking successful:', response);
-        this.bookingId.set(response.id);
+        this.bookingId.set(response.bookingId);
         this.bookingStartDate.set(startDate);
         this.bookingEndDate.set(endDate);
         this.bookingSuccess.set(true);
         this.totalPrice.set(this.calculateTotalPrice());
-         // احسب السعر الكلي
-        // ✅ انتقل لصفحة الدفع مع إرسال السعر
-        this.router.navigate(['/payment', this.bookingId], {
-         state: { 
-          totalPrice: this.calculateTotalPrice(),
-          bookingId: response.id
-        }
+      
+        this.router.navigate(['/payment', response.bookingId], {
+
         });
       },
       error: (err) => {
