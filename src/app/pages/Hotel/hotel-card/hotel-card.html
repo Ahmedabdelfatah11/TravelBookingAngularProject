@@ -2,8 +2,8 @@
   <div class="row g-0">
     <!-- صورة الفندق على اليسار -->
     <div class="col-md-4 position-relative">
-      <img [src]="hotel?.imageUrl" [alt]="hotel?.name"
-        class="img-fluid rounded-start w-100 object-fit-cover" style="height: 300px;">
+      <img [src]="hotel?.imageUrl" [alt]="hotel?.name" class="img-fluid rounded-start w-100 object-fit-cover"
+        style="height: 300px;">
       <!-- <span class="badge bg-light text-dark position-absolute top-0 end-0 m-2">9 images</span> -->
     </div>
 
@@ -30,10 +30,10 @@
         <div class="mb-2">
           <small>
             @for (star of getStars(hotel?.rating ?? ''); track $index) {
-              <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
             }
             @for (star of getEmptyStars(hotel?.rating ?? ''); track $index) {
-              <i class="far fa-star text-warning"></i>
+            <i class="far fa-star text-warning"></i>
             }
             <span class="ms-2">{{ hotel?.rating ?? '' }} Star Hotel</span>
             <span class="mx-2">•</span>
@@ -43,21 +43,29 @@
 
         <!-- التقييم العام -->
         <div class="d-flex align-items-center mb-3">
-          <span class="bg-transparent text-black-50 me-2">{{ ((hotel?.description ?? '').length > 100 
-        ? (hotel?.description ?? '').slice(0, 100) + '...' 
-        : (hotel?.description ?? '')) }}</span>
-         
+          <span class="bg-transparent text-black-50 me-2">{{ ((hotel?.description ?? '').length > 100
+            ? (hotel?.description ?? '').slice(0, 100) + '...'
+            : (hotel?.description ?? '')) }}</span>
+
         </div>
 
         <hr class="my-3" style="opacity: 0.3;">
         <!-- الأزرار -->
         <div class="d-flex align-items-center mt-2">
+
+          @if (isFavoriteSignal()) {
           <button class="btn btn-outline-danger border-1 me-2 d-flex justify-content-center align-items-center"
-            style="width: 40px; height: 40px;">
-            <i class="fas fa-heart"></i>
+            style="width: 40px; height: 40px;" (click)="removeFromFavorites()">
+            <i class="fas fa-heart-circle-minus"></i>
           </button>
+          } @else {
+          <button class="btn btn-outline-danger border-1 me-2 d-flex justify-content-center align-items-center"
+            style="width: 40px; height: 40px;" (click)="addTofavorites()">
+            <i class="far fa-heart"></i>
+          </button>
+          }
           <button [routerLink]="['/hotel-details', hotel?.id]" class="btn btn-success border-0 w-100 text-white">
-            View Place
+            View Rooms
           </button>
         </div>
 

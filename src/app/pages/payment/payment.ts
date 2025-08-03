@@ -45,7 +45,7 @@ export class Payment {
   paymentSuccess = false;
   constructor(private router: Router) { }
   ngOnInit(): void {
-    
+
     const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
     if (bookingId) {
       this.paymentService.createPaymentIntent(bookingId).subscribe({
@@ -78,6 +78,7 @@ export class Payment {
 
 
       } else {
+        console.error('Payment failed:', result.error);
         alert('❌ Payment failed: ' + result.error?.message);
       }
     });

@@ -2,7 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HotelFilterParams, HotelResponse } from '../Models/hotel';
-
+interface BookingResponse {
+  id: number;
+  totalPrice: number;        // ✅
+  clientSecret?: string;     // لو عندك
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +38,7 @@ export class HotelService {
       startDate: StartDate,
       endDate: EndDate
     };
-    return this.http.post<any>(`${this.apiRoomUrl}/${roomId}/book`, body, {
+    return this.http.post<BookingResponse>(`${this.apiRoomUrl}/${roomId}/book`, body, {
       headers: this.getAuthHeaders()
     });
   }
