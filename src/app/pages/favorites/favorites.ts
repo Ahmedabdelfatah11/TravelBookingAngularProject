@@ -10,5 +10,11 @@ import { Footer } from "../../shared/footer/footer";
   styleUrl: './favorites.css'
 })
 export class Favorites {
+ngOnInit() {
+    document.body.classList.add('home-body');
+  }
 
+  ngOnDestroy() {
+    document.body.classList.remove('home-body');
+  }
 }

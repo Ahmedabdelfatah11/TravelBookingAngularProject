@@ -16,6 +16,7 @@ import { Profile } from './pages/profile/profile';
 import { CarBody } from './pages/Car/car-body/car-body';
 import { CarDetails } from './pages/car-details/car-details';
 import { BookDetail } from './pages/book-detail/book-detail';
+import { Favorites } from './pages/favorites/favorites';
 
 
 export const routes: Routes =
@@ -41,4 +42,10 @@ export const routes: Routes =
 { path: 'cars/:id', component: CarDetails },
 { path: 'Booking/:id', component: BookDetail }, 
 { path: '**', redirectTo: '/invalid', pathMatch: 'full' },
+    { path: 'flight', component: Flight },
+    { path: 'FlightDetails/:id', component: FlightDetails },
+    { path: 'hotel', component: Hotel },
+    { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details\
+    { path:'favorites',component:Favorites},
+    { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ];
