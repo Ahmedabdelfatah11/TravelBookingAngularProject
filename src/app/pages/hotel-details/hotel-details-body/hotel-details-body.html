@@ -161,7 +161,7 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Check-out Date</label>
-                            <input type="date" class="form-control" [min]="minCheckoutDate()"
+                            <input type="date" class="form-control" [min]="minCheckoutDate()" [max]="maxDate()"
                                 (change)="onEndDateChange($event)"
                                 [value]="bookingEndDate() ? bookingEndDate()!.toISOString().split('T')[0] : ''">
                         </div>

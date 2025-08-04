@@ -1,0 +1,81 @@
+<div class="card mt-3">
+    <div class="card-body">
+       <div class="container my-5">
+  
+
+  @if (isLoading()) {
+    <div class="text-center my-5">
+      <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-3">Loading Favorites ...</p>
+    </div>
+  } @else if (error()) {
+    <div class="alert alert-danger text-center">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      {{ error() }}
+    </div>
+  } @else if (hotel().length === 0) {
+    <div class="text-center my-5">
+      <i class="far fa-heart" style="font-size: 4rem; color: #ccc;"></i>
+      <h5 class="text-muted mt-3">There is no Favorites</h5>
+      <p class="text-muted">You can Add your Hotel Favorites Here ! </p>
+      <a routerLink="/hotel" class="btn btn-outline-primary mt-2">
+        <i class="fas fa-search me-2"></i>
+       search For Hotels
+      </a>
+    </div>
+  } @else {
+    <div class="row g-4">
+      @for (fav of hotel(); track fav.id) {
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100 hover-lift">
+          <!-- صورة الفندق -->
+          <div style="height: 200px; overflow: hidden;">
+            <img
+              #hotelImg
+              [src]="fav.companyImageUrl"
+              alt="{{ fav.companyName}}"
+              class="img-fluid w-100 h-100 object-fit-cover"
+              style="transition: transform 0.3s;"
+              (mouseenter)="hotelImg.style.transform='scale(1.05)'"
+              (mouseleave)="hotelImg.style.transform='scale(1)'"
+            >
+          </div>
+
+          <!-- محتوى الكارد -->
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-truncate">
+              <a [routerLink]="['/hotel-details', fav.hotelCompanyId]" class="text-decoration-none text-dark">
+                {{ fav.companyName }}
+              </a>
+            </h5>
+            <p class="text-muted small mb-2">
+              <i class="fas fa-map-marker-alt text-danger me-1"></i>
+              {{ fav.companyLocation }}
+            </p>
+
+            <!-- CreatedAt -->
+            <div class="mt-auto">
+              <p class="text-black-50 mb-2">
+                CreatedAt : {{ fav.createdAt | date: 'short' }}
+              </p>
+            </div>
+
+            <!-- زر الحذف -->
+            <button
+              class="btn btn-outline-danger btn-sm mt-2"
+              (click)="removeFromFavorites(fav.id)"
+            >
+              <i class="fas fa-trash-alt me-1"></i>
+              Remove From Favorites
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  }
+</div>
+    </div>
+</div>
