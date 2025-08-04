@@ -36,7 +36,7 @@
 
     </swiper-container>
     <div class="row">
-        <div class="col-md-6 card border-0 mt-5 rounded-4 overflow-hidden" data-aos="fade-left"
+        <!-- <div class="col-md-6 card border-0 mt-5 rounded-4 overflow-hidden" data-aos="fade-left"
             style="max-width: 600px; margin: auto;">
             <div class="card-body d-flex flex-column align-items-center text-center p-4">
                 <img [src]="flightCompany()[0].imageUrl" class="rounded-circle mb-3 shadow-sm border"
@@ -65,7 +65,7 @@
                 <p class="mb-0 small">The largest and busiest airport in Egypt.</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -136,45 +136,46 @@
 
         <!-- Section: CARS -->
         <h4 class="mt-5 mb-3 text-center" id="car" data-aos="fade-down">Cars</h4>
-        <swiper-container slides-per-view="5" space-between="20" loop="true" autoplay-delay="2500"
-            autoplay-disable-on-interaction="false"
-            breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
-            class="d-block px-2">
 
-            @for (c of cars; track $index) {
-            <swiper-slide>
-                <div class="logo-card text-center">
-                    <img [src]="c" [alt]="'car'" height="60">
-                </div>
-            </swiper-slide>
-            }
+<swiper-container slides-per-view="5" space-between="20" loop="true" autoplay-delay="2500"
+    autoplay-disable-on-interaction="false"
+    breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
+    class="d-block px-2">
+    @for (c of cars; track $index) {
+    <swiper-slide>
+        <div class="logo-card text-center">
+            <img [src]="c" [alt]="'car'" height="60">
+        </div>
+    </swiper-slide>
+    }
+</swiper-container>
 
-        </swiper-container>
-
-        <div class="row">
-            <div class="col-md-12 card border-0 mt-5 rounded-4 overflow-hidden" data-aos="fade-left" style="background-image: url('https://i.pinimg.com/1200x/bb/82/95/bb829586f24584a70b6b1b0493d10c0d.jpg');
+<div class="row">
+    <div class="col-md-12 card border-0 mt-5 rounded-4 overflow-hidden"
+        data-aos="fade-left"
+        style="background-image: url('https://i.pinimg.com/1200x/bb/82/95/bb829586f24584a70b6b1b0493d10c0d.jpg');
             background-size: cover;
             background-position: center;
             height: 310px; border-radius: 1rem;">
-                <div class="card-body d-flex flex-column align-items-end text-center p-4">
-                    <img [src]="'https://i.pinimg.com/1200x/90/10/de/9010decca278f5b41a10cd80ce1f4daa.jpg'"
-                        class="rounded-circle mb-3 shadow-sm border"
-                        style="width: 70px; height: 70px; object-fit: contain;" alt="Flight Company Logo">
+        <div class="card-body d-flex flex-column align-items-end text-center p-4">
+            <img [src]="'https://i.pinimg.com/1200x/90/10/de/9010decca278f5b41a10cd80ce1f4daa.jpg'"
+                class="rounded-circle mb-3 shadow-sm border"
+                style="width: 70px; height: 70px; object-fit: contain;" alt="Flight Company Logo">
 
+            <p class="card-text small text-secondary">
+                <!-- يمكن وضع وصف هنا لاحقاً -->
+            </p>
 
-                    <p class="card-text small text-secondary">
-
-                    </p>
-                    <div class="position-absolute bottom-0 start-0 p-4 bg-dark bg-opacity-50 w-100 rounded-bottom-4">
-                        <h4 class="mb-0"></h4>
-                        <a [routerLink]="['/flight']"
-                            class="btn btn-apple btn-outline-secondary text-white px-4 rounded-pill mt-3">
-                            Book Now
-                        </a>
-                    </div>
-
-                </div>
+            <div class="position-absolute bottom-0 start-0 p-4 bg-dark bg-opacity-50 w-100 rounded-bottom-4">
+                <h4 class="mb-0">Best Car Offers</h4>
+                <a [routerLink]="['/cars']"
+                    class="btn btn-apple btn-outline-secondary text-white px-4 rounded-pill mt-3">
+                    Book Now
+                </a>
             </div>
+        </div>
+    </div>
+</div>
             <!-- <div class="col-md-6 airport-banner shadow-lg border-0 mt-5 rounded-4 overflow-hidden position-relative text-white"
                 data-aos="fade-right">
 
