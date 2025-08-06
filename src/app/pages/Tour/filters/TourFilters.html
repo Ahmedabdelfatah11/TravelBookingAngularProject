@@ -1,0 +1,18 @@
+<div class="card">
+    <h6 class="card-header">Filters</h6>
+    <div class="card-body">
+       <div class="mb-3">
+  <label>Price Range: {{ minPrice() }} EGP — {{ maxPrice() }} EGP</label>
+  
+ <c-range-slider
+  (valueChange)="handleValueChange($event)"
+  [labels]="['Low', 'Medium', 'High']"
+  [value]="[25, 75]"
+/>
+</div>
+      
+
+        <hr class="my-3" style="opacity: 0.3;">
+        <button class="btn btn-primary text-black w-100" (click)="applyFilters()">Apply Filters</button>
+    </div>
+</div>

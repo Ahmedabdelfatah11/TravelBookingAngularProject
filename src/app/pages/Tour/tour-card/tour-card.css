@@ -4,12 +4,12 @@
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
     box-shadow: 0 10px 25px rgba(87, 184, 84, 0.841);
 }
 
 .card-body img:hover {
-    filter: brightness(1.1);
+    /* filter: brightness(1.1); */
 }
 
 /* تأكد أن الأزرار في الأسفل */
@@ -20,7 +20,7 @@
 }
 
 img:hover {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
 /* زر القلب */
@@ -44,4 +44,34 @@ img:hover {
 
 .object-fit-cover {
     object-fit: cover;
+}
+.tour-image {
+  width: 100% !important;
+  height: 100% !important;
+  /* height: auto; */
+  /* object-fit: cover; */
+  /* height: 50px; */
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+}
+
+.card
+{
+    border-radius: 25px !important;
+    padding-right: 20px;
+    position: relative;
+    margin-bottom: 25px;
+    /* height: 400px !important; */
+}
+.right-card
+{
+     border-radius: 25px !important;
+    /* border-bottom-left-radius: 50px !important; */
+    background-color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    padding-right: 20px;
 }
