@@ -7,3 +7,73 @@
     </div>
     </div>
 </section>
+<section>
+  <div class="container-lg container-fluid mt-4">
+    <div class="row m-2 w-100">
+      @if (!isMdOrBelow()) {
+  <div class="col-md-3">
+    @defer (when !isMdOrBelow()) {
+    <app-TourFilter (filterChanges)="onFilterChange($event)"></app-TourFilter>
+    }
+  </div>
+   <div class="col-md-9">
+            <app-sort-options (sortChange)="onSortChange($event)"></app-sort-options>
+
+            <div class="row g-4 opacity-100" [class.opacity-25]="loading()">
+                @for (Tours of Tours(); track Tours.id) {
+                <app-tour-card [Tours]="Tours"></app-tour-card>
+                }
+            </div>
+            </div>
+}
+
+       
+
+         @if (isMdOrBelow()) {
+             <div class="col">
+            <app-sort-options (sortChange)="onSortChange($event)"></app-sort-options>
+
+            <div class="row g-4 opacity-100" [class.opacity-25]="loading()">
+                @for (Tours of Tours(); track Tours.id) {
+                <app-tour-card [Tours]="Tours"></app-tour-card>
+                }
+            </div>
+                    </div>
+ @defer (when isMdOrBelow()) {
+  <div class="mt-4">
+    <app-TourFilter (filterChanges)="onFilterChange($event)"></app-TourFilter>
+  </div>
+}
+}
+
+
+
+            @if(loading()){
+            <div class="text-center my-4">
+                <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            }
+
+            @if (Tourcount() > pageSize()) {
+            <nav>
+                <ul class="pagination justify-content-center mt-4">
+                    <li class="page-item" [class.disabled]="currentPage() === 1">
+                        <button class="page-link" (click)="prevPage()">Previous</button>
+                    </li>
+                    @for (page of pages; track page) {
+                    <li class="page-item" [class.active]="page === currentPage()">
+                        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                    </li>
+                    }
+                    <li class="page-item" [class.disabled]="currentPage() * pageSize() >= Tourcount()">
+                        <button class="page-link" (click)="nextPage()">Next</button>
+                    </li>
+                </ul>
+            </nav>
+            }
+    </div>
+
+</div>
+</section>

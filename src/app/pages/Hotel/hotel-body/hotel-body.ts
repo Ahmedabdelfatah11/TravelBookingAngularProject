@@ -48,9 +48,10 @@ export class HotelBody {
       PageSize: this.pageSize()
     };
     console.log('Loading hotels with filters:', params);
-
     this.hotelService.getHotelCompanies(params).subscribe({
       next: (response) => {
+              console.log('Hotels received:', response.data); // ⬅️ ADD THIS LINE
+
         this.hotels.set(response.data);
         this.hotelCount.set(response.count);
         this.loading.set(false);

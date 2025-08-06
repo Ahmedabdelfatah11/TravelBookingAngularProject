@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBar } from '../../../shared/nav-bar/nav-bar';
 import { TourBody } from "../tour-body/tour-body";
+import { Footer } from "../../../shared/footer/footer";
 
 
 @Component({
   selector: 'app-tour',
   standalone: true,
-  imports: [CommonModule, NavBar, TourBody],
+  imports: [CommonModule, NavBar, TourBody, Footer],
   templateUrl: './tour.html',
   styleUrls: ['./tour.css']
 })

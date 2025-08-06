@@ -1,68 +1,69 @@
-<!-- <div class="card mb-3 shadow-sm overflow-hidden">
-  <div class="row g-0"> -->
-    <!-- صورة الفندق على اليسار -->
-    <!-- <div class="col-md-4 position-relative">
-      <img [src]="hotel.image" [alt]="hotel.name"
-        class="img-fluid rounded-start w-100 object-fit-cover" style="height: 250px;">
-      <span class="badge bg-light text-dark position-absolute top-0 end-0 m-2">9 images</span>
-    </div> -->
+<div class="card mb-3 mx-3">
+    <div class="card-body p-0 border-0">
+        <div class="row overflow-hidden" style="height: 300px;">
+            <!-- Logo Column (Left) -->
+            <!-- Logo Column (Left) -->
+            <div class="col-lg-6 col-md-6 d-flex align-items-start justify-content-center p-0 overflow-hidden">
+             <div class="tour-images-container p-0 position-relative overflow-hidden w-100 h-100 ">
+ @for (img of Tours?.imageUrls; track Tours?.id) {
+  <img class="p-0"
+    [src]="img"
+    [alt]="'Tour Image ' + Tours?.id"
+    class="tour-image "
+  />
+}
+    <div class="d-flex align-items-center position-absolute top-0 start-0 p-4">
+                    <button class="btn btn-outline-danger me-2 d-flex justify-content-center align-items-center"
+                        style="width: 40px; height: 40px;" (click)="saveForLater(Tours?.id)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <!-- <button [routerLink]="['/ToursDetails',Tours?.flightId]" class="btn btn-success w-100 text-black">
+                        View Deals
+                    </button> -->
+                </div>
+</div>
+            </div>
 
-    <!-- المحتوى على اليمين -->
-    <!-- <div class="col-md-8">
-      <div class="card-body"> -->
+            <!-- Content Column (Right) -->
+            <div class="col-lg-7 col-md-6 right-card">
+                <!-- Price at top right -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">{{ Tours?.name }}</h3>
+                    <div class="text-end">
+                        <small class="text-muted">starting from</small>
+                        <p><strong>Dates:</strong> {{ Tours?.startDate  }} – {{ Tours?.endDate  }}</p>
+                        <h5 class="text-danger">${{ Tours?.price}}<small class="text-muted">/person</small></h5>
+                        <!-- Tour Summary -->
+<div class="mt-2">
+  <p><strong>Destination:</strong> {{ Tours?.destination }}</p>
+  <p><strong>Category:</strong> {{ Tours?.category }}</p>
+  <!-- <p><strong>Max Guests:</strong> {{ Tours?.maxGuests }}</p> -->
+  <!-- <p><strong>Tour Company:</strong> {{ Tours?.tourCompanyId?.name }}</p> -->
+</div>
 
-        <!-- الاسم والسعر -->
-        <!-- <div class="d-flex justify-content-between align-items-start mb-2">
-          <div>
-            <h5 class="card-title mb-1">{{ hotel.name }}</h5>
-            <p class="text-muted mb-1">
-              <i class="fas fa-map-marker-alt text-danger me-1"></i>
-              {{ hotel.location }}
-            </p>
-          </div>
-          <div class="text-end">
-            <small class="text-muted">starting from</small>
-            <h5 class="text-danger">${{ hotel.price }}<small class="text-muted">/night</small></h5>
-          </div>
-        </div> -->
+                    </div>
+                </div>
 
-        <!-- تقييم النجوم -->
-        <!-- <div class="mb-2">
-          <small>
-            @for (star of getStars(hotel.ratingValue); track $index) {
-              <i class="fas fa-star text-warning"></i>
-            }
-            @for (star of getEmptyStars(hotel.ratingValue); track $index) {
-              <i class="far fa-star text-warning"></i>
-            }
-            <span class="ms-2">{{ hotel.ratingValue }} Star Hotel</span>
-            <span class="mx-2">•</span>
-            <span class="small">20+ Amenities</span>
-          </small>
-        </div> -->
+                <!-- Rating -->
+                <!-- <p class="mt-1"><strong>{{ Tours?. }}</strong></p>
+                <div class="mt-2">
+                    <div>
+                        <div class="form-check">
+                            <p class="form-check-label">
+                                {{ flight?.departureTime | date:'d MMMM yyyy - hh:mm a' }} : {{ flight?.arrivalTime |
+                                date:' hh:mm a' }}
+                                -- <small> non stop</small>
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
 
-        <!-- لتقييم العام -->
-        <!-- <div class="d-flex align-items-center mb-3">
-          <span class="badge bg-light text-dark me-2">{{ hotel.ratingValue }}</span>
-          <span class="text-muted"><strong>Very Good</strong> {{ hotel.reviewCount }} reviews</span>
+                <!-- Divider line -->
+                <!-- <hr class="my-3" style="opacity: 0.3;"> -->
+
+                <!-- Buttons -->
+            
+            </div>
         </div>
-
-        <hr class="my-3" style="opacity: 0.3;"> -->
-      
-      
-      
-        <!-- الأزرار -->
-        <!-- <div class="d-flex align-items-center">
-          <button class="btn btn-outline-danger border-1 me-2 d-flex justify-content-center align-items-center"
-            style="width: 40px; height: 40px;">
-            <i class="fas fa-heart"></i>
-          </button>
-          <button [routerLink]="['/hotel-details', hotel.id]" class="btn btn-success border-0 w-100 text-white">
-            View Place
-          </button>
-        </div>
-
-      </div>
     </div>
-  </div>
-</div> -->
+</div>

@@ -1,0 +1,3 @@
+input[type="range"]:focus {
+  z-index: 5;
+}
