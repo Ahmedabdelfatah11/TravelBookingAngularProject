@@ -123,3 +123,10 @@
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
+.text-gradient {
+   background: linear-gradient(90deg,#21703e, #9af48e, #065121);
+  -webkit-background-clip: text;
+  background-clip: text;
+   -webkit-text-fill-color: transparent;
+   z-index: 222;
+}

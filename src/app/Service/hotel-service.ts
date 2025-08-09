@@ -1,12 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HotelFilterParams, HotelResponse } from '../Models/hotel';
-interface BookingResponse {
-  id: number;
-  totalPrice: number;        // ✅
-  clientSecret?: string;     // لو عندك
-}
+import { DateRange, HotelFilterParams, HotelResponse, Room } from '../Models/hotel';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +17,7 @@ export class HotelService {
       'Authorization': token ? `Bearer ${token}` : ''
     });
   }
-  getHotelCompanies(params:HotelFilterParams) : Observable<HotelResponse> {
+  getHotelCompanies(params: HotelFilterParams): Observable<HotelResponse> {
     const queryParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
@@ -33,13 +29,24 @@ export class HotelService {
   getHotelById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
-  bookRoom(roomId: number,StartDate:Date,EndDate:Date): Observable<any> {
+  bookRoom(roomId: number, StartDate: Date, EndDate: Date): Observable<any> {
     const body = {
       startDate: StartDate,
       endDate: EndDate
     };
-    return this.http.post<BookingResponse>(`${this.apiRoomUrl}/${roomId}/book`, body, {
+    return this.http.post<any>(`${this.apiRoomUrl}/${roomId}/book`, body, {
       headers: this.getAuthHeaders()
     });
   }
+  getAvailableDates(roomId: number, start: Date, end: Date): Observable<DateRange[]> {
+    const params = {
+      start: start.toISOString(),
+      end: end.toISOString()
+    };
+    return this.http.get<DateRange[]>(`${this.apiRoomUrl}/${roomId}/available-dates`, {
+      params,
+      headers: this.getAuthHeaders()
+    });
+  }
+
 }

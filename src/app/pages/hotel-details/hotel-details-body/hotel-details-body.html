@@ -36,7 +36,7 @@
                 <div class="position-relative h-100">
                     <img [src]="hotel()?.rooms?.[0]?.roomImages?.[0]?.imageUrl"
                         (click)="openImageModal(hotel()?.rooms?.[0]?.roomImages?.[0]?.imageUrl!)"
-                        style="cursor: pointer;" class="img-fluid rounded h-100 w-100 object-fit-cover"
+                        style="cursor: pointer;" class="img-fluid rounded-4 h-100 w-100 object-fit-fill"
                         alt="Hotel exterior">
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     @if(image.imageUrl!=hotel()?.rooms?.[0]?.roomImages?.[0]?.imageUrl){
                     <div class="col-12">
                         <img [src]="image.imageUrl" (click)="openImageModal(image.imageUrl)"
-                            class="img-fluid rounded h-100 w-100 object-fit-cover" style="cursor: pointer;" alt="Room">
+                            class="img-fluid rounded-4 h-100 w-100 object-fit-cover" style="cursor: pointer;" alt="Room">
                     </div>
                     }
                     }
@@ -108,7 +108,7 @@
     <hr class="m-3">
     <div class="container mt-5">
         <h5 class="text-black fw-bold mb-4"> Availabe Rooms</h5>
-        @for (room of hotel()?.rooms; track hotel()?.id) {
+        @for (room of hotel()?.rooms; track room.id) {
         <div class="row gap-0">
             <div class="col-md-1 d-flex align-items-start justify-content-center mb-1">
                 <div class="Room-image-container ">
@@ -118,8 +118,12 @@
             </div>
             <div class="col-md-7 align-content-center text-black-50">
                 <p>{{room.description}} - {{room.roomType}}
-                <h6 class="bi-calendar2-range-fill">From: {{room.from | date:"dd-MM-yyyy"}} To: {{room.to|
-                    date:"dd-MM-yyyy"}} </h6>
+                    @for (gap of availableGaps().get(room.id) || []; track $index) {
+                <div class="text-success small mt-1">
+                    <i class="fas fa-calendar-check me-1"></i>
+                    Available: {{ gap.start | date:'dd-MM-yyyy' }} to {{ gap.end | date:'dd-MM-yyyy' }}
+                </div>
+                }
             </div>
             <div class="col-md-2 align-content-center text-black">
                 <p><strong>${{room.price}}</strong>/night</p>
@@ -175,6 +179,24 @@
                     </div>
                     }
                 </div>
+                <div class="mt-3">
+                    <label class="form-label fw-semibold">Available Periods</label>
+                    @for (gap of availableGaps().get(selectedRoomId()!) || []; track $index) {
+                    <div class="alert alert-success p-2 mb-2 small d-flex align-items-center">
+                        <i class="fas fa-calendar-check me-2"></i>
+                        <strong>{{ gap.start | date:'dd-MM-yyyy' }}</strong>
+                        to
+                        <strong>{{ gap.end | date:'dd-MM-yyyy' }}</strong>
+                    </div>
+                    }
+                    @if (selectedRoomId() && availableGaps().has(selectedRoomId()!) &&
+                    availableGaps().get(selectedRoomId()!)?.length === 0) {
+                    <div class="alert alert-danger p-2 small">
+                        <i class="fas fa-ban me-1"></i> No available periods in the selected range.
+                    </div>
+                    }
+                </div>
+
 
                 <!-- Booking Actions -->
                 <div class="d-flex justify-content-end gap-2">

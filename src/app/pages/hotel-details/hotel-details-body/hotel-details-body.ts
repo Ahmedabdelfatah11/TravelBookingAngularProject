@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Hotel } from '../../../Models/hotel';
+import { DateRange, Hotel, Room } from '../../../Models/hotel';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HotelService } from '../../../Service/hotel-service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
@@ -7,7 +7,12 @@ import { CreateReview, ReviewStats } from '../../../Models/reviews';
 import { ReviewService } from '../../../Service/review-service';
 import { Auth } from '../../../Service/auth';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+// Import Bootstrap types if available
 declare var bootstrap: any;
+
+
+
 @Component({
   selector: 'app-hotel-details-body',
   imports: [DatePipe, FormsModule, RouterLink, CurrencyPipe],
@@ -36,6 +41,16 @@ export class HotelDetailsBody {
   bookingSuccess = signal<boolean>(false);
   bookingError = signal<string | null>(null);
 
+
+  availableGaps = signal<Map<number, DateRange[]>>(new Map());
+  isLoadingAvailability = signal<boolean>(false);
+  startDate = signal<Date | null>(null);
+  endDate = signal<Date | null>(null);
+  // Room selection
+  // selectedRoomId is a signal that holds the ID of the currently selected room
+  // It can be null if no room is selected
+
+
   selectedRoomId = signal<number | null>(null);
   hotelId: number = 0;
   hotelCompanyId: number = 0;
@@ -46,12 +61,18 @@ export class HotelDetailsBody {
   authService = inject(Auth);
   router = inject(Router);
 
+
+
+  constructor(private toastr: ToastrService) {}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.hotelId = +params['id']; // This is the flight ID from route
       this.loadHotelDetails();
+
     });
   }
+
+
   private loadHotelDetails(): void {
     if (isNaN(this.hotelId)) {
       this.error.set('Invalid hotel ID');
@@ -62,10 +83,16 @@ export class HotelDetailsBody {
       next: (response) => {
         this.hotel.set(response);
         this.isLoading.update(s => ({ ...s, hotel: false }));
+
         if (response && response.id) {
           this.hotelCompanyId = response.id;
           this.loadReviewStats();
           this.checkUserReview();
+        }
+        for (const room of response.rooms) {
+          room.from = new Date(room.from).toISOString();
+          room.to = new Date(room.to).toISOString();
+          this.loadAvailableDates(room.id, new Date(room.from), new Date(room.to));
         }
       },
       error: (err) => {
@@ -74,6 +101,47 @@ export class HotelDetailsBody {
       }
     });
   }
+
+  loadAvailableDates(roomId: number, startDate?: Date, endDate?: Date): void {
+    const start = startDate ?? this.startDate();
+    const end = endDate ?? this.endDate();
+
+    if (!start || !end) {
+      this.availableGaps.update(gaps => {
+        gaps.set(roomId, []);
+        return new Map(gaps);
+      });
+      return;
+    }
+
+    this.hotelService.getAvailableDates(roomId, start, end).subscribe({
+      next: (ranges: DateRange[]) => {
+        // ✅ حول الـ Start و End من string إلى Date
+        const parsedRanges = ranges.map(r => ({
+          start: new Date(r.start).toISOString(),
+          end: new Date(r.end).toISOString()
+        }));
+
+        // ✅ احفظ الفراغات بناءً على roomId
+        this.availableGaps.update(gaps => {
+          const newMap = new Map(gaps);
+          newMap.set(roomId, parsedRanges);
+          return newMap;
+        });
+      },
+      error: (err) => {
+        console.error(`Failed to load availability for room ${roomId}`, err);
+        this.availableGaps.update(gaps => {
+          const newMap = new Map(gaps);
+          newMap.set(roomId, []);
+          return newMap;
+        });
+      }
+    });
+  }
+
+
+
   selectedImage: string = '';
 
   openImageModal(imageUrl: string): void {
@@ -247,13 +315,14 @@ export class HotelDetailsBody {
   // Booking Methods
   openBookingForm(roomId: number) {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to book a room');
+      this.toastr.warning('Please login to book a room');
       return;
     }
-    this.selectedRoomId.set(roomId); // ✅ حدّث الإشارة
+    this.selectedRoomId.set(roomId);
     this.showBookingForm.set(true);
     this.bookingSuccess.set(false);
     this.bookingError.set(null);
+    this.loadAvailableDates(roomId);
   }
 
   closeBookingForm() {
@@ -277,19 +346,16 @@ export class HotelDetailsBody {
       this.isBooking.set(false);
       return;
     }
-
-    this.hotelService.bookRoom(this.hotelId, startDate, endDate).subscribe({
+    console.log('Booking room with ID:', this.selectedRoomId(), 'from', startDate, 'to', endDate);
+    this.hotelService.bookRoom(this.selectedRoomId()!, startDate, endDate).subscribe({
       next: (response) => {
         console.log('Booking successful:', response);
         this.bookingId.set(response.bookingId);
         this.bookingStartDate.set(startDate);
         this.bookingEndDate.set(endDate);
         this.bookingSuccess.set(true);
-        this.totalPrice.set(this.calculateTotalPrice());
-      
-        this.router.navigate(['/payment', response.bookingId], {
 
-        });
+        this.router.navigate(['/payment', response.bookingId]);
       },
       error: (err) => {
         console.error('Booking error:', err);
@@ -321,7 +387,7 @@ export class HotelDetailsBody {
     return days;
   }
 
-  // أقل تاريخ ممكن (من تاريخ اليوم أو من تاريخ الغرفة)
+  // Minimum Date for Check-in
   minDate(): string {
     const room = this.getCurrentRoom();
     if (!room) return '';
@@ -332,16 +398,16 @@ export class HotelDetailsBody {
     return min.toISOString().split('T')[0];
   }
 
-  // أقل تاريخ Check-out = StartDate + 1
+  // Minimum Date for Check-out
   minCheckoutDate(): string {
     const start = this.bookingStartDate();
     if (!start) return this.minDate();
     const nextDay = new Date(start);
-    nextDay.setDate(nextDay.getDate() );
+    nextDay.setDate(nextDay.getDate());
     return nextDay.toISOString().split('T')[0];
   }
 
-  // أقصى تاريخ ممكن (حتى تاريخ انتهاء الغرفة)
+  // Maximum Date for Check-in Check-out
   maxDate(): string {
     const room = this.getCurrentRoom();
     if (!room) return '';
@@ -375,7 +441,7 @@ export class HotelDetailsBody {
     const end = this.bookingEndDate();
     if (!start || !end) return 0;
     const diffTime = end.getTime() - start.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) +1; // +1 لأننا نحسب اليوم الأول
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 لأننا نحسب اليوم الأول
     return diffDays > 0 ? diffDays : 1;
   }
 

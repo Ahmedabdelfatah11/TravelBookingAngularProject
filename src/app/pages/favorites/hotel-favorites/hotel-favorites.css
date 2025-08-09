@@ -1,37 +1,98 @@
-.hover-lift {
-  transition: transform 0.3s, box-shadow 0.3s;
+.favorites-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-.hover-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+.hotel-image-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
 }
 
-.card-title {
-  font-size: 1.1rem;
+.hotel-image {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.text-truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.favorite-hotel-card:hover .hotel-image {
+    transform: scale(1.05);
 }
 
-img {
-  transition: transform 0.3s ease;
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 50%);
 }
 
-/* للأجهزة الصغيرة */
-@media (max-width: 576px) {
-  .container {
-    padding: 0 10px;
-  }
+.hotel-title {
+    transition: color 0.2s;
+    position: relative;
+    display: inline-block;
+}
 
-  .card-body {
-    padding: 0.75rem;
-  }
+.hotel-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
 
-  h2 {
-    font-size: 1.5rem;
-  }
+.hotel-title:hover::after {
+    width: 100%;
+}
+
+.hotel-title:hover {
+    color: var(--secondary-color) !important;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.rating-stars {
+    letter-spacing: 2px;
+}
+
+.empty-icon {
+    transition: all 0.5s ease;
+}
+
+.empty-state:hover .empty-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+.badge {
+    padding: 0.35em 0.65em;
+    font-weight: 500;
+}
+
+.btn {
+    background-color: var(--main-color);
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }

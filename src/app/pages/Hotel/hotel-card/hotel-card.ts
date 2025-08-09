@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Hotel } from '../../../Models/hotel';
 import { Favorites } from '../../../Service/favorites';
 import { Favorite } from '../../../Models/favorite';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-hotel-card',
   imports: [RouterLink],
@@ -19,7 +20,7 @@ export class HotelCard {
 
   favouriteService = inject(Favorites);
 
-  constructor() {
+  constructor( private toastr: ToastrService) {
     // ✅ افحص حالة المفضلة بمجرد توفر hotel.id
     effect(() => {
       const hotelId = this.hotel?.id;
@@ -59,7 +60,7 @@ export class HotelCard {
         console.log('Added to favorites:', response);
         this.favIdSignal.set(response.id);
         this.isFavoriteSignal.set(true);
-        alert('تمت الإضافة إلى المفضلة!');
+        this.toastr.success('Added to favorites successfully!');
       },
       error: (error) => {
         console.error('Error adding to favorites:', error);
@@ -79,7 +80,9 @@ export class HotelCard {
         console.log('Removed from favorites');
         this.isFavoriteSignal.set(false);
         this.favIdSignal.set(null);
-        alert('تم الحذف من المفضلة!');
+       
+        this.toastr.info('Removed from favorites !');
+       
       },
       error: (error) => {
         console.error('Error removing from favorites:', error);

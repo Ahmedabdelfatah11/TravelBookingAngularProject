@@ -6,12 +6,13 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeService, StripeCardComponent, NgxStripeModule } from 'ngx-stripe';
 import { PaymentService } from '../../core/services/payment';
+import { ToastrService } from 'ngx-toastr';
 // ... باقي imports
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgxStripeModule, NgIf, StripeCardComponent, RouterModule,],
+  imports: [CommonModule, FormsModule, NgxStripeModule, StripeCardComponent, RouterModule,],
   templateUrl: './payment.html',
   styleUrls: ['./payment.css']
 })
@@ -43,7 +44,7 @@ export class Payment {
 
   clientSecret = '';
   paymentSuccess = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router ,private Toastr : ToastrService) { }
   ngOnInit(): void {
 
     const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
@@ -62,24 +63,25 @@ export class Payment {
 
   pay(): void {
     if (!this.clientSecret) {
-      alert("⚠️ Payment not ready yet. Please wait a moment.");
+      this.Toastr.error('⚠️ Payment not ready yet. Please wait a moment.');
+      
       return;
     }
     this.stripeService.confirmCardPayment(this.clientSecret, {
       payment_method: {
-        card: this.card.element, // ← ✅ ده مربوط بالـ StripeCardComponent من الـ template
+        card: this.card.element, 
       }
     }).subscribe(result => {
       if (result.paymentIntent?.status === 'succeeded') {
         this.paymentSuccess = true;
         console.log('Payment succeeded:', result);
-        alert('✅ Payment succeeded');
+        this.Toastr.success('✅ Payment succeeded');
         this.router.navigate(['/home']);
 
 
       } else {
         console.error('Payment failed:', result.error);
-        alert('❌ Payment failed: ' + result.error?.message);
+        this.Toastr.error('❌ Payment failed: ' + result.error?.message);
       }
     });
   }
