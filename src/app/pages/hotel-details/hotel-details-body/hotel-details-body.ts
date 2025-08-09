@@ -27,6 +27,7 @@ export class HotelDetailsBody {
   readonly isSubmitting = signal(false);
   readonly submitError = signal<string | null>(null);
   bookingId = signal<number | null>(null);
+  totalPrice = signal<number>(0);
   // Booking Signals
   showBookingForm = signal<boolean>(false);
   bookingStartDate = signal<Date | null>(null);
@@ -284,10 +285,15 @@ export class HotelDetailsBody {
         this.bookingStartDate.set(startDate);
         this.bookingEndDate.set(endDate);
         this.bookingSuccess.set(true);
-        this.isBooking.set(false);
-        const totalPrice = response.totalPrice ?? 0;
+        this.totalPrice.set(this.calculateTotalPrice());
+         // احسب السعر الكلي
         // ✅ انتقل لصفحة الدفع مع إرسال السعر
-        this.router.navigate(['/payment', this.bookingId]);
+        this.router.navigate(['/payment', this.bookingId], {
+         state: { 
+          totalPrice: this.calculateTotalPrice(),
+          bookingId: response.id
+        }
+        });
       },
       error: (err) => {
         console.error('Booking error:', err);
@@ -335,7 +341,7 @@ export class HotelDetailsBody {
     const start = this.bookingStartDate();
     if (!start) return this.minDate();
     const nextDay = new Date(start);
-    nextDay.setDate(nextDay.getDate() + 1);
+    nextDay.setDate(nextDay.getDate() );
     return nextDay.toISOString().split('T')[0];
   }
 
@@ -373,7 +379,7 @@ export class HotelDetailsBody {
     const end = this.bookingEndDate();
     if (!start || !end) return 0;
     const diffTime = end.getTime() - start.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) +1; // +1 لأننا نحسب اليوم الأول
     return diffDays > 0 ? diffDays : 1;
   }
 
@@ -389,5 +395,3 @@ export class HotelDetailsBody {
     return this.hotel()?.rooms?.find(r => r.id === this.selectedRoomId());
   }
 }
-
-
