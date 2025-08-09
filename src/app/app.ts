@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Home } from './pages/home/home';
+
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @Component({
