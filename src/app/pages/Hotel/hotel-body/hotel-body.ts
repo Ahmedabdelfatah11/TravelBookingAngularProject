@@ -26,7 +26,7 @@ export class HotelBody {
   constructor() {
     // تهيئة الفلاتر الافتراضية
     this.filters.set({
-      searchTerm: '',
+      Search: '',
       Sort: '',
     });
 
