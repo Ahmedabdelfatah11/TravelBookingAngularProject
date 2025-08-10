@@ -63,7 +63,7 @@ export class HotelDetailsBody {
 
 
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.hotelId = +params['id']; // This is the flight ID from route
@@ -121,13 +121,18 @@ export class HotelDetailsBody {
           start: new Date(r.start).toISOString(),
           end: new Date(r.end).toISOString()
         }));
-
+        this.selectedRoomId.set(roomId);
         // ✅ احفظ الفراغات بناءً على roomId
         this.availableGaps.update(gaps => {
           const newMap = new Map(gaps);
           newMap.set(roomId, parsedRanges);
           return newMap;
         });
+        if (parsedRanges.length > 0 && this.selectedRoomId() === roomId) {
+          const firstGap = parsedRanges[0];
+          this.bookingStartDate.set(new Date(firstGap.start));
+          this.bookingEndDate.set(new Date(firstGap.end));
+        }
       },
       error: (err) => {
         console.error(`Failed to load availability for room ${roomId}`, err);
@@ -322,7 +327,12 @@ export class HotelDetailsBody {
     this.showBookingForm.set(true);
     this.bookingSuccess.set(false);
     this.bookingError.set(null);
-    this.loadAvailableDates(roomId);
+
+    // تحميل التواريخ المتاحة للغرفة المحددة
+    const room = this.getCurrentRoom();
+    if (room) {
+      this.loadAvailableDates(roomId, new Date(room.from), new Date(room.to));
+    }
   }
 
   closeBookingForm() {
@@ -367,25 +377,6 @@ export class HotelDetailsBody {
       }
     });
   }
-  availableRoomDays(): Date[] {
-    const selectedId = this.selectedRoomId();
-    if (!selectedId) return [];
-
-    const room = this.hotel()?.rooms?.find(r => r.id === selectedId);
-    if (!room) return [];
-
-    const from = new Date(room.from);
-    const to = new Date(room.to);
-    if (isNaN(from.getTime()) || isNaN(to.getTime())) return [];
-
-    const days: Date[] = [];
-    let current = new Date(from);
-    while (current <= to) {
-      days.push(new Date(current));
-      current.setDate(current.getDate() + 1);
-    }
-    return days;
-  }
 
   // Minimum Date for Check-in
   minDate(): string {
@@ -414,24 +405,45 @@ export class HotelDetailsBody {
     return new Date(room.to).toISOString().split('T')[0];
   }
 
+  isDateAvailable(date: Date, roomId: number): boolean {
+    const gaps = this.availableGaps().get(roomId);
+    if (!gaps || gaps.length === 0) return false;
+
+    return gaps.some(gap => {
+      return date >= new Date(gap.start) && date <= new Date(gap.end);
+    });
+  }
   // حدّث StartDate
   onStartDateChange(event: any) {
     const value = event.target.value;
     if (value) {
-      this.bookingStartDate.set(new Date(value));
-      // امسح end date لو أصغر من الجديد
-      const end = this.bookingEndDate();
-      if (end && end <= this.bookingStartDate()!) {
-        this.bookingEndDate.set(null);
+      const selectedDate = new Date(value);
+      const roomId = this.selectedRoomId();
+
+      if (roomId && !this.isDateAvailable(selectedDate, roomId)) {
+        this.bookingError.set("Selected check-in date is not available");
+        return;
       }
+
+      this.bookingStartDate.set(selectedDate);
+      this.bookingEndDate.set(null); // Reset end date when start date changes
+      this.bookingError.set(null);
     }
   }
 
-  // حدّث EndDate
   onEndDateChange(event: any) {
     const value = event.target.value;
     if (value) {
-      this.bookingEndDate.set(new Date(value));
+      const selectedDate = new Date(value);
+      const roomId = this.selectedRoomId();
+
+      if (roomId && !this.isDateAvailable(selectedDate, roomId)) {
+        this.bookingError.set("Selected check-out date is not available");
+        return;
+      }
+
+      this.bookingEndDate.set(selectedDate);
+      this.bookingError.set(null);
     }
   }
 

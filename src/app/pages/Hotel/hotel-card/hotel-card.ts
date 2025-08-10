@@ -21,7 +21,6 @@ export class HotelCard {
   favouriteService = inject(Favorites);
 
   constructor( private toastr: ToastrService) {
-    // ✅ افحص حالة المفضلة بمجرد توفر hotel.id
     effect(() => {
       const hotelId = this.hotel?.id;
       if (hotelId) {

@@ -20,13 +20,9 @@
         <div class="text-end">
             <div class="fs-4 text-success fw-bold">${{hotel()?.rooms?.[0]?.price}} <span
                     class="text-muted fs-6">/night</span></div>
-            <button class="btn mt-2">Book now</button>
         </div>
     </div>
-
     <!-- Review badge -->
-
-
 
     <!-- Image Grid - Modified to match reference image -->
     <div class="image-grid mb-4">
@@ -49,7 +45,8 @@
                     @if(image.imageUrl!=hotel()?.rooms?.[0]?.roomImages?.[0]?.imageUrl){
                     <div class="col-12">
                         <img [src]="image.imageUrl" (click)="openImageModal(image.imageUrl)"
-                            class="img-fluid rounded-4 h-100 w-100 object-fit-cover" style="cursor: pointer;" alt="Room">
+                            class="img-fluid rounded-4 h-100 w-100 object-fit-cover" style="cursor: pointer;"
+                            alt="Room">
                     </div>
                     }
                     }
@@ -118,10 +115,19 @@
             </div>
             <div class="col-md-7 align-content-center text-black-50">
                 <p>{{room.description}} - {{room.roomType}}
+                    <label class="form-label fw-semibold">Available Periods</label>
                     @for (gap of availableGaps().get(room.id) || []; track $index) {
-                <div class="text-success small mt-1">
-                    <i class="fas fa-calendar-check me-1"></i>
-                    Available: {{ gap.start | date:'dd-MM-yyyy' }} to {{ gap.end | date:'dd-MM-yyyy' }}
+                <div class="alert alert-success p-2 mb-2 small d-flex align-items-center">
+                    <i class="fas fa-calendar-check me-2"></i>
+                    <strong>{{ gap.start | date:'dd-MM-yyyy' }}</strong>
+                    <-- To -->
+                        <strong>{{ gap.end | date:'dd-MM-yyyy' }}</strong>
+                </div>
+                }
+                @if (room.id && availableGaps().has(room.id) &&
+                availableGaps().get(room.id)?.length === 0) {
+                <div class="alert alert-danger p-2 small">
+                    <i class="fas fa-ban me-1"></i> No available periods in the selected range.
                 </div>
                 }
             </div>
@@ -160,18 +166,20 @@
                             <label class="form-label">Check-in Date</label>
                             <input type="date" class="form-control" [min]="minDate()" [max]="maxDate()"
                                 (change)="onStartDateChange($event)"
-                                [value]="bookingStartDate() ? bookingStartDate()!.toISOString().split('T')[0] : ''">
+                                [value]="bookingStartDate() ? bookingStartDate()!.toISOString().split('T')[0] : ''"
+                                [disabled]="!selectedRoomId()">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Check-out Date</label>
                             <input type="date" class="form-control" [min]="minCheckoutDate()" [max]="maxDate()"
                                 (change)="onEndDateChange($event)"
-                                [value]="bookingEndDate() ? bookingEndDate()!.toISOString().split('T')[0] : ''">
+                                [value]="bookingEndDate() ? bookingEndDate()!.toISOString().split('T')[0] : ''"
+                                [disabled]="!selectedRoomId() || !bookingStartDate()">
                         </div>
                     </div>
 
-                    <!-- عرض السعر التلقائي -->
+                    <!-- Dynamic Price show-->
                     @if (bookingStartDate() && bookingEndDate()) {
                     <div class="alert alert-info mt-3">
                         <strong>Total: {{ calculateTotalPrice() | currency:'USD':'symbol' }}</strong>
