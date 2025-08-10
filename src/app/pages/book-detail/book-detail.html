@@ -1,0 +1,48 @@
+<div *ngIf="booking && booking.id; else noData" class="container my-5">
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-success text-white text-center rounded-top-4">
+      <h2 class="mb-0"> Booking Confirmed</h2>
+    </div>
+    <div class="card-body px-5 py-4">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Booking ID:</strong> {{ booking.id }}
+        </div>
+        <div class="col-md-6">
+          <strong>Status:</strong> <span class="badge bg-info text-dark">{{ booking.status }}</span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Car ID:</strong> {{ booking.carId }}
+        </div>
+        <div class="col-md-6">
+          <strong>Car Model:</strong> {{ booking.carModel }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Start Date:</strong> {{ booking.startDate | date:'mediumDate' }}
+        </div>
+        <div class="col-md-6">
+          <strong>End Date:</strong> {{ booking.endDate | date:'mediumDate' }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <strong>Total Price:</strong> 
+          <span class="text-success fw-bold">{{ booking.price | currency:'USD' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="alert alert-warning text-center my-5">
+    <p class="mb-0"> No booking data available.</p>
+  </div>
+</ng-template>

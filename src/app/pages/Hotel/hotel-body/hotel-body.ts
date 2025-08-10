@@ -4,6 +4,7 @@ import { SortOptions } from "../sort-options/sort-options";
 import { HotelCard } from "../hotel-card/hotel-card";
 import { HotelFilterParams } from '../../../Models/hotel';
 import { HotelService } from '../../../Service/hotel-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-body',
@@ -22,14 +23,46 @@ export class HotelBody {
   searchData = signal<any>(null); // سيتم تعبئتها من حالة الراوتر
   
   hotelService = inject(HotelService);
-  
+  private router = inject(Router);
+
   constructor() {
     // تهيئة الفلاتر الافتراضية
     this.filters.set({
-      searchTerm: '',
+      Search: '',
       Sort: '',
     });
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
 
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        Search: this.searchData().NameOrLocation,
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadHotels();
+    }
+  }
+  ngOnInit() {
+    // استقبال بيانات البحث من حالة الراوتر
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+
+    if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
+
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        Search: this.searchData().NameOrLocation,
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadHotels();
+    }
   }
   loadEffect = effect(() => {
   // نربط الـ effect بالإشارات (signals) علشان يعيد التحميل عند التغيير
