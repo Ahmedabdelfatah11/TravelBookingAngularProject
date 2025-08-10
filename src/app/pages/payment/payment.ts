@@ -45,7 +45,7 @@ export class Payment {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
     if (bookingId) {
       this.paymentService.createPaymentIntent(bookingId).subscribe({
@@ -78,8 +78,8 @@ export class Payment {
         
         // ✅ تأكيد الدفع مع الـ backend
         this.confirmPaymentWithBackend(result.paymentIntent.id);
-      } else {
-        this.paymentProcessing = false;
+      } else { 
+        this.paymentProcessing = false; 
         alert('❌ Payment failed: ' + result.error?.message);
       }
     });
