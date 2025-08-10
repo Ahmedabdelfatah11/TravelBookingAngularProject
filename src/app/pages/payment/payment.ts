@@ -1,4 +1,3 @@
-
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +5,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeService, StripeCardComponent, NgxStripeModule } from 'ngx-stripe';
 import { PaymentService } from '../../core/services/payment';
-// ... باقي imports
 
 @Component({
   selector: 'app-payment',
@@ -43,9 +41,11 @@ export class Payment {
 
   clientSecret = '';
   paymentSuccess = false;
+  paymentProcessing = false; // ✅ loading state
+
   constructor(private router: Router) { }
+
   ngOnInit(): void {
-    
     const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
     if (bookingId) {
       this.paymentService.createPaymentIntent(bookingId).subscribe({
@@ -65,20 +65,44 @@ export class Payment {
       alert("⚠️ Payment not ready yet. Please wait a moment.");
       return;
     }
+
+    this.paymentProcessing = true; // ✅ بدء الـ processing
+
     this.stripeService.confirmCardPayment(this.clientSecret, {
       payment_method: {
-        card: this.card.element, // ← ✅ ده مربوط بالـ StripeCardComponent من الـ template
+        card: this.card.element,
       }
     }).subscribe(result => {
       if (result.paymentIntent?.status === 'succeeded') {
-        this.paymentSuccess = true;
         console.log('Payment succeeded:', result);
-        alert('✅ Payment succeeded');
-        this.router.navigate(['/home']);
-
-
+        
+        // ✅ تأكيد الدفع مع الـ backend
+        this.confirmPaymentWithBackend(result.paymentIntent.id);
       } else {
+        this.paymentProcessing = false;
         alert('❌ Payment failed: ' + result.error?.message);
+      }
+    });
+  }
+
+  // ✅ الـ method الجديدة للتأكيد
+  confirmPaymentWithBackend(paymentIntentId: string): void {
+    this.paymentService.confirmPayment(paymentIntentId).subscribe({
+      next: (response) => {
+        this.paymentSuccess = true;
+        this.paymentProcessing = false;
+        console.log('Payment confirmed with backend:', response);
+        alert('✅ Payment succeeded and booking confirmed!');
+        
+        // الانتقال للصفحة التالية
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 2000);
+      },
+      error: (error) => {
+        this.paymentProcessing = false;
+        console.error('Error confirming payment with backend:', error);
+        alert('⚠️ Payment succeeded but there was an issue confirming your booking. Please contact support.');
       }
     });
   }
