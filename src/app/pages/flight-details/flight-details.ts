@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavBar } from "../../shared/nav-bar/nav-bar";
 import { FlightDetailsBody } from "./flight-details-body/flight-details-body";
-import { Header } from "../../components/header/header";
+import { Header } from "../home/header/header";
 import { Footer } from "../../shared/footer/footer";
 
 @Component({
