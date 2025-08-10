@@ -1,1 +1,85 @@
-<p>car-details works!</p>
+<div class="container my-5">
+  <div class="row g-5">
+    
+    <!-- Car Details Card -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm border-light h-100">
+        <img 
+          [src]="car?.imageUrl || 'https://via.placeholder.com/600x400?text=No+Image'" 
+          [alt]="car?.model" 
+          class="card-img-top" 
+          style="height: 250px; object-fit: cover;">
+        
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title fw-bold text-dark">{{ car?.model }}</h3>
+          
+          <ul class="list-group list-group-flush flex-grow-1 mb-4">
+            <li class="list-group-item">
+              <strong>Price:</strong> {{ car?.price | number }} EGP / day
+            </li>
+            <li class="list-group-item">
+              <strong>Description:</strong> {{ car?.description }}
+            </li>
+            <li class="list-group-item">
+              <strong>Capacity:</strong> {{ car?.capacity }} passengers
+            </li>
+            <li class="list-group-item">
+              <strong>Location:</strong> {{ car?.location }}
+            </li>
+          </ul>
+
+          <button (click)="goBack()" class="btn btn-outline-secondary mt-auto">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm border-primary h-100">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-calendar-plus"></i> Book This Car
+          </h4>
+        </div>
+        <div class="card-body d-flex flex-column">
+
+          <form #bookingForm="ngForm" class="d-flex flex-column flex-grow-1" (ngSubmit)="BookCar()">
+            <!-- Start Date -->
+            <div class="mb-3">
+              <label for="startDate" class="form-label"><strong>Start Date</strong></label>
+              <input 
+                type="date" 
+                id="startDate" 
+                name="startDate" 
+                class="form-control" 
+                required 
+                [(ngModel)]="startDate">
+            </div>
+
+            <!-- End Date -->
+            <div class="mb-3">
+              <label for="endDate" class="form-label"><strong>End Date</strong></label>
+              <input 
+                type="date" 
+                id="endDate" 
+                name="endDate" 
+                class="form-control" 
+                required 
+                [(ngModel)]="endDate">
+            </div>
+
+            <button 
+              type="submit" 
+              class="btn btn-success btn-lg w-100 mt-auto py-3 fs-5">
+              <i class="bi bi-credit-card"></i> Book Now
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
