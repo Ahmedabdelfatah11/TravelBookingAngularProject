@@ -469,5 +469,3 @@ export class HotelDetailsBody {
     return this.hotel()?.rooms?.find(r => r.id === this.selectedRoomId());
   }
 }
-
-
