@@ -12,11 +12,10 @@ import { ResendConfirmationEmail } from './Features/auth/resend-confirm-email/re
 import { ResetPassword } from './Features/auth/reset-password/reset-password';
 import { Invalid } from './shared/invalid/invalid';
 import { Payment } from './pages/payment/payment';
-import { Profile } from './pages/profile/profile';
+import { Profile } from './pages/profile/profile'; 
 import { Aboutus } from './pages/aboutus/aboutus';
 import { Contactus } from './pages/contactus/contactus';
-
-
+import { Favorites } from './Service/favorites';
 export const routes: Routes =
   [
     { path: 'home', component: Home, title: 'Home' },
@@ -33,8 +32,9 @@ export const routes: Routes =
     { path: 'flight', component: Flight },
     { path: 'FlightDetails/:id', component: FlightDetails },
     { path: 'hotel', component: Hotel },
-    { path: 'about', component: Aboutus },
-    { path: 'contact', component: Contactus },
+    { path: 'about', component: Aboutus ,title: 'About Us'},
+    { path: 'contact', component: Contactus, title: 'Contact Us' },
     { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details
+  { path:'favorites',component:Favorites}, 
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ];

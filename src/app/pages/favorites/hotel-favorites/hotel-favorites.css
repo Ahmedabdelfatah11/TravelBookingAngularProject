@@ -1,0 +1,37 @@
+.hover-lift {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  font-size: 1.1rem;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+img {
+  transition: transform 0.3s ease;
+}
+
+/* للأجهزة الصغيرة */
+@media (max-width: 576px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .card-body {
+    padding: 0.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
