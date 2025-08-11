@@ -5,7 +5,11 @@
     --secondary-color: #0eb39d;
 }
 
-body, button, input, select, textarea {
+body,
+button,
+input,
+select,
+textarea {
     font-family: "Anton", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -27,8 +31,7 @@ body, button, input, select, textarea {
     position: relative;
 }
 
-
-
 .src {
     background-color: var(--main-color);
 }
+

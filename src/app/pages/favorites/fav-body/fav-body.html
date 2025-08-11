@@ -3,23 +3,15 @@
     <i class="fas fa-heart me-2"></i>
     Favorites
   </h2>
-    <div class="col-12 mt-4">
+<div class="col-12 mt-4">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
+        <li class="nav-item " role="presentation">
             <button class="nav-link text-black active" id="Hotel-tab" data-bs-toggle="tab" data-bs-target="#Hotel"
                 type="button" role="tab" aria-controls="Hotel" aria-selected="true">Hotel</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-black" id="Bookings-tab" data-bs-toggle="tab" data-bs-target="#Bookings"
-                type="button" role="tab" aria-controls="Bookings" aria-selected="false">Flight</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link text-black" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
-                type="button" role="tab" aria-controls="payment" aria-selected="false">CarRental</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link text-black" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
-                type="button" role="tab" aria-controls="payment" aria-selected="false">Tour</button>
+            <button class="nav-link text-black" id="Tour-tab" data-bs-toggle="tab" data-bs-target="#Tour"
+                type="button" role="tab" aria-controls="Tour" aria-selected="false">Tour</button>
         </li>
     </ul>
 </div>
@@ -29,15 +21,9 @@
     <div class="tab-pane fade show active" id="Hotel" role="tabpanel" aria-labelledby="Hotel-tab">
         <app-hotel-favorites></app-hotel-favorites>
     </div>
-    <div class="tab-pane fade" id="Bookings" role="tabpanel" aria-labelledby="Bookings-tab">
-        <!-- <app-bookings></app-bookings> -->
+    <div class="tab-pane fade" id="Tour" role="tabpanel" aria-labelledby="Tour-tab">
+      <app-tour-favorites></app-tour-favorites>
     </div>
-    <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-        <div class="card mt-3">
-            <div class="card-body">
-                <p>No payment methods added.</p>
-            </div>
-        </div>
-    </div>
+    
 </div>
 </div>

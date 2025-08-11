@@ -1,0 +1,8 @@
+.src {
+    background-color: var(--main-color);
+    border-color: aliceblue;
+}
+
+.src:hover {
+    background-color: var(--secondary-color);
+}

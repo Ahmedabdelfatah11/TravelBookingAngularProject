@@ -1,4 +1,4 @@
-<div class="card mb-3 mx-3">
+<div class="card mb-3 mx-3 rounded-5">
     <div class="card-body">
         <div class="row">
             <!-- Logo Column (Left) -->
@@ -39,10 +39,7 @@
 
                 <!-- Buttons -->
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-danger me-2 d-flex justify-content-center align-items-center"
-                        style="width: 40px; height: 40px;" (click)="saveForLater(flight?.flightId)">
-                        <i class="fas fa-heart"></i>
-                    </button>
+
                     <button [routerLink]="['/FlightDetails',flight?.flightId]" class="btn btn-success w-100 text-black">
                         View Deals
                     </button>

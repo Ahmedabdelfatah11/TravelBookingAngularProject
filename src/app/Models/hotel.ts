@@ -1,12 +1,12 @@
 export interface HotelResponse {
-    pageIndex: number;
-    pageSize: number;
-    count: number;
-    data: Hotel[];
+  pageIndex: number;
+  pageSize: number;
+  count: number;
+  data: Hotel[];
 }
 
 export interface Hotel {
-     id: number
+  id: number
   name: string
   description: string
   location: string
@@ -28,13 +28,17 @@ export interface Room {
   roomImages: roomImage[]
 }
 export interface roomImage {
-  imageUrl:string
-  roomId:number
-  id:number
+  imageUrl: string
+  roomId: number
+  id: number
 }
 export interface HotelFilterParams {
-    searchTerm?: string;
-    Sort?: string;          // "priceAsc", "priceDesc", etc.
-    PageIndex?: number;
-    PageSize?: number;
+  Search?: string;
+  Sort?: string;          // "priceAsc", "priceDesc", etc.
+  PageIndex?: number;
+  PageSize?: number;
+}
+export interface DateRange {
+  start: string;
+  end: string;
 }
