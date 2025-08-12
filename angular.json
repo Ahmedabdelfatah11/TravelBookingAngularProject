@@ -26,7 +26,9 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/swiper/swiper-bundle.min.css",
               "node_modules/aos/dist/aos.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/flatpickr/dist/themes/airbnb.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",

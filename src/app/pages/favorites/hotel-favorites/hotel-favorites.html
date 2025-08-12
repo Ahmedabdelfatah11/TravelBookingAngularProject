@@ -1,0 +1,95 @@
+<div class="favorites-container">
+  <div class="card border-0 shadow-lg overflow-hidden">
+    <div class="card-header bg-white py-3 border-0">
+      <div class="d-flex align-items-end justify-content-end">
+      
+        <span class="badge bg-danger rounded-pill">{{hotel().length}} saved</span>
+      </div>
+    </div>
+
+    <div class="card-body p-4">
+      @if (isLoading()) {
+      <div class="loading-state text-center py-5">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <h5 class="mt-4 text-muted animate-pulse">Loading your dream stays...</h5>
+      </div>
+      }
+      @else if (error()) {
+      <div class="error-state alert alert-danger alert-dismissible fade show rounded-3 shadow-sm">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-exclamation-circle me-3 fs-4"></i>
+          <div>
+            <h5 class="alert-heading mb-1">Oops! Something went wrong</h5>
+            <p class="mb-0 small">{{ error() }}</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      }
+      @else if (hotel().length === 0) {
+      <div class="empty-state text-center py-5">
+        <div class="empty-icon mb-4 position-relative">
+          <i class="far fa-heart text-muted" style="font-size: 5rem; opacity: 0.2;"></i>
+          <i class="fas fa-hotel text-success position-absolute top-50 start-50 translate-middle"
+            style="font-size: 2rem;"></i>
+        </div>
+        <h4 class="text-muted mb-3">Your hotel wishlist is empty</h4>
+        <p class="text-muted mb-4">Save hotels you love to find them here later</p>
+        <a routerLink="/hotel" class="btn px-4 rounded-pill shadow-sm">
+          <i class="fas fa-search me-2"></i>
+          Explore Hotels
+        </a>
+      </div>
+      }
+      @else {
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @for (fav of hotel(); track fav.id) {
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm overflow-hidden favorite-hotel-card">
+            <!-- Hotel Image with Overlay -->
+            <div class="hotel-image-container position-relative">
+              <img [src]="fav.companyImageUrl" alt="{{ fav.companyName }}" class="img-fluid w-100 hotel-image">
+              <div class="image-overlay"></div>
+              <div class="position-absolute top-0 end-0 p-2">
+                <button class="btn btn-danger btn-sm rounded-circle shadow" (click)="removeFromFavorites(fav.id)"
+                  title="Remove from favorites">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Hotel Content -->
+            <div class="card-body position-relative">
+              <div class="justify-content-between align-items-start mb-2">
+                <h5 class="card-title mb-0">
+                  <a [routerLink]="['/hotel-details', fav.hotelCompanyId]"
+                    class="text-decoration-none text-dark stretched-link hotel-title">
+                    {{ fav.companyName }}
+                  </a>
+                </h5>
+                <div class="mt-2"> <!-- Added margin-bottom -->
+                  <h6 class="badge bg-light text-dark rounded-pill d-inline-flex align-items-center">
+                    <i class="fas fa-map-marker-alt text-danger me-1"></i>
+                    {{ fav.companyLocation }}
+                  </h6>
+                </div>
+              </div>
+
+
+
+              <!-- Added Date -->
+              <div class="d-flex align-items-center text-muted small mt-3">
+                <i class="far fa-calendar-alt me-2"></i>
+                Saved on {{ fav.createdAt | date: 'mediumDate' }}
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

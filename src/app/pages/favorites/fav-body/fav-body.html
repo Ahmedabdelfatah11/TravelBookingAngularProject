@@ -1,1 +1,29 @@
-<p>fav-body works!</p>
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-danger">
+    <i class="fas fa-heart me-2"></i>
+    Favorites
+  </h2>
+<div class="col-12 mt-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item " role="presentation">
+            <button class="nav-link text-black active" id="Hotel-tab" data-bs-toggle="tab" data-bs-target="#Hotel"
+                type="button" role="tab" aria-controls="Hotel" aria-selected="true">Hotel</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black" id="Tour-tab" data-bs-toggle="tab" data-bs-target="#Tour"
+                type="button" role="tab" aria-controls="Tour" aria-selected="false">Tour</button>
+        </li>
+    </ul>
+</div>
+
+<!-- Tab Content -->
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="Hotel" role="tabpanel" aria-labelledby="Hotel-tab">
+        <app-hotel-favorites></app-hotel-favorites>
+    </div>
+    <div class="tab-pane fade" id="Tour" role="tabpanel" aria-labelledby="Tour-tab">
+      <app-tour-favorites></app-tour-favorites>
+    </div>
+    
+</div>
+</div>
