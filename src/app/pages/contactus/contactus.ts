@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
 import { NavBar } from "../../shared/nav-bar/nav-bar";
+import { Footer } from "../../shared/footer/footer";
 
 @Component({
   selector: 'app-contactus',
-  imports: [NavBar],
+  imports: [NavBar, Footer],
   templateUrl: './contactus.html',
   styleUrl: './contactus.css'
 })
 export class Contactus { 
-ngOnInit() {
-    document.body.classList.add('home-body');
-  }
 
-  ngOnDestroy() {
-    document.body.classList.remove('home-body');
-  }
 }

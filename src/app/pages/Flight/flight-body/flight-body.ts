@@ -5,7 +5,7 @@ import { SortOptions } from "../sort-options/sort-options";
 import { FlightCard } from "../flight-card/flight-card";
 import { FlightService } from '../../../Service/flightService';
 import { Router } from '@angular/router';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-flight-body',
   imports: [Filters, SortOptions, FlightCard],
@@ -72,6 +72,10 @@ export class FlightBody implements OnInit {
       // تحميل الرحلات بناء على بيانات البحث
       this.loadFlights();
     }
+    AOS.init({
+      duration: 1000, // مدة التأثير بالمللي ثانية
+      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+    });
   }
   loadEffect = effect(() => {
     // this.LoadsearchData();

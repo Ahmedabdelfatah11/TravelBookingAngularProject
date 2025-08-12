@@ -10,5 +10,5 @@ import { Footer } from "../../../shared/footer/footer";
   styleUrl: './hotel.css'
 })
 export class Hotel {
-
+  Image: string = 'img/12.jpg';
 }
