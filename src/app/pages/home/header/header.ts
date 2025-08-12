@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavBar } from "../../../shared/nav-bar/nav-bar";
 
 @Component({
@@ -8,5 +8,6 @@ import { NavBar } from "../../../shared/nav-bar/nav-bar";
   styleUrl: './header.css'
 })
 export class Header {
-
+@Input() title: string | undefined ;
+@Input() Image: string | undefined ;
 }

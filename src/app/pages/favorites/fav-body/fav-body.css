@@ -1,10 +1,11 @@
 .nav-tabs .nav-link.active {
-    color: #5bd1ac !important;
+    color:  var(--secondary-color) !important;
     border-color: var(--main-color) !important;
 }
 .nav-tabs:hover {
-    color: #5bd1ac !important;
+    color: var(--secondary-color) !important;
     background-color: transparent !important;
+    
 }
 .text-overlay {
     opacity: 0;

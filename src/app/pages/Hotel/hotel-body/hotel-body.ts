@@ -5,7 +5,7 @@ import { HotelCard } from "../hotel-card/hotel-card";
 import { HotelFilterParams } from '../../../Models/hotel';
 import { HotelService } from '../../../Service/hotel-service';
 import { Router } from '@angular/router';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-hotel-body',
   imports: [Filters, SortOptions, HotelCard],
@@ -45,6 +45,10 @@ if (state?.searchData) {
       // تحميل الرحلات بناء على بيانات البحث
       this.loadHotels();
     }
+    AOS.init({
+      duration: 1000, // مدة التأثير بالمللي ثانية
+      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+    });
   }
   ngOnInit() {
     // استقبال بيانات البحث من حالة الراوتر

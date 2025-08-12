@@ -33,13 +33,13 @@ img:hover {
 .btn-success {
     background-color: var(--main-color);
     /* لون خلفية الزر */
-    color: white;
+    color: black;
 }
 
 .btn-success:hover {
-    background-color: darkgreen;
+    background-color: var(--secondary-color);
     /* لون خلفية الزر عند التمرير */
-    color: white;
+    color: black;
 }
 
 .object-fit-cover {
