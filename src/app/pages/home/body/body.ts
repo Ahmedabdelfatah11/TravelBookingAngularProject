@@ -5,14 +5,13 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
-import { ChatBot } from "./chat-bot/chat-bot";
 
 
 // إضافة SwiperModule إلى المكونات المستوردة    
 register();
 @Component({
   selector: 'app-body',
-  imports: [RouterLink, ChatBot],
+  imports: [RouterLink],
   templateUrl: './body.html',
   styleUrl: './body.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
