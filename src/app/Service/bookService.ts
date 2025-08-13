@@ -33,11 +33,5 @@ export class BookService {
     );
   } 
 
-  getLatestBooking(): CarBookingResultDto | null {
-    return this.latestBookingResult;
-  }
-
-  clearBooking(): void {
-    this.latestBookingResult = null;
-  }
+  
 }

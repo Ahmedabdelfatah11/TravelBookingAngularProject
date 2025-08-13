@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideNgxStripe } from 'ngx-stripe';
-
+import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), 
+    provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
      provideAnimations(),
@@ -23,6 +23,11 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideAnimations(),
+    provideToastr({
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
   ]
 };
 

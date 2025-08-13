@@ -53,15 +53,15 @@ togglePasswordVisibility() {
   next: (response) => {
   console.log('Full response: ', response);
   if (response.message === 'User registered successfully. Please confirm your email.') {
-    this.successMessage = "Registration successful! Please check your email to confirm.";
     this.isLoading = false; // Stop loading spinner
+    this.successMessage = "Registration successful! Please check your email to confirm.";
     // setTimeout(() => {
     //         this.router.navigate(['/confirm-email']);
     //       }, 2000);
   }
   else {
-    this.errMessage = response.message || 'Registration failed. Please try again.';
     this.isLoading = false; // Stop loading spinner
+    this.errMessage = response.message || 'Registration failed. Please try again.';
   }
 },
     error: (error) => {

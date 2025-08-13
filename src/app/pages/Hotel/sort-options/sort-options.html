@@ -1,51 +1,77 @@
-<div class="mb-4">
-    <label class="form-label d-flex align-items-center">
-        <i class="fas fa-sort-amount-down-alt me-2 text-primary"></i>
-        <!-- <span>Sort Results</span> -->
-    </label>
-    
-    <div class="position-relative">
-        <select class="form-select ps-4" [value]="sort()" (change)="onSortChange($event)" aria-label="Sort results">
-            <option value="" disabled selected>Select sorting option</option>
-            <option value="nameasc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-up "></i>
-                    Name: Asc
-                </span>
-            </option>
-            <option value="namedesc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Name: Desc
-                </span>
-            </option>
-            <option value="locationasc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Location: Asc
-                </span>
-            </option>
-            <option value="locationdesc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Location: Desc
-                </span>
-            </option>
-            <option value="ratingasc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Rating: Asc
-                </span>
-            </option>
-            <option value="ratingdesc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Rating: Desc
-                </span>
-            </option>
+<div class="sorting-control mb-4">
+    <div class="dropdown">
+        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-sort me-2"></i>
+            <span class="current-selection">{{ getSortLabel(sort()) || 'Select option' }}</span>
+            <i class="fas fa-chevron-down ms-auto transition-all"></i>
+        </button>
 
-        </select>
+        <ul class="dropdown-menu shadow-lg">
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('nameasc')">
+                    <i class="fas fa-arrow-up-a-z me-2 text-success"></i>
+                    <span>Name (A → Z)</span>
+                    @if(sort() === 'nameasc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
 
-        <!-- <i class="fas fa-chevron-down position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i> -->
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('namedesc')">
+                    <i class="fas fa-arrow-down-z-a me-2 text-success"></i>
+                    <span>Name (Z → A)</span>
+                    @if(sort() === 'namedesc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('locationasc')">
+                    <i class="fas fa-location-arrow me-2 text-info"></i>
+                    <span>Location (A → Z)</span>
+                    @if(sort() === 'locationasc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('locationdesc')">
+                    <i class="fas fa-location-arrow me-2 text-info"></i>
+                    <span>Location (Z → A)</span>
+                    @if(sort() === 'locationdesc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('ratingasc')">
+                    <i class="fas fa-star me-2 text-warning"></i>
+                    <span>Rating (Low → High)</span>
+                    @if(sort() === 'ratingasc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('ratingdesc')">
+                    <i class="fas fa-star me-2 text-warning"></i>
+                    <span>Rating (High → Low)</span>
+                    @if(sort() === 'ratingdesc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+                </a>
+            </li>
+        </ul>
     </div>
 </div>

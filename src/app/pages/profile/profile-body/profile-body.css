@@ -30,3 +30,91 @@
 .text-overlay:hover {
     opacity: 1;
 }
+/* Profile Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Tabs */
+.profile-tabs {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.profile-tabs .nav-link {
+    color: #555;
+    font-weight: 500;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+.profile-tabs .nav-link:hover {
+    color: var(--secondary-color);
+    background-color: rgba(121, 205, 223, 0.1);
+}
+
+.profile-tabs .nav-link.active {
+    color: var(--secondary-color);
+    background-color: rgba(121, 205, 223, 0.2);
+    border-bottom: 3px solid #260574;
+}
+
+/* Tab Content */
+.profile-tab-content {
+    padding: 0 10px;
+}
+
+.profile-card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card .card-title {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Form Fields */
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-field .form-label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-field .input-group-text {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.form-field .input-group-text:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: #79cddf;
+    margin-bottom: 20px;
+}
+
+.empty-text {
+    color: #6c757d;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CarBody } from './pages/Car/car-body/car-body';
-import { CarDetails } from './pages/car-details/car-details';
-import { BookDetail } from './pages/book-detail/book-detail';
+
 
 
 @Component({
@@ -14,5 +12,5 @@ import { BookDetail } from './pages/book-detail/book-detail';
   styleUrl: './app.css'
 })
 export class App {
-  protected title = 'TravelBooking';
+  protected title = 'Travel Booking';
 }

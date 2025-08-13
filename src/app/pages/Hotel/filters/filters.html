@@ -1,23 +1,93 @@
-<div class="card">
-    <h6 class="card-header">Filters</h6>
+<div class="card bg-transparent shadow mb-4 border-0">
+    <h6 class="card-header bg-transparent">Filters</h6>
     <div class="card-body">
-        
+
         <div class="mb-3">
-            <label>Location</label>
-            <input type="text" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label>Check-in Date</label>
-            <input type="date" class="form-control">
+            <label>Search</label>
+            <input type="text" class="form-control" [value]="search()" (input)="updateSignal(search, $event)"
+                placeholder="Search by hotel name or location or description">
         </div>
         <hr class="my-3" style="opacity: 0.3;">
-        <div class="mb-3">
-            <label>Check-out Date</label>
-            <input type="date" class="form-control">    
+        <div class="sorting-radio-container mb-4 p-3 bg-light rounded-3">
+            <h6 class="fw-bold mb-3 d-flex align-items-center">
+                <i class="fas fa-sort me-2 text-success"></i>
+                Sort 
+            </h6>
+            <div class="radio-group container">
+                <!-- Name Sorting -->
+                <div class="radio-option">
+                    <input type="radio" id="nameasc" name="sort" value="nameasc" [checked]="sort() === 'nameasc'"
+                        (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="nameasc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-arrow-up-a-z"></i>
+                        </span>
+                        <span class="radio-text">Name: A → Z</span>
+                    </label>
+                </div>
+
+                <div class="radio-option">
+                    <input type="radio" id="namedesc" name="sort" value="namedesc" [checked]="sort() === 'namedesc'"
+                        (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="namedesc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-arrow-down-z-a"></i>
+                        </span>
+                        <span class="radio-text">Name: Z → A</span>
+                    </label>
+                </div>
+
+                <!-- Location Sorting -->
+                <div class="radio-option">
+                    <input type="radio" id="locationasc" name="sort" value="locationasc"
+                        [checked]="sort() === 'locationasc'" (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="locationasc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-location-arrow"></i>
+                        </span>
+                        <span class="radio-text">Location: A → Z</span>
+                    </label>
+                </div>
+
+                <div class="radio-option">
+                    <input type="radio" id="locationdesc" name="sort" value="locationdesc"
+                        [checked]="sort() === 'locationdesc'" (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="locationdesc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-location-arrow"></i>
+                        </span>
+                        <span class="radio-text">Location: Z → A</span>
+                    </label>
+                </div>
+
+                <!-- Rating Sorting -->
+                <div class="radio-option">
+                    <input type="radio" id="ratingasc" name="sort" value="ratingasc" [checked]="sort() === 'ratingasc'"
+                        (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="ratingasc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="radio-text">Rating: Low → High</span>
+                    </label>
+                </div>
+
+                <div class="radio-option">
+                    <input type="radio" id="ratingdesc" name="sort" value="ratingdesc"
+                        [checked]="sort() === 'ratingdesc'" (change)="updateSignal(sort, $event)" class="radio-input">
+                    <label for="ratingdesc" class="radio-label">
+                        <span class="radio-icon">
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="radio-text">Rating: High → Low</span>
+                    </label>
+                </div>
+            </div>
+
+
         </div>
-
-
-        <hr class="my-3" style="opacity: 0.3;">
-        <button class="btn btn-primary text-white w-100" >Apply Filters</button>
+        <button class="btn w-100 mt-3 py-2 rounded-pill shadow-sm" (click)="applyFilters()">
+            <i class="fas fa-check-circle me-2"></i>
+            Apply Filters
+        </button>
     </div>
-</div>
