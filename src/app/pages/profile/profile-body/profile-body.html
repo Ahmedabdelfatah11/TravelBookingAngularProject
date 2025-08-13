@@ -13,109 +13,177 @@
                 <div class="position-absolute top-50 start-50 translate-middle text-white text-center"
                     style="z-index: 5;">
                     <!-- الصورة -->
-                    <img src="img/1.png" alt="User Profile Picture"
+                    <img src="img/profile.jpg" alt="User Profile Picture"
                         class="rounded-circle mb-2 border border-4 border-white"
                         style="width: 100px; height: 100px; object-fit: cover;">
 
                     <!-- النص فوق الصورة -->
                     <div class="mt-2">
-                        <h5 class="mb-0">John Doe.</h5>
-                        <p class="text-black-50 mb-0">{{'AbA@gmail.com'}}</p>
+                        <h5 class="mb-0">{{userProfile()?.firstName}} {{userProfile()?.lastName}}</h5>
+                        <p class="text-black-50 mb-0">{{userProfile()?.email}}</p>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Tabs -->
-        <div class="col-12 mt-4">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link text-black active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account"
-                        type="button" role="tab" aria-controls="account" aria-selected="true">Account</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link text-black" id="Bookings-tab" data-bs-toggle="tab" data-bs-target="#Bookings"
-                        type="button" role="tab" aria-controls="Bookings" aria-selected="false">Bookings</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link text-black" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
-                        type="button" role="tab" aria-controls="payment" aria-selected="false">Payment methods</button>
-                </li>
-            </ul>
-        </div>
+        <div class="container profile-container">
+            <!-- Enhanced Tabs Navigation -->
+            <div class="col-12 mt-4">
+                <ul class="nav nav-tabs profile-tabs" id="profileTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account"
+                            type="button" role="tab" aria-controls="account" aria-selected="true">
+                            <i class="fas fa-user-circle me-2"></i>Account
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="Bookings-tab" data-bs-toggle="tab" data-bs-target="#Bookings"
+                            type="button" role="tab" aria-controls="Bookings" aria-selected="false">
+                            <i class="fas fa-calendar-check me-2"></i>Bookings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
+                            type="button" role="tab" aria-controls="payment" aria-selected="false">
+                            <i class="fas fa-credit-card me-2"></i>Payment Methods
+                        </button>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- Tab Content -->
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" value="John Doe" readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i>Change</button>
+            <!-- Tab Content -->
+            <div class="tab-content profile-tab-content" id="profileTabContent">
+                <!-- Account Tab -->
+                <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <div class="card profile-card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4"><i class="fas fa-cog me-2"></i>Account Settings</h5>
+                            <form class="profile-form">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="Fname" class="form-label">First Name</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="Fname"
+                                                    [readonly]="!editFirstName()"
+                                                    [(ngModel)]="editableProfile.firstName" name="FirstName"
+                                                    value="{{userProfile()?.firstName}}">
+                                                <button type="button" class="btn input-group-text"
+                                                    (click)="toggleEdit('fname')">
+                                                    <i class="fas fa-edit me-1"></i> {{ editFirstName() ? 'Save' :
+                                                    'Edit' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Last Name -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="Lname" class="form-label">Last Name</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="Lname"
+                                                    [readonly]="!editLastName()" [(ngModel)]="editableProfile.lastName"
+                                                    name="lastName" value="{{userProfile()?.lastName}}">
+                                                <button type="button" class="btn input-group-text"
+                                                    (click)="toggleEdit('lname')">
+                                                    <i class="fas fa-edit me-1"></i> {{ editLastName() ? 'Save' : 'Edit'
+                                                    }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="email" class="form-label">Email</label>
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" id="email"
+                                                    value="{{userProfile()?.email}}" readonly>
+                                                <span class="input-group-text text-muted">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                            </div>
+                                            <small class="text-muted">Contact support to change email</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="phone" class="form-label">Phone number</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="phone"
+                                                    [readonly]="!editPhone()" [(ngModel)]="editableProfile.phone"
+                                                    name="phone" value="{{userProfile()?.phone}}">
+                                                <button type="button" class="btn input-group-text"
+                                                    (click)="toggleEdit('phone')">
+                                                    <i class="fas fa-edit me-1"></i> {{ editPhone() ? 'Save' : 'Edit' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="address" class="form-label">Address</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="address"
+                                                    [readonly]="!editAddress()" [(ngModel)]="editableProfile.address"
+                                                    name="address" value="{{userProfile()?.address}}">
+                                                <button type="button" class="btn input-group-text"
+                                                    (click)="toggleEdit('address')">
+                                                    <i class="fas fa-edit me-1"></i> {{ editAddress() ? 'Save' : 'Edit'
+                                                    }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Date of Birth -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-field">
+                                            <label for="dob" class="form-label">Date of birth</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="dob"
+                                                    [readonly]="!editDateOfBirth()"
+                                                    [(ngModel)]="editableProfile.dateOfBirth" name="dob"
+                                                    value="{{userProfile()?.dateOfBirth | date:'yyyy-MM-dd'}}">
+                                                <button type="button" class="btn input-group-text"
+                                                    (click)="toggleEdit('dateOfBirth')">
+                                                    <i class="fas fa-edit me-1"></i> {{ editDateOfBirth() ? 'Save' :
+                                                    'Edit' }}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" value="john.doe@gmail.com"
-                                            readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-plus me-1"></i> Add another email</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" value="************"
-                                            readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone number</label>
-                                        <input type="tel" class="form-control" id="phone" value="+1 000-000-0000"
-                                            readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address"
-                                            value="St 32 main downtown, Los Angeles, California, USA" readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="dob" class="form-label">Date of birth</label>
-                                        <input type="text" class="form-control" id="dob" value="01-01-1992" readonly>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2"><i
-                                                class="fas fa-edit me-1"></i> Change</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="Bookings" role="tabpanel" aria-labelledby="Bookings-tab">
-                <app-bookings></app-bookings>
-            </div>
-            <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <p>No payment methods added.</p>
+
+                <!-- Bookings Tab -->
+                <div class="tab-pane fade" id="Bookings" role="tabpanel" aria-labelledby="Bookings-tab">
+                    <app-book-cart></app-book-cart>
+                </div>
+
+                <!-- Payment Methods Tab -->
+                <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                    <div class="card profile-card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4"><i class="fas fa-credit-card me-2"></i>Payment Methods</h5>
+                            <div class="empty-state">
+                                <i class="fas fa-credit-card empty-icon"></i>
+                                <p class="empty-text">No payment methods added.</p>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-plus me-2"></i>Add Payment Method
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,13 @@ import { ResendConfirmationEmail } from './Features/auth/resend-confirm-email/re
 import { ResetPassword } from './Features/auth/reset-password/reset-password';
 import { Invalid } from './shared/invalid/invalid';
 import { Payment } from './pages/payment/payment';
+
 import { Profile } from './pages/profile/profile';
+import { Aboutus } from './pages/aboutus/aboutus';
+import { Contactus } from './pages/contactus/contactus';
+
+
+
 import { CarBody } from './pages/Car/car-body/car-body';
 import { CarDetails } from './pages/car-details/car-details';
 import { BookDetail } from './pages/book-detail/book-detail';
@@ -20,6 +26,8 @@ import { Favorites } from './pages/favorites/favorites';
 import { Tour } from './pages/Tour/tour/tour';
 import { TourDetails } from './pages/Tour-details/tour-details/tour-details';
 import { TourResolver } from './pages/Tour-details/tour.resolver';
+import { ChatBot } from './pages/home/body/chat-bot/chat-bot';
+import { Bookings } from './pages/bookings/bookings';
 
 
 export const routes: Routes =
@@ -34,18 +42,28 @@ export const routes: Routes =
     { path: 'reset', component: ResetPassword, title: 'Reset Password' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'payment/:bookingId', component: Payment, title: 'Payment' },
-    { path: "profile",component: Profile},
-    
-    { path: 'cars', component: CarBody },
-    { path: 'cars/:id', component: CarDetails },
-    { path: 'Booking/:id', component: BookDetail }, 
+    { path: "profile",component: Profile,title:'Profile'},
+    { path: 'cars', component: CarBody,title:'Cars'},
+    { path: 'cars/:id', component: CarDetails ,title:'Car'},
+    { path: 'Booking/:id', component: BookDetail ,title:'Booking Details'}, 
     { path: 'flight', component: Flight ,title:'Flight'},
-    { path: 'FlightDetails/:id', component: FlightDetails },
+    { path: 'FlightDetails/:id', component: FlightDetails ,title:'Flight Details'},
     { path: 'hotel', component: Hotel ,title:'Hotel'},
-    { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details\
-    { path:'favorites',component:Favorites},
+      { path: 'contact', component: Contactus, title: 'Contact Us' },
+        { path: 'about', component: Aboutus, title: 'About Us' },
+    { path: 'hotel-details/:id', component: HotelDetails,title:'Hotel Details' }, // Assuming you want to use the same component for hotel details\
+    { path:'favorites',component:Favorites,title:'Favorites'},
     {path: 'tour',component:Tour,title:'tour'},
     { path: 'ToursDetails/:id', component: TourDetails, title: 'Tour Details'  , resolve: { tour: TourResolver }},
+      { path: 'chat', component:ChatBot},
+      { path: 'bookings',component:Bookings,title:'Booking'},
     { path: 'invalid', component: Invalid },
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
-  ];
+  ]
+
+//     import { Bookings } from './pages/bookings/bookings';
+// import { ChatBot } from './pages/home/body/chat-bot/chat-bot';
+
+
+
+

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HotelBody } from "../hotel-body/hotel-body";
-import { Header } from "../../../components/header/header";
+import { Header } from "../../home/header/header";
 import { Footer } from "../../../shared/footer/footer";
 
 @Component({
@@ -10,5 +10,5 @@ import { Footer } from "../../../shared/footer/footer";
   styleUrl: './hotel.css'
 })
 export class Hotel {
-
+  Image: string = 'img/12.jpg';
 }

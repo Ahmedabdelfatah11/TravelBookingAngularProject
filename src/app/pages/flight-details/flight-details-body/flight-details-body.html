@@ -17,13 +17,7 @@
         <div class="col-md-8">
             <div class="flight-card-container">
                 <app-flight-details-card [flight]="flight()"></app-flight-details-card>
-
                 <div class="action-buttons d-flex flex-column flex-md-row gap-3 mt-4 p-3 bg-light rounded-3">
-                    <button
-                        class="btn btn-outline-danger flex-grow-1 py-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-heart me-2"></i>
-                        <span>Save for Later</span>
-                    </button>
                     <button
                         class="btn btn-gradient-primary flex-grow-1 py-2 d-flex align-items-center justify-content-center"
                         (click)="openBookingForm()">
@@ -225,14 +219,12 @@
                             }
                         </button>
                     </div>
-
-
                 </div>
                 }
-
             </div>
         </div>
     </div>
+
 
     <!-- Booking Form Container -->
     @if (showBookingForm()) {
@@ -304,7 +296,6 @@
                 <button class="btn btn-outline-success" (click)="closeBookingForm()">Close</button>
             </div>
             }
-
             <!-- Error Message -->
             @if (bookingError()) {
             <div class="alert alert-danger mt-3 mb-0">

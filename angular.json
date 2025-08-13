@@ -29,7 +29,8 @@
               "node_modules/ngx-sharebuttons/themes/circles.scss",
               "node_modules/ngx-sharebuttons/themes/modern.scss",
                "node_modules/ngx-toastr/toastr.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/flatpickr/dist/themes/airbnb.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",

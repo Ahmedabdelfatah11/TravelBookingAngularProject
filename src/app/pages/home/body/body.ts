@@ -5,13 +5,14 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
+import { ChatBot } from "./chat-bot/chat-bot";
 
 
 // إضافة SwiperModule إلى المكونات المستوردة    
 register();
 @Component({
   selector: 'app-body',
-  imports: [RouterLink],
+  imports: [RouterLink, ChatBot],
   templateUrl: './body.html',
   styleUrl: './body.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -28,15 +29,15 @@ export class Body implements OnInit {
     "https://i.pinimg.com/1200x/27/b7/de/27b7de9c188db33b73b49b79f9a9e99f.jpg",
     "https://i.pinimg.com/1200x/55/27/f2/5527f222cf8f62f743369b8160f06009.jpg",
     "https://i.pinimg.com/736x/a5/ea/c8/a5eac89ee55ade32ba75162a2ccbebd1.jpg",
-    "https://i.pinimg.com/736x/a7/f6/06/a7f606bf22838e1cf4f54d9b41635683.jpg",
-    "https://i.pinimg.com/736x/2f/3b/f9/2f3bf9f0ea31ffd6008db72fef359b2a.jpg",
-    "https://i.pinimg.com/736x/9c/dc/b3/9cdcb3ce1f2d094f48e391e74d44105e.jpg",
-    "https://i.pinimg.com/736x/d2/59/dc/d259dcd272a3ca9b538e68aedf721fb3.jpg",
+    "https://i.pinimg.com/736x/28/de/bc/28debc1fb8adadc2346392696b59cf06.jpg",
+    "https://i.pinimg.com/736x/18/af/72/18af72dd5c1c8720e33ad26104a9bbf4.jpg",
+    "https://i.pinimg.com/1200x/6a/b7/33/6ab7339e9c55b6218aaee4e43acb108b.jpg",
+    "https://i.pinimg.com/1200x/bb/48/69/bb4869b06baf8f2b03d0549993b11efa.jpg",
     "https://i.pinimg.com/1200x/f2/59/fd/f259fdb912b55eff4ffc4710ff13fb28.jpg",
     "https://i.pinimg.com/1200x/10/f4/25/10f4257da8bb72817752bc7e95383e81.jpg",
     "https://i.pinimg.com/1200x/81/26/11/812611c18c61bcebf60bf51e4a434210.jpg",
-    "https://i.pinimg.com/736x/03/da/12/03da12c97ce7c9c1e534c486a134bb40.jpg",
-    "https://i.pinimg.com/736x/25/70/75/257075a1e799f95704c721f6fc3e28bd.jpg"
+    "https://i.pinimg.com/736x/f1/65/4b/f1654b5c379e9f6a06377bbf85dbbde2.jpg",
+    "https://i.pinimg.com/736x/2d/46/f3/2d46f364e5a5edabc69f6dd4ab0c4e54.jpg"
   ];
   trips = [
     { title: 'Hotels', description: 'Book hotels in minutes', image: 'img/Hotels.jpg', sub: "Explore hotels", subimg: "img/Hotel.jpg", link: '/hotel' },
@@ -53,7 +54,7 @@ export class Body implements OnInit {
     this.loadFlights();
     AOS.init({
       duration: 1000, // مدة التأثير بالمللي ثانية
-      once: true      // يشغّل الأنيميشن مرة واحدة فقط
+      once: false      // يشغّل الأنيميشن مرة واحدة فقط
     });
   }
 

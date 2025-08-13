@@ -70,3 +70,10 @@ nav
     transform: translateX(-50%) !important;
   }
 }
+.navbar .nav-link {
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: var(--secondary-color) !important; /* اللون اللي انت عايزه */
+}
