@@ -53,7 +53,14 @@ nav
  /* تأكد إنها فوق أي عنصر تاني */
 }
 
-
+.text-black
+{
+    transition: all .3s ease-in-out;
+}
+.text-black:hover
+{
+    color: var(--secondary-color) !important;
+}
 
 /* لما الشاشة تصغر جدًا (موبايل)، خليها تحت بالكامل */
 @media (max-width: 768px) {

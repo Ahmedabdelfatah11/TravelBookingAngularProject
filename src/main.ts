@@ -1,12 +1,20 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { App } from './app/app';
 import { appConfig } from './app/app.config';
+
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 
 bootstrapApplication(App, {
   ...appConfig,
   providers: [
-    ...(appConfig.providers || []), // in case it's undefined
-    provideAnimationsAsync()
+    ...(appConfig.providers || []),
+    importProvidersFrom(
+      BrowserAnimationsModule,
+      ToastrModule.forRoot({
+         positionClass: 'toast-bottom-right', 
+      })
+    )
   ]
 }).catch(err => console.error(err));

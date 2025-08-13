@@ -1,0 +1,79 @@
+<section>
+  <div class=" shadow-sm border border-1 card">
+    <div class="card-body w-100 p-0">
+      <h5 class="card-title mb-3 p-4 text-white w-100">Booking Form</h5>
+      <div class="p-4">
+
+        <!-- Tour Info -->
+         <div class="row mb-4">
+          <div class="col-4">
+            <h2 class="fw-bolder mt-1">Start Date:</h2>
+          </div>
+          <div class="col-8">
+            <p class="card-text text-muted ">
+    <input type="date" class="form-control" [(ngModel)]="tour.startDate" name="startDate" readonly/>      
+      </p>
+
+          </div>
+         </div>
+         <hr>
+        <!-- Ticket Selection -->
+        @if (activeTickets.length > 0) {
+          <h2 class="fw-bolder">Tickets:</h2>
+          <div class="row g-3 mb-4">
+            @for (ticket of activeTickets; track ticket.id) {
+              <div class="col-12 ">
+                <div class="border rounded p-3 h-100 shadow-sm">
+                  <div class="row ticket-info">
+                    <div class="col-3">
+                      <h5 class="mb-2 text-muted">{{ ticket.type }}</h5>
+                      
+                    </div>
+                    <div class="col-4">
+                      <p class="mb-1 text-muted">
+                        Price: <strong>{{ ticket.price | currency:'USD' }}</strong>
+                      </p>
+
+                    </div>
+                    <div class="col-5">
+                      <div class="d-flex align-items-center gap-2">
+                        <label class="form-label mb-0">Quantity:</label>
+                        <input type="number"
+                               class="form-control w-50"
+                               min="0"
+                               [max]="ticket.availableQuantity"
+                               [(ngModel)]="ticket.quantity">
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <hr>
+           <div class="d-flex justify-content-between mb-4">
+          <div>
+    <h2 class="fw-bolder mt-1">Grand Total:</h2>
+          </div>
+          <div>
+
+    <p class="card-text text-muted">
+      <strong>{{ getTotalPrice() | currency:'USD' }}</strong>
+    </p>
+          </div>
+         </div>
+
+         <div>
+          <button class="w-100 btn btn-primary">
+            Book Now
+          </button>
+         </div>
+        } @else {
+          <p class="text-muted">No tickets available for this tour.</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>

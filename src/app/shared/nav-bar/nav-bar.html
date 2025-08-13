@@ -1,5 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-<nav class=" navbar navbar-expand-lg bg-transparent my-0 shadow position-fixed top-0 start-0 end-0" [ngClass]="{'special-page': isSpecialPage}" id = navbar>
+<nav class=" navbar navbar-expand-lg bg-light  my-0 shadow position-fixed top-0 start-0 end-0" [ngClass]="{'special-page': isSpecialPage}" id = navbar>
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -11,14 +11,14 @@
             <ul class="navbar-nav me-auto">
 
 
-                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/flight']">Flights</a></li>
-                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/hotel']" >Hotels</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Cars</a></li>
-                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/tour']" href="#">Trips</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-black" [routerLink]="['/flight']">Flights</a></li>
+                <li class="nav-item"><a class="nav-link text-black" [routerLink]="['/hotel']" >Hotels</a></li>
+                <li class="nav-item"><a class="nav-link text-black" [routerLink]="['/cars']" >Cars</a></li>
+                <li class="nav-item"><a class="nav-link text-black" [routerLink]="['/tour']" href="#">Trips</a></li>
+                <li class="nav-item"><a class="nav-link text-black" href="#">About Us</a></li>
 
                 <li class="nav-item dropdown position-relative me-3">
-                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="bi bi-bell fs-5"></i>
                         <span
@@ -35,7 +35,7 @@
             </ul>
 
             <!-- Centered Brand -->
-            <a class="navbar-brand text-white d-flex align-items-center justify-content-center flex-grow-1">
+            <a class="navbar-brand text-black d-flex align-items-center justify-content-center flex-grow-1">
                 <img src="img/Logo.jpg" alt="Logo" width="30" height="30" class="rounded-circle me-2">
                 Live & Travel
             </a>

@@ -18,25 +18,30 @@ export class TourService {
     });
   }
 
-  private buildQueryParams(filter: TourFilterParams): HttpParams {
-    let params = new HttpParams();
-    Object.entries(filter).forEach(([key, value]) => {
-      if (value !== null && value !== undefined && value !== '') {
-        params = params.set(key, value.toString());
-      }
-    });
-    return params;
-  }
+private buildQueryParams(filter: TourFilterParams): HttpParams {
+  let params = new HttpParams();
+
+  Object.entries(filter).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach(val => {
+        params = params.append(key, val); 
+      });
+    } else if (value !== null && value !== undefined && value !== '') {
+      params = params.set(key, value.toString());
+    }
+  });
+
+  return params;
+}
 
   getTourCompany(): Observable<ITourCompany[]> {
     return this.http.get<ITourCompany[]>(this.tourCompanyUrl);
   }
 
-  getTours(filter: TourFilterParams): Observable<TourResponse> {
-    const params = this.buildQueryParams(filter);
-    return this.http.get<TourResponse>(this.apiUrl, { params });
-  }
-
+ getFilteredTours(params: TourFilterParams): Observable<TourResponse> {
+  const httpParams = this.buildQueryParams(params);
+  return this.http.get<TourResponse>(this.apiUrl, { params: httpParams });
+}
   getTourById(id: number): Observable<Tours> {
     return this.http.get<Tours>(`${this.apiUrl}/${id}`);
   }
@@ -47,15 +52,5 @@ export class TourService {
       headers: this.getAuthHeaders()
     });
   }
-  getPriceBounds(): Observable<{ min: number; max: number }> {
-  return this.http.get<Tours[]>(this.apiUrl).pipe(
-    map(tours => {
-      const prices = tours.map(t => t.price);
-      return {
-        min: Math.min(...prices),
-        max: Math.max(...prices)
-      };
-    })
-  );
-}
+
 }

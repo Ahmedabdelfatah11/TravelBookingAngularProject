@@ -1,3 +1,31 @@
 input[type="range"]:focus {
   z-index: 5;
 }
+
+.btn-primary
+{
+    background-color: var(--secondary-color) !important; 
+    border-color: var(--secondary-color) !important;
+    color: white !important;
+    font-size: 14px;
+    width: 100px;
+}
+.btn-primary:hover
+{
+    background-color: var(--third-color) !important; 
+    border-color: var(--third-color) !important;
+    color: black !important;
+}
+.btn-outline-secondary
+{
+     background-color: var(--main-color) !important; 
+    border-color: var(--main-color) !important;
+    color: black;
+      font-size: 14px;
+    width: 100px;
+  }
+  .btn-outline-secondary:hover
+{
+     background-color: var(--third-color) !important; 
+    border-color: var(--third-color) !important;
+}

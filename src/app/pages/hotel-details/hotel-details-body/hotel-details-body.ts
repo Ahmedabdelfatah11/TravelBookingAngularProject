@@ -90,7 +90,7 @@ export class HotelDetailsBody {
       return;
     }
 
-    console.log('Loading reviews for Flight Company ID:', this.hotelId);
+    console.log('Loading reviews for hotel Company ID:', this.hotelId);
 
     this.reviewService.getCompanyReviewStats({
       companyType: 'hotel',
