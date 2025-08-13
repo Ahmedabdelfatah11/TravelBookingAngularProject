@@ -7,7 +7,7 @@
 
 .page-link:hover,
 .page-link:focus {
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
     color: white;
     box-shadow: 0 0 8px rgba(141, 211, 187, 0.5);
 }

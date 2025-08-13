@@ -19,4 +19,9 @@ export class PaymentService {
   createPaymentIntent(id: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/create-intent/${id}`, {}, { headers: this.getAuthHeaders() });
   }
+   confirmPayment(paymentIntentId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/confirm-payment`, {
+      paymentIntentId: paymentIntentId
+    });
+  }
 }

@@ -1,14 +1,13 @@
 <div class="container mt-4">
     <div class="row m-2">
-        <div class="col-md-3">
+        <div class="col-md-3 bg-transparent border-0">
             <app-filters (filterChange)="onFilterChange($event)"></app-filters>
         </div>
         <div class="col-md-9">
             <app-sort-options (sortChange)="onSortChange($event)"></app-sort-options>
-
             <div class="row g-4 opacity-100" [class.opacity-25]="loading()">
                 @for (flight of flights(); track flight.flightNumber) {
-                <app-flight-card [flight]="flight"></app-flight-card>
+                <app-flight-card [flight]="flight" data-aos="fade-left" data-aos-delay="120"></app-flight-card>
                 }
             </div>
             @if(loading()){
@@ -18,7 +17,6 @@
                 </div>
             </div>
             }
-
             @if (flightcount() > pageSize()) {
             <nav>
                 <ul class="pagination justify-content-center mt-4">

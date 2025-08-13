@@ -28,16 +28,10 @@ export class BookService {
       { headers: this.getAuthHeaders() }
     ).pipe(
       tap(result => {
-        this.latestBookingResult = result; // خزّن الريسبونس داخليًا
+        this.latestBookingResult = result;
       })
     );
   } 
 
-  getLatestBooking(): CarBookingResultDto | null {
-    return this.latestBookingResult;
-  }
-
-  clearBooking(): void {
-    this.latestBookingResult = null;
-  }
+  
 }

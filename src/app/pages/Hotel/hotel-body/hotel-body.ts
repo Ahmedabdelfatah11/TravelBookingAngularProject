@@ -4,7 +4,8 @@ import { SortOptions } from "../sort-options/sort-options";
 import { HotelCard } from "../hotel-card/hotel-card";
 import { HotelFilterParams } from '../../../Models/hotel';
 import { HotelService } from '../../../Service/hotel-service';
-
+import { Router } from '@angular/router';
+import * as AOS from 'aos';
 @Component({
   selector: 'app-hotel-body',
   imports: [Filters, SortOptions, HotelCard],
@@ -22,14 +23,50 @@ export class HotelBody {
   searchData = signal<any>(null); // سيتم تعبئتها من حالة الراوتر
   
   hotelService = inject(HotelService);
-  
+  private router = inject(Router);
+
   constructor() {
     // تهيئة الفلاتر الافتراضية
     this.filters.set({
-      searchTerm: '',
+      Search: '',
       Sort: '',
     });
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
 
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        Search: this.searchData().NameOrLocation,
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadHotels();
+    }
+    AOS.init({
+      duration: 1000, // مدة التأثير بالمللي ثانية
+      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+    });
+  }
+  ngOnInit() {
+    // استقبال بيانات البحث من حالة الراوتر
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: any };
+
+    if (state?.searchData) {
+      this.searchData.set(state.searchData);
+      console.log('Received search data:', state.searchData);
+
+      // تحويل البيانات إلى الفلاتر المطلوبة
+      this.filters.set({
+        Search: this.searchData().NameOrLocation,
+      });
+      console.log('Filters set from search data:', this.filters());
+      // تحميل الرحلات بناء على بيانات البحث
+      this.loadHotels();
+    }
   }
   loadEffect = effect(() => {
   // نربط الـ effect بالإشارات (signals) علشان يعيد التحميل عند التغيير
@@ -48,9 +85,10 @@ export class HotelBody {
       PageSize: this.pageSize()
     };
     console.log('Loading hotels with filters:', params);
-
     this.hotelService.getHotelCompanies(params).subscribe({
       next: (response) => {
+              console.log('Hotels received:', response.data); // ⬅️ ADD THIS LINE
+
         this.hotels.set(response.data);
         this.hotelCount.set(response.count);
         this.loading.set(false);

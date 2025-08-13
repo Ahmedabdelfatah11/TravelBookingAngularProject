@@ -1,5 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-<nav class="navbar navbar-expand-lg bg-transparent my-2 shadow" [ngClass]="{'special-page': isSpecialPage}">
+<nav class="navbar navbar-expand-lg bg-transparent shadow" [ngClass]="{'special-page': isSpecialPage}">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -10,13 +10,11 @@
             <!-- Left Nav Links -->
             <ul class="navbar-nav me-auto">
 
-
-                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/flight']">Flights</a></li>
-                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/hotel']" >Hotels</a></li>
+                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/hotel']">Hotels</a></li>
                 <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/cars']">Cars</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Trips</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">About Us</a></li>
-
+                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/tour']">Trips</a></li>
+                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/about']">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/contact']">Contact Us</a></li>
                 <li class="nav-item dropdown position-relative me-3">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -35,8 +33,8 @@
             </ul>
 
             <!-- Centered Brand -->
-            <a class="navbar-brand text-white d-flex align-items-center justify-content-center flex-grow-1">
-                <img src="img/Logo.jpg" alt="Logo" width="30" height="30" class="rounded-circle me-2">
+            <a class="navbar-brand text-white d-flex align-items-center justify-content-center flex-grow-1"
+                [routerLink]="['/home']">
                 Live & Travel
             </a>
 
@@ -47,10 +45,9 @@
             <div class="d-flex dropdown position-relative">
                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="userDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="text-black">Welcome {{ auth.getUsername() }}</span>
+                    <span class="text">Welcome {{ auth.getUsername() }}</span>
                 </a>
 
-                <!-- القائمة تظهر مباشرة تحت زر الترحيب -->
                 <ul class="dropdown-menu shadow border-0 rounded-4 mt-2 custom-dropdown" aria-labelledby="userDropdown">
                     <li class="px-3 py-2">
                         <div class="d-flex align-items-center">
@@ -63,11 +60,12 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/profile']"><i class="bi bi-person me-2"></i>My
+                    <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/profile']"><i
+                                class="bi bi-person me-2"></i>My
                             account</a></li>
                     <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/favorites']"><i
                                 class="bi bi-heart fs-5 me-2"></i> Favorites</a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i
+                    <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/bookings']"><i
                                 class="bi bi-credit-card me-2"></i>Bookings</a></li>
                     <li><a class="dropdown-item d-flex align-items-center" href="#"><i
                                 class="bi bi-gear me-2"></i>Settings</a></li>
@@ -81,9 +79,7 @@
                 </ul>
             </div>
 
-            <!-- زر إدارة (فقط للـ Admin) -->
             } @else {
-            <!-- إذا لم يكن مسجل دخول -->
             <a routerLink="/login" class="btn btn-outline-light me-2">Login</a>
             <a routerLink="/register" class="btn btn-success btn-gradient-primary text-black">Sign Up</a>
             }

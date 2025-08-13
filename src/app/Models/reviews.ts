@@ -31,18 +31,25 @@ export interface ReviewFilterParams {
     hotelId?: number;
     flightId?: number;
     carRentalId?: number;
+    tourCompanyId?: number; 
     tourId?: number;
     page?: number;
     pageSize?: number;
     sortBy?: string;
 } 
 export class CreateReview {
-    companyType!: string; // required, max 50
-    hotelCompanyId?: number;     // optional
-    flightCompanyId?: number;    // optional
-    carRentalCompanyId?: number; // optional
-    tourCompanyId?: number;      // optional
-    rating!: number;              // required, 1-5
-    comment?: string;            // optional, max 500
- 
+  companyType!: string;  // required, max 50
+  hotelCompanyId?: number;     
+  flightCompanyId?: number;    
+  carRentalCompanyId?: number; 
+  tourCompanyId?: number;      
+  tourId?: number;              // <--- Add this line
+  rating!: number;             // required, 1-5
+  comment?: string;            // optional, max 500
+}
+
+
+export interface ReviewCheckParams {
+  companyType: string;
+  tourId: number;
 }
