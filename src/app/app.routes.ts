@@ -30,7 +30,7 @@ export const routes: Routes =
     { path: 'forget', component: ForgetPassword, title: 'Forget Password' },
     { path: 'reset', component: ResetPassword, title: 'Reset Password' },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'payment/:bookingId', component: Payment, title: 'Payment' },
+    { path: 'payment/:id', component: Payment, title: 'Payment' },
     { path: "profile",component: Profile},
     { path: 'invalid', component: Invalid },
     // { path: 'flight', component: Flight },
@@ -38,10 +38,9 @@ export const routes: Routes =
     // { path: 'hotel', component: Hotel },
     // { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details
 
-{ path: 'cars', component: CarBody },
-{ path: 'cars/:id', component: CarDetails },
-{ path: 'Booking/:id', component: BookDetail }, 
-{ path: '**', redirectTo: '/invalid', pathMatch: 'full' },
+  { path: 'cars', component: CarBody },
+ { path: 'cars/:id', component: CarDetails },
+  { path: 'Booking/:id', component: BookDetail }, 
     { path: 'flight', component: Flight },
     { path: 'FlightDetails/:id', component: FlightDetails },
     { path: 'hotel', component: Hotel },

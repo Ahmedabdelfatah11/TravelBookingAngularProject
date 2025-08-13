@@ -46,7 +46,7 @@ export class Payment {
   constructor(private router: Router) { }
   ngOnInit(): void {
 
-    const bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
+    const bookingId = Number(this.route.snapshot.paramMap.get('id'));
     if (bookingId) {
       this.paymentService.createPaymentIntent(bookingId).subscribe({
         next: (res) => {

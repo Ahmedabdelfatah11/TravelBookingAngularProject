@@ -16,7 +16,7 @@ export class PaymentService {
       'Authorization': token ? `Bearer ${token}` : ''
     });
   }
-  createPaymentIntent(bookingId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create-intent/${bookingId}`, {}, { headers: this.getAuthHeaders() });
+  createPaymentIntent(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/create-intent/${id}`, {}, { headers: this.getAuthHeaders() });
   }
 }
