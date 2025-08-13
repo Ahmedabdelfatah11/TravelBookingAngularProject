@@ -26,7 +26,7 @@ import { Favorites } from './pages/favorites/favorites';
 import { Tour } from './pages/Tour/tour/tour';
 import { TourDetails } from './pages/Tour-details/tour-details/tour-details';
 import { TourResolver } from './pages/Tour-details/tour.resolver';
-import { ChatBot } from './pages/home/body/chat-bot/chat-bot';
+import { ChatbotComponent } from './chatbot/chatbot';
 import { Bookings } from './pages/bookings/bookings';
 
 
@@ -55,7 +55,7 @@ export const routes: Routes =
     { path:'favorites',component:Favorites,title:'Favorites'},
     {path: 'tour',component:Tour,title:'tour'},
     { path: 'ToursDetails/:id', component: TourDetails, title: 'Tour Details'  , resolve: { tour: TourResolver }},
-      { path: 'chat', component:ChatBot},
+      { path: 'chat', component:ChatbotComponent},
       { path: 'bookings',component:Bookings,title:'Booking'},
     { path: 'invalid', component: Invalid },
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
