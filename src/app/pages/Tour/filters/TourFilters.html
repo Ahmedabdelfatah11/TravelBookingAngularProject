@@ -1,0 +1,57 @@
+<div class="card">
+    <h6 class="card-header">Filters</h6>
+    <div class="card-body">
+ <div class="mb-3">
+      <label>
+        Price Range: {{ minPriceValue }} EGP – {{ maxPriceValue }} EGP
+      </label>
+
+      <ngx-slider
+        [(value)]="minPriceValue"
+        [(highValue)]="maxPriceValue"
+        [options]="priceOptions">
+      </ngx-slider>
+    </div>
+<!-- 🗺️ Destination Input -->
+<div class="mb-3">
+  <label class="form-label">Destination</label>
+  <input
+    class="form-control"
+    type="text"
+    [value]="destination()"
+    (input)="updateSignal(destination, $event)"
+    placeholder="Type part of destination name"
+  />
+</div>
+
+<!-- 📚 Category Checkboxes -->
+<div class="mb-3">
+  <label class="form-label">Categories</label>
+  @for (cat of categoryOptions; track cat) {
+    <div class="form-check">
+      <input
+      
+        type="checkbox"
+        class="form-check-input"
+        [id]="cat"
+        [value]="cat"
+        [checked]="selectedCategories().includes(cat)"
+        (change)="onCategoryToggle(cat, $event)"
+      />
+      <label class="form-check-label" [for]="cat">{{ cat }}</label>
+    </div>
+  }
+
+      <div class="d-flex my-3">
+        <!-- <hr class="my-3" style="opacity: 0.3;"> -->
+        <div class="me-3">
+          <button class="btn btn-primary text-black mt-3 w-100" (click)="applyFilters()">Apply Filters</button>
+      </div>
+      <div>
+      <button class="btn btn-outline-secondary mt-3 w-100" (click)="resetFilters()">
+  Reset Filters
+</button>
+  </div>
+
+      </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-filters',
@@ -7,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrl: './filters.css'
 })
 export class Filters {
+  search=signal('');
+  sort = signal('');
 
+  @Output() filterChange = new EventEmitter<any>();
+  
+  applyFilters() {
+    const filters = {
+      Search: this.search(),
+      Sort: this.sort()
+    };
+    this.filterChange.emit(filters);
+  }
+  updateSignal(signalVar: WritableSignal<string>, event: Event) {
+    const input = event.target as HTMLInputElement;
+    signalVar.set(input.value);
+  }
 }

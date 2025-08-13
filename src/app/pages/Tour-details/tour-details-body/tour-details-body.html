@@ -1,0 +1,523 @@
+@if (!tour) {
+  <div class="d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3 text-muted">Loading tour details...</p>
+  </div>
+}
+@if (tour) {
+  <nav aria-label="breadcrumb" class="mt-1">
+    <div class="container">
+    <ol class="breadcrumb">
+      <li class="text-muted"><a routerLink="/home">Home > </a></li>
+      <li class=" text-muted mx-2"><a [routerLink]="['/tour']">Tours > </a></li>
+      <li class="active" aria-current="page">
+        {{ tour.name }}
+      </li>
+    </ol>
+    </div>
+  </nav>
+
+  <div class="container-fluid px-5 mb-5" >
+    <div class="row g-4 h-100" >
+      <div class="col-lg-4">
+        <div class="row gy-3 gx-3 h-100">
+          <div class="col-lg-12 col-sm-6 ">
+            @if (tour.imageUrls.length > 0) {
+              <img
+                [src]="tour.imageUrls[0]"
+                [alt]="'Tour Image 1 for Tour ' + tour.id"
+                class="img-fluid rounded shadow-sm w-100 h-100"
+              />
+            }
+          </div>
+          <div class="col-lg-12 col-sm-6 ">
+            @if (tour.imageUrls.length > 1) {
+              <img
+                [src]="tour.imageUrls[1]"
+                [alt]="'Tour Image 2 for Tour ' + tour.id"
+                class="img-fluid rounded shadow-sm w-100 h-100"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 ">
+        @if (tour.imageUrls.length > 2) {
+          <img
+            [src]="tour.imageUrls[2]"
+            [alt]="'Tour Image 3 for Tour ' + tour.id"
+            class="img-fluid rounded shadow-sm w-100 h-100"
+          />
+        }
+      </div>
+        <div class="col-lg-4">
+        <div class="row gy-1 gx-3 h-100 w-100">
+          <div class="col-lg-6 col-sm-6 ">
+            @if (tour.imageUrls.length > 0) {
+              <img
+                [src]="tour.imageUrls[3]"
+                [alt]="'Tour Image 1 for Tour ' + tour.id"
+                class="img-fluid rounded shadow-sm w-100 h-100"
+              />
+            }
+          </div>
+          <div class="col-lg-6 col-sm-6 gy-2">
+            @if (tour.imageUrls.length > 1) {
+              <img
+                [src]="tour.imageUrls[4]"
+                [alt]="'Tour Image 2 for Tour ' + tour.id"
+                class="img-fluid rounded shadow-sm w-100 h-100"
+              />
+            }
+          </div>
+          <div class="col-12 pt-3">
+            @if (tour.imageUrls.length > 1) {
+              <img
+                [src]="tour.imageUrls[4]"
+                [alt]="'Tour Image 2 for Tour ' + tour.id"
+                class="img-fluid rounded shadow-sm w-100 "
+              />
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Body -->
+  <section class="mt-5">
+      <div class="container">
+        <h1>{{tour.name}}</h1>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <div class="me-5">
+                    <span class="text-muted"><i class="fa-solid fa-location-dot"></i></span>
+                    <span  class="text-muted">{{tour.destination}}</span>
+                </div>
+                <div class="text-muted">
+                    <span><i class="fa-solid fa-calendar-days"></i></span>
+                    <span>  {{ getDurationInDays(tour.startDate, tour.endDate) }} days,</span>
+                      <span >
+                       {{ getDurationInDays(tour.startDate, tour.endDate) +1}} nights
+                      </span>
+                </div>
+            </div>
+        <div class="wishlist">
+  <!-- Wishlist Button -->
+<button class="btn text-black btn-primary bookBtn" (click)="addToWishlist()">
+  <i class="fa-solid fa-heart me-1"></i> wishlist
+</button>
+
+
+
+<!-- Scrollable modal -->
+<!-- Modal Trigger -->
+<button type="button" class="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#shareModal" >
+  <i class="fa-solid fa-share-nodes me-1"></i> Share
+</button>
+
+<!-- Modal -->
+<div class="modal fade mt-5" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shareModalLabel">Share This</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-center">Share the site with your friends and enjoy your favourite popular tours</p>
+        <!-- Share Toggle Button -->
+        <div class="d-flex justify-content-center">
+           <share-buttons
+        [include]="[
+          'copy', 'facebook', 'email', 'messenger',  'line','whatsapp',
+          'linkedin'
+        ]"
+        
+        [url]="currentUrl"
+        theme="circles-dark"
+        [showText]="true"
+        [showIcon]="true"
+        description="Share Website"
+      ></share-buttons>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Share Toggle Button -->
+
+
+  <!-- Collapsible Share Card -->
+   <!-- 'pinterest', 'print', 'reddit', 'sms',
+          'telegram', 'tumblr', 'twitter', 'viber', 'vk', 'xing', 'whatsapp' -->
+  </div>
+</div>
+        </div>
+  </section>
+  <div class="container mt-5 ">
+    <div class="row">
+        <div class="col-lg-8">
+<div class="row shadow-sm border border-1 p-2 m-0 g-3">
+<div class="col-lg-3 col-6">
+  <div class="d-flex justify-content-center">
+    <div class="header-icon-box duration">
+      <div class="header-icon-box-details">
+        <i class="fa-solid fa-calendar-days fs-3"></i>
+      </div>
+    </div>
+    <div class="headerbox ps-3">
+      <h3 class="m-0 p-0 text-muted">duration</h3>
+      <p >  <span>  {{ getDurationInDays(tour.startDate, tour.endDate) }} - {{ getDurationInDays(tour.startDate, tour.endDate)+1 }} days</span></p>
+    </div>
+  </div>
+</div>
+<div class="col-lg-3 col-6">
+  <div class="d-flex justify-content-center">
+    <div class="header-icon-box groupSize">
+      <div class="header-icon-box-details">
+        <i class="fa-solid fa-calendar-days fs-3"></i>
+      </div>
+    </div>
+    <div class="headerbox ps-3">
+      <h3 class="m-0 p-0 text-muted">Group Size</h3>
+      <p >  <span>  {{ tour.minGroupSize }}-{{tour.maxGroupSize}} People</span></p>
+    </div>
+  </div>
+</div>
+<div class="col-lg-3 col-6">
+  <div class="d-flex justify-content-center">
+    <div class="header-icon-box details">
+      <div class="header-icon-box-details">
+        <i class="fa-solid fa-calendar-days fs-3"></i>
+      </div>
+    </div>
+    <div class="headerbox ps-3">
+      <h3 class="m-0 p-0 text-muted">Tour Type</h3>
+      <p >  <span>  {{ tour.category }}</span></p>
+    </div>
+  </div>
+</div>
+<div class="col-lg-3 col-6">
+  <div class="d-flex justify-content-center">
+    <div class="header-icon-box">
+      <div class="header-icon-box-details">
+        <i class="fa-solid fa-calendar-days fs-3"></i>
+      </div>
+    </div>
+    <div class="headerbox ps-3">
+      <h3 class="m-0 p-0 text-muted">Language</h3>
+      <p >  <span>  {{ tour.languages }}</span></p>
+    </div>
+  </div>
+</div>
+</div>
+
+       <div class="bg-light w-100 my-4 border border-1 question-info p-2" id="overview">
+  <a
+    class="btn bg-light w-100 text-start p-3 border-0"
+    data-bs-toggle="collapse"
+    href="#firstQuestion"
+    role="button"
+    aria-expanded="true"
+    aria-controls="firstQuestion"
+    id="overviewToggle"
+  >
+    <div class="d-flex justify-content-between">
+      <h2>Overview</h2>
+      <!-- <i class="fa-solid fa-arrow-right px-3 py-2 collapse-icon" id="overviewIcon"></i> -->
+    </div>
+  </a>
+
+  <div class="collapse show" id="firstQuestion">
+    <div class="card card-body border-0 bg-light shadow-none">
+      {{tour.description}}
+    </div>
+  </div>
+</div>
+      <div class="bg-light w-100 my-4 border border-1 question-info p-2" id="Included/Excluded">
+  <a
+    class="btn bg-light w-100 text-start p-3 border-0"
+    data-bs-toggle="collapse"
+    href="#secondQuestion"
+    role="button"
+    aria-expanded="true"
+    aria-controls="secondQuestion"
+    id="includedToggle"
+  >
+    <div class="d-flex justify-content-between">
+      <h2>Included/Excluded</h2>
+      <!-- <i class="fa-solid fa-arrow-right px-3 py-2 collapse-icon" id="includedIcon"></i> -->
+    </div>
+  </a>
+
+  <div class="collapse show" id="secondQuestion">
+    <div class="card card-body border-0 bg-light shadow-none">
+      <div class="d-flex flex-wrap">
+        <div class="pe-5">
+          <h5>Included</h5>
+          <ul class="mb-3">
+            @for (item of tour.includedItems; track item) {
+              <li>✔️ {{ item }}</li>
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h5>Excluded</h5>
+          <ul>
+            @for (item of tour.excludedItems; track item) {
+              <li>❌ {{ item }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-light w-100 my-4 border border-1 question-info p-2" id="questionSection">
+  <a
+    class="btn bg-light w-100 text-start p-3 border-0"
+    data-bs-toggle="collapse"
+    href="#Question"
+    role="button"
+    aria-expanded="false"
+    aria-controls="Question"
+    id="questionsToggle"
+  >
+    <div class="d-flex justify-content-between">
+      <h2>Questions</h2>
+      <!-- <i class="fa-solid fa-arrow-right px-3 py-2 collapse-icon" id="questionsIcon"></i> -->
+    </div>
+  </a>
+
+  <div class="collapse" id="Question">
+  <div class="bg-light px-2 py-3">
+    <div class="row">
+      @for (q of tour.questions; track q) {
+        <div class="col-12 mb-3">
+          <div class="card  border-0 h-100">
+            <div class="card-body card-shadow-teal">
+              <!-- <h6 class="card-title text-primary">Question</h6> -->
+              <p class="mb-2 text-black fw-bolder"><strong>Q:</strong> {{ q.questionText }}</p>
+              <p class="">{{ q.answerText || 'Answer coming soon.' }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+</div>
+<div>
+
+</div>
+ <div class="reviews-section bg-white p-4 rounded-4 shadow-sm w-100">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="m-0 d-flex align-items-center">
+                    <i class="fas fa-star text-warning me-2"></i>
+                    <span>Reviews</span>
+                </h3>
+                @if (reviewStats()) {
+                <span class="badge rounded-pill bg-light text-dark fs-6">
+                    {{ reviewStats()?.totalReviews }} reviews
+                </span>
+                }
+            </div>
+
+            <!-- Overall Rating -->
+            @if (reviewStats()?.totalReviews ?? 0 > 0) {
+            <div class="overall-rating bg-light p-3 rounded-3 mb-4">
+                <div class="d-flex align-items-center">
+                    <div class="rating-circle text-black d-flex flex-column align-items-center justify-content-center me-3"
+                        style="width: 60px; height:60px;">
+                        <span class="display-6 fw-bold">{{ reviewStats()?.averageRating }}</span>
+                    </div>
+                    <div>
+                        <div class="star-rating mb-2 position-relative" style="height: 20px;">
+                            <div class="stars-empty" style="color: #e4e5e9;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stars-filled position-absolute top-0 start-0"
+                                [style.width.%]="(reviewStats()?.averageRating ?? 0) * 20" style="color: #ffc107;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">Based on {{ reviewStats()?.totalReviews }} traveler reviews</p>
+                    </div>
+                </div>
+            </div>
+            } @else {
+            <div class="no-reviews text-center py-4">
+                <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2rem;"></i>
+                <h5 class="text-muted">No Reviews Yet</h5>
+                <p class="text-muted">Be the first to share your experience!</p>
+            </div>
+            }
+
+            <!-- Reviews List -->
+            @if (isLoading().reviews) {
+            <div class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading reviews...</p>
+            </div>
+            } @else if (reviewStats()?.totalReviews ?? 0 > 0) {
+            <div class="reviews-list">
+                @for (review of reviews; track review.id){
+                <div class="review-item bg-light p-3 rounded-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="user-avatar text-black rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="width: 40px; height: 40px;">
+                                {{ review.userName?.charAt(0)?.toUpperCase() }}
+                            </div>
+                            <div>
+                                <h6 class="m-0 fw-bold">{{ review.userName }}</h6>
+                                <small class="text-muted"> {{ review.createdAt | date:'dd MMM yyyy' }}</small>
+                            </div>
+                        </div>
+                        <span class="badge bg-success text-black-50">
+                            <i class="fas fa-star me-1"></i> {{ review.rating }}
+                        </span>
+                    </div>
+                    <hr class="my-3" style="opacity: 0.3;">
+                    <div class="review-content py-2">
+                        <p class="m-0">{{ review.comment }}</p>
+                    </div>
+
+                </div>
+                }
+            </div>
+            }
+            <!-- Review Form Section -->
+            <!-- Login Required Message -->
+            @if (!authService.isLoggedIn()) {
+            <div class="alert alert-warning border-0 rounded-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-sign-in-alt me-3 text-warning"></i>
+                    <div>
+                        <strong>Want to share your experience?</strong><br>
+                        <small>Please <a [routerLink]="['/login']" class="alert-link fw-bold">login</a> to write a
+                            review.</small>
+                    </div>
+                </div>
+            </div>
+            }
+
+            <!-- Already Reviewed Message -->
+            @else if (hasReviewed()) {
+            <div class="alert alert-success border-0 rounded-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle me-3 text-success"></i>
+                    <div>
+                        <strong>Thank you for your review!</strong><br>
+                        <small>You have already reviewed this flight company.</small>
+                    </div>
+                </div>
+            </div>
+            }
+
+            <!-- Add Review Form -->
+            @else {
+            <div class="add-review-form border rounded-3 p-4 mt-4">
+                <h5 class="mb-3 d-flex align-items-center">
+                    <i class="fas fa-edit me-2 text-success"></i>
+                    Write a Review
+                </h5>
+
+                <!-- Error Message -->
+                @if (submitError()) {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    {{ submitError() }}
+                    <button type="button" class="btn-close" (click)="submitError.set(null)" aria-label="Close"></button>
+                </div>
+                }
+
+                <!-- Rating Stars -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">
+                        Your Rating <span class="text-danger">*</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        @for(star of [1,2,3,4,5]; track star) {
+                        <i class="fas fa-star me-1" (click)="rating.set(star)" [class.text-warning]="rating() >= star"
+                            [class.text-muted]="rating() < star"
+                            [style.cursor]="isSubmitting() ? 'not-allowed' : 'pointer'"
+                            [style.opacity]="isSubmitting() ? '0.5' : '1'"
+                            style="font-size: 1.5rem; transition: all 0.2s;" [attr.disabled]="isSubmitting()"></i>
+                        }
+                        @if (rating() > 0) {
+                        <span class="ms-2 text-muted small">({{ rating() }}/5)</span>
+                        }
+                    </div>
+                    @if (rating() === 0) {
+                    <small class="text-muted">Click on a star to rate</small>
+                    }
+                </div>
+
+                <!-- Comment Textarea -->
+                <div class="mb-4">
+                    <label for="reviewComment" class="form-label fw-semibold">
+                        Your Comment <span class="text-muted">(optional)</span>
+                    </label>
+                    <textarea id="reviewComment" class="form-control" rows="4" [(ngModel)]="comment"
+                        [disabled]="isSubmitting()"
+                        placeholder="Share your experience with this flight company... What did you like? What could be improved?"
+                        maxlength="500" style="resize: none;"></textarea>
+                    <div class="form-text d-flex justify-content-between">
+                        <small>Help other travelers by sharing your honest feedback</small>
+                        <small class="text-muted">{{ comment.length }}/500</small>
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="button" class="btn btn-outline-secondary" (click)="resetReviewForm()"
+                        [disabled]="isSubmitting()">
+                        <i class="fas fa-undo me-2"></i> Reset
+                    </button>
+
+                    <button type="button" class="btn btn-outline-success d-flex align-items-center"
+                        (click)="submitReview(rating(), comment)" [disabled]="isSubmitting() || rating() === 0">
+                        @if (isSubmitting()) {
+                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Submitting...
+                        } @else {
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Submit Review
+                        }
+                    </button>
+                </div>
+
+
+            </div>
+            }
+
+        </div>
+
+
+        </div>
+        <div class="col-lg-4">
+          <app-tour-booking [tour]="tour"></app-tour-booking>
+        </div>
+    </div>
+  </div>
+}

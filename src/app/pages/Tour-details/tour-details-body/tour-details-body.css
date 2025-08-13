@@ -1,0 +1,211 @@
+nav
+{
+    margin-top: 100px !important;
+    font-size: 20px;
+}
+nav .active
+{
+    color: black;
+     font-weight: 600;
+}
+img
+{
+  width: 100%;
+  height: 100%;
+  border-radius: 15px !important;
+}
+nav a
+{
+    cursor: pointer;
+    text-decoration: none !important;
+    color: gray;
+    transition: all .5s ease-in-out;
+}
+nav a:hover
+{
+    color: black;
+}
+
+h1
+{
+    font-size: 40px;
+    font-weight: 600;
+}
+.btn-primary
+{
+    background-color: var(--secondary-color) !important; 
+    border-color: var(--secondary-color) !important;
+    color: white !important;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 100px;
+}
+.btn-primary:hover
+{
+    background-color: var(--third-color) !important; 
+    border-color: var(--third-color) !important;
+    color: black !important;
+}
+
+.collapse-icon {
+  transition: transform 0.3s ease;
+}
+
+.rotate-up {
+  transform: rotate(-90deg); /* Arrow points up */
+}
+
+.rotate-down {
+  transform: rotate(90deg); /* Arrow points down */
+}
+::ng-deep share-buttons .sb-button {
+  /* background-color: #007bff !important;  */
+  color: #fff !important;               /* Icon/text color */
+  border-radius: 50%;                   /* Optional: keep circular */
+}
+
+::ng-deep share-buttons .sb-icon {
+  color: #fff !important;               /* Icon color */
+}
+
+::ng-deep share-buttons .sb-button {
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+::ng-deep share-buttons .sb-icon {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-text {
+  font-size: 14px;
+}
+
+::ng-deep share-buttons .sb-facebook {
+  background-color: #1877f2 !important;
+  color: white !important;
+}
+::ng-deep share-buttons .sb-whatsapp {
+  background-color: #25D366 !important;
+  color: white !important;
+}
+::ng-deep share-buttons .sb-linkedin {
+  background-color: #0077b5 !important;
+  color: white !important;
+}
+
+::ng-deep share-buttons .sb-icon svg {
+  display: none !important;
+}
+
+::ng-deep share-buttons .sb-button.copy::before {
+  content: "\f0c1"; /* fa-link */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.facebook::before {
+  content: "\f39e"; /* fa-facebook-f */
+  font-family: "Font Awesome 6 Brands";
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.email::before {
+  content: "\f0e0"; /* fa-envelope */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.messenger::before {
+  content: "\f39f"; /* fa-facebook-messenger */
+  font-family: "Font Awesome 6 Brands";
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.line::before {
+  content: "\f3c0"; /* fa-line */
+  font-family: "Font Awesome 6 Brands";
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.whatsapp::before {
+  content: "\f232"; /* fa-whatsapp */
+  font-family: "Font Awesome 6 Brands";
+  margin-right: 6px;
+}
+
+::ng-deep share-buttons .sb-button.linkedin::before {
+  content: "\f0e1"; /* fa-linkedin-in */
+  font-family: "Font Awesome 6 Brands";
+  margin-right: 6px;
+}
+::ng-deep share-buttons .sb-button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+
+/* Overview */
+.headerbox
+
+{
+}
+.headerbox h3
+{
+  font-size: 16px;
+}
+.headerbox p
+{
+  font-weight: 600;
+}
+.header-icon-box
+{
+   width: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e4f9f9;
+  border: thin .5px rgb(188, 185, 185);
+  border-radius: 11px;
+}
+.duration
+{
+  background-color: #e4f9f9;
+}
+.groupSize
+{
+  background-color: #fff0ec;
+}
+.details
+{
+  background-color: #fcf2fa;
+}
+
+h2
+{
+  font-weight: 600;
+  transition: all .3s ease-in-out;
+}
+h2:hover
+{
+  color: var(--secondary-color);
+}
+
+.card-shadow-teal {
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 8px; /* Apply radius even without hover for consistency */
+}
+
+.card-shadow-teal:hover {
+  box-shadow: 0 4px 12px rgba(14, 179, 157, 0.3); /* Teal glow */
+  transform: translateY(-2px); /* Subtle lift effect */
+}

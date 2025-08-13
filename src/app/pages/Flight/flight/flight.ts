@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Header } from "../../../components/header/header";
-import { SearchBarComponent } from "../../../components/search-bar/search-bar";
+import { Header } from "../../home/header/header";
+import { SearchBarComponent } from "../../home/search-bar/search-bar";
 import { FlightBody } from "../flight-body/flight-body";
 import { NavBar } from "../../../shared/nav-bar/nav-bar";
 import { Footer } from "../../../shared/footer/footer";
@@ -12,5 +12,5 @@ import { Footer } from "../../../shared/footer/footer";
   styleUrl: './flight.css'
 })
 export class Flight {
-
+  Image: string = 'img/13.jpg';
 }
