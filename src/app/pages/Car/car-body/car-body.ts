@@ -18,9 +18,9 @@ cars: Car[] = [];
   pageSize = 10;
   isLoading = false;
   errorMessage = '';
-
   searchModel = '';
-  location = '';  
+  location = ''; 
+  sort ='';
   minPrice = 0;
   maxPrice = 10000000;
 
@@ -46,7 +46,8 @@ cars: Car[] = [];
       this.searchModel,
       this.minPrice,
       this.maxPrice,
-      this.location,    
+      this.location,
+      this.sort,
       this.currentPage,
       this.pageSize,
     ).subscribe({
@@ -87,7 +88,8 @@ cars: Car[] = [];
 
   resetFilters(): void {
     this.searchModel = '';
-    this.location = '';   
+    this.location = '';  
+    this.sort = ''; 
     this.minPrice = 0;
     this.maxPrice = 10000000;
     this.currentPage = 1;

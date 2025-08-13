@@ -61,8 +61,7 @@ export const routes: Routes =
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ]
 
-//     import { Bookings } from './pages/bookings/bookings';
-// import { ChatBot } from './pages/home/body/chat-bot/chat-bot';
+
 
 
 

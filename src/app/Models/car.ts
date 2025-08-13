@@ -8,5 +8,5 @@ export interface Car {
   imageUrl?: string;
   capacity: number;
   rentalCompanyId: number;
-  companyName?: string;
+  name?: string;
 }
