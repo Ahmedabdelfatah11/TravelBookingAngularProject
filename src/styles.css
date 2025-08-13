@@ -3,6 +3,7 @@
 :root {
     --main-color: #a0d9cb;
     --secondary-color: #0eb39d;
+    --third-color:#31dac3;
 }
 
 body, button, input, select, textarea {
@@ -33,4 +34,9 @@ body, button, input, select, textarea {
 
 .src {
     background-color: var(--main-color);
+}
+
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
 }

@@ -28,7 +28,7 @@ export class BookService {
       { headers: this.getAuthHeaders() }
     ).pipe(
       tap(result => {
-        this.latestBookingResult = result; // خزّن الريسبونس داخليًا
+        this.latestBookingResult = result;
       })
     );
   } 

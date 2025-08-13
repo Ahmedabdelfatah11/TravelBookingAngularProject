@@ -1,8 +1,8 @@
 export interface ITourCompany {
-        Id: number;
-        Name: string;
-        Description: string;
-        ImageUrl:string;
-        Location: string;
-        Rating:number;
+  id: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+  location: string;
+  rating: number;
 }

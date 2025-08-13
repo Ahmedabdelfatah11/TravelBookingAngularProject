@@ -18,6 +18,8 @@ import { CarDetails } from './pages/car-details/car-details';
 import { BookDetail } from './pages/book-detail/book-detail';
 import { Favorites } from './pages/favorites/favorites';
 import { Tour } from './pages/Tour/tour/tour';
+import { TourDetails } from './pages/Tour-details/tour-details/tour-details';
+import { TourResolver } from './pages/Tour-details/tour.resolver';
 
 
 export const routes: Routes =
@@ -43,6 +45,7 @@ export const routes: Routes =
     { path: 'hotel-details/:id', component: HotelDetails }, // Assuming you want to use the same component for hotel details\
     { path:'favorites',component:Favorites},
     {path: 'tour',component:Tour,title:'tour'},
+    { path: 'ToursDetails/:id', component: TourDetails, title: 'Tour Details'  , resolve: { tour: TourResolver }},
     { path: 'invalid', component: Invalid },
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ];

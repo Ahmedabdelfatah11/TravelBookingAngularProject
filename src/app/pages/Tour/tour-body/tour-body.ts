@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, OnInit, signal, inject, effect } from '@angular/core';
+import { Component, AfterViewInit, OnInit, signal, inject, effect, computed } from '@angular/core';
 import Typed from 'typed.js';
-import { TourFilterParams } from '../../../Models/tourModel';
+import { TourFilterParams, TourResponse } from '../../../Models/tourModel';
 import { TourService } from '../../../Service/tour-service';
 import { Router } from '@angular/router';
 import { TourCard } from "../tour-card/tour-card";
@@ -42,7 +42,7 @@ ngOnInit() {
   // Step 1: Try getting filters from route state (search page navigation)
   const navigation = this.router.getCurrentNavigation();
   const state = navigation?.extras.state as { searchData: any };
-
+  console.log('Tour received in card component:', this.Tours);
   if (state?.searchData) {
     this.filters.set({
       Destination: state.searchData.Destination,
@@ -70,28 +70,30 @@ ngOnInit() {
   });
 
 
-  loadTours() {
-    this.loading.set(true);
+ loadTours() {
+  this.loading.set(true);
 
-    const params = {
-      ...this.filters(),
-      PageIndex: this.currentPage(),
-      PageSize: this.pageSize()
-    };
+  const params = {
+    ...this.filters(),
+    PageIndex: this.currentPage(),
+    PageSize: this.pageSize()
+  };
 
-    console.log('Loading Tours with params:', params);
-    this.TourService.getTours(params).subscribe({
-      next: (data) => {
-        this.Tours.set(data.data);
-        this.Tourcount.set(data.count);
-        this.loading.set(false);
-      },
-      error: (err) => {
-        console.error('Error fetching flights:', err);
-        this.loading.set(false);
-      }
-    });
-  }
+  this.TourService.getFilteredTours(params).subscribe({
+    next: (data: any) => {
+      const tours = data.pagination?.data;
+      const count = data.pagination?.count;
+
+      this.Tours.set(tours || []);
+      this.Tourcount.set(count || 0);
+      this.loading.set(false);
+    },
+    error: (err: unknown) => {
+      console.error('Error fetching tours:', err);
+      this.loading.set(false);
+    }
+  });
+}
 
   // باقي الدوال كما هي...
   nextPage() {
@@ -105,11 +107,6 @@ ngOnInit() {
       this.currentPage.update(p => p - 1);
     }
   }
-
-  // onFilterChange(filters: any) {
-  //   this.filters.set(filters);
-  //   this.currentPage.set(1);
-  // }
   onFilterChange(filters: TourFilterParams) {
   this.filters.set(filters);
   this.currentPage.set(1);
@@ -125,9 +122,12 @@ ngOnInit() {
     return Math.ceil(this.Tourcount() / this.pageSize());
   }
 
-  get pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
-  }
+pages = computed(() => {
+  const count = Math.ceil(this.Tourcount() / this.pageSize());
+  return Array.from({ length: count }, (_, i) => i + 1);
+});
+
+
 
   goToPage(page: number) {
     this.currentPage.set(page);

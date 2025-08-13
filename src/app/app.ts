@@ -8,11 +8,11 @@ import { BookDetail } from './pages/book-detail/book-detail';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule,],
+  imports: [RouterOutlet, ReactiveFormsModule],
 
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected title = 'day3';
+  protected title = 'TravelBooking';
 }

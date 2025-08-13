@@ -8,6 +8,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
