@@ -1,1 +1,82 @@
-<p>tour-card works!</p>
+
+<div class="card mb-3 mx-3">
+    <div class="card-body p-0 border-0  w-100">
+        <div class="row overflow-hidden">
+            <!-- Logo Column (Left) -->
+            <!-- Logo Column (Left) -->
+            <div class=" col-lg-6 col-md-5 left-card d-flex align-items-start justify-content-center p-0 overflow-hidden ">
+             <div class="tour-images-container p-0 position-relative overflow-hidden w-100 h-100 ">
+  <img class="p-0"
+    [src]="Tours?.imageUrl"
+    [alt]="'Tour Image ' + Tours?.id"
+    class="tour-image "
+  />
+
+    <div class="d-flex align-items-center position-absolute top-0 start-0 p-4">
+                  <button class="btn btn-outline-danger me-2 d-flex justify-content-center align-items-center"
+        style="width: 40px; height: 40px;"
+        (click)="addToWishlist(Tours?.id)">
+  <i class="fas fa-heart"></i>
+</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Content Column (Right) -->
+            <div class="col-lg-7 col-md-8  right-card ">
+                <!-- Price at top right -->
+                 <h3 class="mb-0" [routerLink]="['/ToursDetails',Tours?.id]">{{ Tours?.name }}</h3>
+                 
+                <div class="d-flex p-3 py-md-2 pt-1 pb-0 text-muted  flex-wrap duration" >
+                    <div class="d-flex  ">
+                   <span> <i class="fa-solid fa-clock"></i></span>
+                  <span class="text-muted px-2 pe-1">
+                    {{ getDurationInDays(Tours?.startDate, Tours?.endDate) }} days,
+                  </span>
+                  <span class="text-muted">
+                    {{ getDurationInDays(Tours?.startDate, Tours?.endDate) +1}} nights
+                  </span>
+                  </div>
+                  <div class="d-flex mx-3">
+                    <span><i class="fa-solid fa-user"></i></span>
+                    <span>Max guests : {{Tours?.maxGuests}}</span>
+                  </div>
+                        </div>
+                    <div>
+                        <p class=" m-0 "><strong >Category:</strong> {{ Tours?.category }}</p>
+                    <div class="d-flex justify-content-between px-md-1 px-4">
+                        <h5 >${{ Tours?.price}}<small class="text-muted"></small></h5>
+                           <button [routerLink]="['/ToursDetails',Tours?.id]" class="btn  text-black btn-primary bookBtn">book now
+                    </button>
+                        <!-- Tour Summary -->
+  <!-- <p><strong>Destination:</strong> {{ Tours?.destination }}</p> -->
+  <!-- <p><strong>Max Guests:</strong> {{ Tours?.maxGuests }}</p> -->
+  <!-- <p><strong>Tour Company:</strong> {{ Tours?.tourCompanyId?.name }}</p> -->
+</div>
+
+                    </div>
+
+
+                <!-- Rating -->
+                <!-- <p class="mt-1"><strong>{{ Tours?. }}</strong></p>
+                <div class="mt-2">
+                    <div>
+                        <div class="form-check">
+                            <p class="form-check-label">
+                                {{ flight?.departureTime | date:'d MMMM yyyy - hh:mm a' }} : {{ flight?.arrivalTime |
+                                date:' hh:mm a' }}
+                                -- <small> non stop</small>
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Divider line -->
+                <!-- <hr class="my-3" style="opacity: 0.3;"> -->
+
+                <!-- Buttons -->
+
+            </div>
+        </div>
+    </div>
+</div>

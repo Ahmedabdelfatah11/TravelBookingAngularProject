@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { Header } from "./header/header";
 import { SearchBarComponent } from "./search-bar/search-bar";
 import { Footer } from "../../shared/footer/footer";
@@ -16,4 +16,5 @@ import { Body } from './body/body';
 export class Home {
   @Input() description: string = '';
   @Input() buttonText: string = '';
+ Image =signal('img/Cover.jpg');
 }

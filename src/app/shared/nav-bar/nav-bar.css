@@ -40,16 +40,27 @@
     transform: translateX(-100px);
     /* عدل حسب الحاجة */
 }
+nav
+{
+      z-index: 105000000;
+}
 .custom-dropdown {
   left: auto !important;
   right: 0 !important;
   top: 100% !important;
   transform: none !important;
   min-width: 220px;
-  z-index: 1050; /* تأكد إنها فوق أي عنصر تاني */
+ /* تأكد إنها فوق أي عنصر تاني */
 }
 
-
+.text-black
+{
+    transition: all .3s ease-in-out;
+}
+.text-black:hover
+{
+    color: var(--secondary-color) !important;
+}
 
 /* لما الشاشة تصغر جدًا (موبايل)، خليها تحت بالكامل */
 @media (max-width: 768px) {
@@ -58,4 +69,11 @@
     right: auto !important;
     transform: translateX(-50%) !important;
   }
+}
+.navbar .nav-link {
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: var(--secondary-color) !important; /* اللون اللي انت عايزه */
 }

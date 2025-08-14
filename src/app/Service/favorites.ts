@@ -8,7 +8,7 @@ import { Hotel } from '../pages/Hotel/hotel/hotel';
   providedIn: 'root'
 })
 export class Favorites {
-  private apiUrl = 'https://localhost:7277/api/favoritet';
+  private apiUrl = 'https://localhost:7277/api/favorite';
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
@@ -53,6 +53,15 @@ export class Favorites {
     // Return an observable that errors if type is invalid
     throw new Error('Invalid company type');
   }
+
+  addTourToFavorites(tourId: number): Observable<Favorite> {
+  return this.http.post<Favorite>(`${this.apiUrl}`, {
+    tourId,
+    companyType: 'tour'
+  }, {
+    headers: this.getAuthHeaders()
+  });
+}
 
   removeFromFavorites(Id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${Id}`, {
@@ -101,7 +110,7 @@ export class Favorites {
     }
     if (type === 'tour') {
       return this.http.post<boolean>(`${this.apiUrl}/check`, {
-        tourCompanyId: Id,
+        tourId: Id,
         companyType: type
       }, {
         headers: this.getAuthHeaders()

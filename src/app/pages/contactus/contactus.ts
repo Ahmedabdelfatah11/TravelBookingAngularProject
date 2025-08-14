@@ -3,14 +3,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NavBar } from "../../shared/nav-bar/nav-bar"; 
 import { ContactService } from '../../core/services/contact-service';
 import { CommonModule } from '@angular/common';
+import { Footer } from "../../shared/footer/footer";
 
 @Component({
   selector: 'app-contactus',
   standalone: true,
-  imports: [NavBar, CommonModule,ReactiveFormsModule],
+  imports: [NavBar, CommonModule,ReactiveFormsModule, Footer],
   templateUrl: './contactus.html',
   styleUrls: ['./contactus.css']
 })
+
 export class Contactus implements OnInit, OnDestroy {
   contactForm: FormGroup;
   successMessage = '';

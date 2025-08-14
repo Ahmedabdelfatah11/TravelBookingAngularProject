@@ -12,5 +12,5 @@ import { Footer } from "../../../shared/footer/footer";
   styleUrl: './flight.css'
 })
 export class Flight {
-
+  Image: string = 'img/13.jpg';
 }

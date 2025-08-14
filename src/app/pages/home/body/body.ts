@@ -5,13 +5,14 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
+import { ChatBot } from "./chat-bot/chat-bot";
 
 
 // إضافة SwiperModule إلى المكونات المستوردة    
 register();
 @Component({
   selector: 'app-body',
-  imports: [RouterLink],
+  imports: [RouterLink, ChatBot],
   templateUrl: './body.html',
   styleUrl: './body.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -53,7 +54,7 @@ export class Body implements OnInit {
     this.loadFlights();
     AOS.init({
       duration: 1000, // مدة التأثير بالمللي ثانية
-      once: true      // يشغّل الأنيميشن مرة واحدة فقط
+      once: false      // يشغّل الأنيميشن مرة واحدة فقط
     });
   }
 
