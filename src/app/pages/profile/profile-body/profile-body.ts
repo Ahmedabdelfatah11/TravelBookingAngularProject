@@ -1,15 +1,15 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { Auth } from '../../../Service/auth';
-import { Bookings } from "../bookings/bookings";
 import { Profile, ProfileParams } from '../../../Models/profile';
 import { ProfileService } from '../../../Service/profile-service';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { last } from 'rxjs';
+import { BookCart } from "../book-cart/book-cart";
 
 @Component({
   selector: 'app-profile-body',
-  imports: [Bookings,DatePipe,FormsModule],
+  imports: [DatePipe, FormsModule, BookCart],
   templateUrl: './profile-body.html',
   styleUrl: './profile-body.css'
 })

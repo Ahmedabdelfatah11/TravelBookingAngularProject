@@ -12,9 +12,9 @@
             <app-sort-options class="d-flex justify-content-end align-content-end"
                 (sortChange)="onSortChange($event)"></app-sort-options>
             </div>
-            <div class="row g-4 opacity-100">
+            <div class="row g-4 opacity-100" >
                 @for (hotel of hotels(); track hotel.id) {
-                <app-hotel-card [hotel]="hotel"></app-hotel-card>
+                <app-hotel-card [hotel]="hotel"  data-aos="fade-left" data-aos-delay="100"></app-hotel-card>
                 }
             </div>
             @if(loading()){

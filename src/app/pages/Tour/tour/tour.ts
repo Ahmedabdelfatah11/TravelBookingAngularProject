@@ -1,11 +1,28 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NavBar } from '../../../shared/nav-bar/nav-bar';
+import { TourBody } from "../tour-body/tour-body";
+import { Footer } from "../../../shared/footer/footer";
+
 
 @Component({
   selector: 'app-tour',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, NavBar, TourBody, Footer],
   templateUrl: './tour.html',
-  styleUrl: './tour.css'
+  styleUrls: ['./tour.css']
 })
-export class Tour {
+export class Tour { 
 
+   getStars(rating: number): number[] {
+    return Array(Math.floor(rating)).fill(0);
+  }
+
+  getEmptyStars(rating: number): number[] {
+    return Array(5 - Math.floor(rating)).fill(0);
+  }
+  saveForLater(hotelId: number) {
+    console.log('Hotel saved:', hotelId);
+
+  }
 }

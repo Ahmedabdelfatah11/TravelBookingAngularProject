@@ -3,6 +3,7 @@
 :root {
     --main-color: #a0d9cb;
     --secondary-color: #0eb39d;
+    --third-color:#31dac3;
 }
 
 body,
@@ -13,6 +14,8 @@ textarea {
     font-family: "Anton", sans-serif;
     font-weight: 400;
     font-style: normal;
+    margin: 0px;
+    padding: 0px;
 }
 
 .card {
@@ -35,3 +38,7 @@ textarea {
     background-color: var(--main-color);
 }
 
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}

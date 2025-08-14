@@ -42,7 +42,8 @@ export class Auth {
       tap(response => {
         if (response.isAuthenticated && response.token) {
           localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userId', response.email!);  
+          localStorage.setItem('userId', response.email!); 
+           
           localStorage.setItem('username', response.username!);
           localStorage.setItem('roles', JSON.stringify(response.roles));
         }
