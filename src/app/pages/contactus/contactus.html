@@ -1,5 +1,6 @@
 <!-- Contact Us Hero -->
 
+
 <div class="container-fluid p-0 m-0 ">
     <div class="hero text-white text-center"
         style="background-image: url('img/10.jpg'); background-size: cover; background-position: center; min-height: 400px; position: relative;">
@@ -22,38 +23,48 @@
 
 <!-- Contact Us Main -->
 <section class="contact-main container py-5">
-    <div class="row g-5">
-        <!-- Left Form -->
-        <div class="col-lg-6 text-center fade-left delay-1">
-            <div class="contact-form p-4 shadow rounded bg-white">
-                <h3 class="fw-bold mb-2">GET IN TOUCH</h3>
-                <p class="text-muted mb-4">We’re just a message away!</p>
-                <form>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="col">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" rows="4" placeholder="Tell us about your inquiry"
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary px-4">SEND MESSAGE</button>
-                </form>
-            </div>
-        </div>
+  <div class="row g-5">
+    <!-- Left Form -->
+    <div class="col-lg-6 text-center fade-left delay-1">
+      <div class="contact-form p-4 shadow rounded bg-white">
+        <h3 class="fw-bold mb-2">GET IN TOUCH</h3>
+        <p class="text-muted mb-4">We’re just a message away!</p>
 
-        <!-- Right Text -->
-        <div class="col-lg-6 d-flex flex-column justify-content-center fade-right delay-2">
-            <h3 class="fw-bold">REACH US ANYTIME</h3>
-            <p class="text-muted">
-                Have questions or need assistance? Our team is ready to help you with your travel plans.
-            </p>
-        </div>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Your Name" formControlName="name">
+            </div>
+            <div class="col">
+              <input type="email" class="form-control" placeholder="Your Email" formControlName="email">
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Subject (optional)" formControlName="subject">
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Tell us about your inquiry" formControlName="message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary px-4" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Sending...' : 'SEND MESSAGE' }}
+          </button>
+        </form>
+
+        <!-- Messages -->
+        <div class="mt-3 text-success" *ngIf="successMessage">{{ successMessage }}</div>
+        <div class="mt-3 text-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </div>
     </div>
+
+    <!-- Right Text -->
+    <div class="col-lg-6 d-flex flex-column justify-content-center fade-right delay-2">
+      <h3 class="fw-bold">REACH US ANYTIME</h3>
+      <p class="text-muted">
+        Have questions or need assistance? Our team is ready to help you with your travel plans.
+      </p>
+    </div>
+  </div>
+
 </section>
 <!-- Contact Us Footer -->
  <app-footer class="fade-up delay-3"></app-footer>
