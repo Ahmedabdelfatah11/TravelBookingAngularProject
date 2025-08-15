@@ -10,11 +10,12 @@ import { TourService } from '../../../Service/tour-service';
 import { ITourCompany } from '../../../Models/tourModel';
 
 
+
 // إضافة SwiperModule إلى المكونات المستوردة    
 register();
 @Component({
   selector: 'app-body',
-  imports: [RouterLink, ChatBot],
+  imports: [RouterLink],
   templateUrl: './body.html',
   styleUrl: './body.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
