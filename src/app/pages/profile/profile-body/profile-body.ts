@@ -5,11 +5,11 @@ import { ProfileService } from '../../../Service/profile-service';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { last } from 'rxjs';
-import { BookCart } from "../book-cart/book-cart";
+import { BookingBodyDetails } from "../../bookings/booking-body-details/booking-body-details";
 
 @Component({
   selector: 'app-profile-body',
-  imports: [DatePipe, FormsModule, BookCart],
+  imports: [DatePipe, FormsModule, BookingBodyDetails],
   templateUrl: './profile-body.html',
   styleUrl: './profile-body.css'
 })

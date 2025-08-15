@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TourBookingResponse, TourTickets } from '../Models/tourModel';
 
 export interface TourBookingPayload {
   tickets: {
@@ -13,12 +14,24 @@ export interface TourBookingPayload {
   providedIn: 'root'
 })
 export class TourBookingService {
-  private baseUrl = '/api/Tour';
+  private apiUrl = 'https://localhost:7277/api/Tour';
 
-  constructor(private http: HttpClient) {}
-
-  bookTour(serviceId: number, payload: TourBookingPayload): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${serviceId}/book`, payload);
+  constructor(private http: HttpClient) { }
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: token ? `Bearer ${token}` : ''
+    });
   }
+  bookTour(serviceId: number, payload: TourTickets) {
+    if (!serviceId) {
+      throw new Error('Service ID is required');
+    }
+    return this.http.post<TourBookingResponse>(`${this.apiUrl}/${serviceId}/book`, payload, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
 
 }

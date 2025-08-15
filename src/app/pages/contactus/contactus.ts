@@ -13,7 +13,7 @@ import { Footer } from "../../shared/footer/footer";
   styleUrls: ['./contactus.css']
 })
 
-export class Contactus implements OnInit, OnDestroy {
+export class Contactus  {
   contactForm: FormGroup;
   successMessage = '';
   errorMessage = '';
@@ -26,14 +26,6 @@ export class Contactus implements OnInit, OnDestroy {
       subject: [''],
       message: ['', [Validators.required, Validators.maxLength(2000)]]
     });
-  }
-
-  ngOnInit() {
-    document.body.classList.add('home-body');
-  }
-
-  ngOnDestroy() {
-    document.body.classList.remove('home-body');
   }
 
   onSubmit() {

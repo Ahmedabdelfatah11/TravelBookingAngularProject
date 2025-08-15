@@ -11,8 +11,19 @@ export class SortOptions {
 
   @Output() sortChange = new EventEmitter<string>();
 
-  onSortChange(event: any) {
+  onSortChange(value: string) {
     this.sort();
-    this.sortChange.emit(event.target.value);
+    this.sortChange.emit(value);
+  }
+   getSortLabel(sortValue: string): string {
+    switch (sortValue) {
+      case 'priceasc':
+        return 'priceasc';
+      case 'pricedesc':
+        return 'pricedesc';
+
+      default:
+        return '';
+    }
   }
 }

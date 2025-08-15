@@ -1,13 +1,15 @@
 <nav aria-label="breadcrumb" class="py-3 border-bottom bg-white">
-    <div class="container">
+    <div class="container mt-5">
         <ol class="breadcrumb mb-0" style="--bs-breadcrumb-divider: '>';">
             <li class="breadcrumb-item">
-                <a [routerLink]="['/home']" class="text-decoration-none text-dark">Home</a>
+                <a [routerLink]="['/home']" class="">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a [routerLink]="['/flight']" class="text-decoration-none text-dark">Flights</a>
+                <a [routerLink]="['/flight']" class="">Flights</a>
             </li>
-            <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">Details</li>
+
+            <li class="breadcrumb-item active fw-bold text-dark " style="font-weight:700" aria-current="page">Details
+            </li>
         </ol>
     </div>
 </nav>
@@ -275,9 +277,9 @@
                 <!-- Booking Actions -->
                 <div class="d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-outline-secondary" (click)="closeBookingForm()">Cancel</button>
-                   <button type="button" class="btn btn-success" (click)="confirmBooking()" [disabled]="isBooking()">
+                    <button type="button" class="btn btn-success" (click)="confirmBooking()" [disabled]="isBooking()">
 
-                    @if (isBooking()) {
+                        @if (isBooking()) {
                         <span class="spinner-border spinner-border-sm me-2"></span>
                         Booking...
                         } @else {

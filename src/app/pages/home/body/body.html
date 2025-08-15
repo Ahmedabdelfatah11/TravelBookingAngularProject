@@ -2,7 +2,7 @@
     <h1 class="mb-4 text-sm-center">Top Travel Partners</h1>
 
     <!-- Section: FLIGHT -->
-    <section class="my-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <section class="my-5 " data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
         <h1 class="text-center text-gradient m-0" id="flight" data-aos="fade-down">Flights</h1>
 
         <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
@@ -13,7 +13,7 @@
             @for (f of flightCompany(); track f.id) {
             <swiper-slide>
                 <div class="logo-card text-center">
-                    <img [src]="f.imageUrl" [alt]="f.name" height="60">
+                    <img [src]="f.imageUrl" [alt]="f.name" height="60" width="100" style="border-radius: 15px;">
                 </div>
             </swiper-slide>
             }
@@ -121,7 +121,7 @@
         @for (c of cars; track $index) {
         <swiper-slide>
             <div class="logo-card text-center">
-                <img [src]="c" [alt]="'car'" height="60">
+                <img [src]="c" [alt]="'car'" height="50" width="100">
             </div>
         </swiper-slide>
         }
@@ -133,14 +133,6 @@
             background-position: center;
             height: 450px; border-radius: 1rem;">
             <div class="card-body d-flex flex-column align-items-end p-4">
-                <!-- <img [src]="'https://i.pinimg.com/1200x/90/10/de/9010decca278f5b41a10cd80ce1f4daa.jpg'"
-                    class="rounded-circle mb-3 shadow-sm border" style="width: 70px; height: 70px; object-fit: contain;"
-                    alt="Flight Company Logo">
-
-                <p class="card-text small text-secondary">
-                  
-                </p> -->
-
                 <div
                     class="d-flex position-absolute bottom-0 justify-content-between start-0 p-4 bg-dark bg-opacity-50 w-100 text-white rounded-bottom-4 ">
                     <div>
@@ -159,15 +151,16 @@
 
 
     <!-- Section: TOURS -->
+
     <h1 class="mt-5 mb-3 text-center text-gradient" id="tour" data-aos="fade-down">Tours</h1>
-    <swiper-container slides-per-view="5" space-between="20" loop="true" autoplay-delay="2500"
+    <swiper-container slides-per-view="6" space-between="20" loop="true" autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
         breakpoints='{"320":{"slidesPerView":2},"768":{"slidesPerView":3},"992":{"slidesPerView":4},"1200":{"slidesPerView":6}}'
         class="d-block px-2">
-        @for (f of flightCompany(); track f.id) {
+        @for (t of TourCompany(); track t.id) {
         <swiper-slide>
             <div class="logo-card text-center">
-                <img [src]="f.imageUrl" [alt]="f.name" height="50">
+                <img [src]="t.imageUrl" [alt]="t.name" height="60" width="100" style="border-radius: 25px;">
             </div>
         </swiper-slide>
         }
