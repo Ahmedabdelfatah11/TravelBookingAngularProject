@@ -42,3 +42,7 @@ body.modal-open {
   overflow: auto !important;
   padding-right: 0 !important;
 }
+.app-container {
+  position: relative;
+  min-height: 100vh;
+}
