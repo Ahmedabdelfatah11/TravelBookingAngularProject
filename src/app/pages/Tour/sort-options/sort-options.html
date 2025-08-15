@@ -1,26 +1,35 @@
-<div class="mb-4">
-    <label class="form-label d-flex align-items-center">
-        <i class="fas fa-sort-amount-down-alt me-2 text-primary"></i>
-        <!-- <span>Sort Results</span> -->
-    </label>
+<div class="sorting-control mb-4">
 
-    <div class="position-relative">
-        <select class="form-select ps-4" [value]="sort()" (change)="onSortChange($event)" aria-label="Sort results">
-            <option value="" disabled selected>Select sorting option</option>
-            <option value="priceAsc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-up "></i>
-                    Price: Low to High
-                </span>
-            </option>
-            <option value="priceDesc">
-                <span class="d-flex align-items-center">
-                    <i class="fas fa-arrow-down"></i>
-                    Price: High to Low
-                </span>
-            </option>
-        </select>
 
-        <!-- <i class="fas fa-chevron-down position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i> -->
+    <div class="dropdown">
+        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-sort me-2"></i>
+            <span class="current-selection">{{ getSortLabel(sort()) || 'Select option' }}</span>
+            <i class="fas fa-chevron-down ms-auto transition-all"></i>
+        </button>
+
+        <ul class="dropdown-menu shadow-lg">
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('priceasc')">
+                    <i class="fas fa-arrow-up-a-z me-2 text-success"></i>
+                    <span>Price (Low → High)</span>
+                    @if(sort() === 'priceasc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" (click)="onSortChange('pricedesc')">
+                    <i class="fas fa-arrow-down-z-a me-2 text-success"></i>
+                    <span>Price (High → Low)</span>
+                    @if(sort() === 'pricedesc'){
+                    <i class="fas fa-check ms-auto"></i>
+                    }
+
+                </a>
+            </li>
+           
+        </ul>
     </div>
 </div>

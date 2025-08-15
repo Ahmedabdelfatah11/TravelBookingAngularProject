@@ -16,7 +16,7 @@ export class Filters {
   sort = signal('');
 
   @Output() filterChange = new EventEmitter<any>();
-  
+
   applyFilters() {
     const filters = {
       DepartureAirport: this.departureAirport(),
@@ -30,5 +30,16 @@ export class Filters {
   updateSignal(signalVar: WritableSignal<string>, event: Event) {
     const input = event.target as HTMLInputElement;
     signalVar.set(input.value);
+  }
+  resetFilters() {
+    // Reset signals to default values
+    this.departureAirport.set('');
+    this.arrivalAirport.set('');
+    this.departureTime.set('');
+    this.sort.set('');
+    this.arrivalTime.set(''); // Reset price range to default bounds
+
+    // Emit empty filter object to parent
+    this.filterChange.emit({});
   }
 }

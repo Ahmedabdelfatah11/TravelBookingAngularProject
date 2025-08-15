@@ -6,6 +6,7 @@ export interface Favorite {
     flightCompanyId?: number
     carRentalCompanyId?: number
     tourCompanyId?: number
+    tourId?: number
     createdAt: Date
     companyName: string
     companyDescription: string
