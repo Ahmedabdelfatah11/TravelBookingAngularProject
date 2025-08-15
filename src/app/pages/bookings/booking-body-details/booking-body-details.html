@@ -1,0 +1,349 @@
+ @if (loading()) {
+      <div class="text-center py-5 my-5">
+        <div class="spinner-grow text-secondary" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <h5 class="mt-4 text-muted">Loading your bookings...</h5>
+      </div>
+      }
+
+      <!-- حالة الخطأ -->
+      @else if (error()) {
+      <div class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm mb-4">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+          <div>
+            <h5 class="alert-heading mb-1">Error loading bookings</h5>
+            <p class="mb-0">{{ error() }}</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      }
+
+      <!-- حالة عدم وجود حجوزات -->
+      @else if (Bookings().length === 0) {
+      <div class="text-center py-5 my-5">
+        <div class="empty-icon mb-4">
+          <i class="fas fa-calendar-times text-muted" style="font-size: 5rem; opacity: 0.5;"></i>
+        </div>
+        <h4 class="text-muted mb-3">No bookings found</h4>
+        <p class="text-muted mb-4">You haven't made any reservations yet.</p>
+        <a routerLink="/hotel" class="btn btn-primary px-4 rounded-pill">
+          <i class="fas fa-search me-2"></i>
+          Explore Hotels
+        </a>
+      </div>
+      }
+
+      <!-- قائمة الحجوزات -->
+      @else {
+      <div class="booking-list" data-aos="fade-left" data-aos-delay="100">
+        @for(booking of Bookings(); track booking.id) {
+
+        <!-- بطاقة حجز الفندق -->
+        @if(booking.bookingType === 'Room') {
+        <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden" data-aos="flip-down" data-aos-delay="100">
+          <div class="row g-0">
+            <!-- صورة الفندق -->
+            <div class="col-md-4 position-relative">
+              <img [src]="booking.agencyDetails.roomImages[0]?.imageUrl || 'assets/images/default-hotel.jpg'"
+                class="img-fluid h-100 w-100 object-fit-cover" alt="{{booking.agencyDetails.hotelCompanyName}}">
+              <div class="position-absolute top-0 start-0 p-3 bg-dark bg-opacity-50 text-white">
+                <i class="fas fa-hotel me-2"></i> Hotel
+              </div>
+            </div>
+
+            <!-- تفاصيل الحجز -->
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <h4 class="card-title mb-2">{{booking.agencyDetails.hotelCompanyName}}</h4>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-calendar-day me-1"></i>
+                        {{booking.startDate | date:'mediumDate'}} - {{booking.endDate | date:'mediumDate'}}
+                      </span>
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-moon me-1"></i>
+                        {{ calculateNights(booking.startDate, booking.endDate) }} nights
+                      </span>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <div class="text-muted small">Total Price</div>
+                    <h3 class="text-danger">{{booking.totalPrice | currency}}</h3>
+                  </div>
+                </div>
+
+                <!-- معلومات الدفع والحالة -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-receipt me-2"></i> Booking ID: {{booking.id}}</p>
+                    <p class="mb-1"><i class="fas fa-credit-card me-2"></i> Payment:
+                      <span
+                        [ngClass]="{'text-success': booking.paymentStatus === 'Paid', 'text-danger': booking.paymentStatus !== 'Paid'}">
+                        {{booking.paymentStatus}}
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-id-card me-2"></i> Payment ID: {{booking.paymentIntentId |
+                      maskStringPipe}}</p>
+
+                  </div>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                  @if (booking.paymentStatus !== 'Paid') {
+                  <button class="btn btn-primary px-4" [routerLink]="['/payment', booking.id]">
+                    <i class="fas fa-credit-card me-2"></i> Complete Payment
+                  </button>
+                  <button class="btn btn-outline-danger px-4" (click)="deleteBooking(booking.id)">
+                    <i class="fas fa-trash-alt me-2"></i> Cancel Booking
+                  </button>
+                  }
+
+                  <button class="btn-outline-secondary px-4"
+                    [routerLink]="['/hotel-details', booking.agencyDetails.hotelCompanyId]">
+                    <i class="fas fa-eye me-2"></i> View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- بطاقة حجز الطيران -->
+        @if(booking.bookingType === 'Flight') {
+        <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden" data-aos="flip-down" data-aos-delay="100">
+          <div class="row g-0">
+            <!-- شعار الشركة -->
+            <div class="col-md-2 bg-light d-flex align-items-center justify-content-center p-4">
+              <img [src]="booking.agencyDetails.imageUrl || 'assets/images/default-airline.png'" class="img-fluid"
+                alt="{{booking.agencyDetails.airlineName}}" style="max-height: 80px;">
+            </div>
+
+            <!-- تفاصيل الحجز -->
+            <div class="col-md-10">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <h4 class="card-title mb-2">{{booking.agencyDetails.airlineName}}</h4>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-plane-departure me-1"></i>
+                        {{booking.startDate | date:'mediumDate'}}
+                      </span>
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-plane-arrival me-1"></i>
+                        {{booking.endDate | date:'mediumDate'}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <div class="text-muted small">Total Price</div>
+                    <h3 class="text-danger">{{booking.totalPrice | currency}}</h3>
+                  </div>
+                </div>
+
+                <!-- معلومات إضافية -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-receipt me-2"></i> Booking ID: {{booking.id}}</p>
+                    <p class="mb-1"><i class="fas fa-credit-card me-2"></i> Payment:
+                      <span
+                        [ngClass]="{'text-success': booking.paymentStatus === 'Paid', 'text-danger': booking.paymentStatus !== 'Paid'}">
+                        {{booking.paymentStatus}}
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-id-card me-2"></i> Payment ID: {{booking.paymentIntentId |
+                      maskStringPipe}}</p>
+                  </div>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                  @if (booking.paymentStatus !== 'Paid') {
+                  <button class="btn btn-primary px-4" [routerLink]="['/payment', booking.id]">
+                    <i class="fas fa-credit-card me-2"></i> Complete Payment
+                  </button>
+                  <button class="btn btn-outline-danger px-4" (click)="deleteBooking(booking.id)">
+                    <i class="fas fa-trash-alt me-2"></i> Cancel Booking
+                  </button>
+                  }
+
+                  <button class="btn-outline-secondary px-4"
+                    [routerLink]="['/FlightDetails', booking.agencyDetails.flightId]">
+                    <i class="fas fa-eye me-2"></i> View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+        @if(booking.bookingType === 'Car') {
+        <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden" data-aos="flip-down" data-aos-delay="100">
+          <div class="row g-0">
+            <!-- صورة الفندق -->
+            <div class="col-md-4 position-relative">
+              <img [src]="booking.agencyDetails.imageUrl || 'img/hotel.jpg'"
+                class="img-fluid h-100 w-100 object-fit-cover" alt="{{booking.agencyDetails.Name}}">
+              <div class="position-absolute top-0 start-0 p-3 bg-dark bg-opacity-50 text-white">
+                <i class="fas fa-hotel me-2"></i> Car
+              </div>
+            </div>
+
+            <!-- تفاصيل الحجز -->
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <h4 class="card-title mb-2">{{booking.agencyDetails.Name}}</h4>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-calendar-day me-1"></i>
+                        {{booking.startDate | date:'mediumDate'}} - {{booking.endDate | date:'mediumDate'}}
+                      </span>
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-moon me-1"></i>
+                        {{ calculateNights(booking.startDate, booking.endDate) }} Days
+                      </span>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <div class="text-muted small">Total Price</div>
+                    <h3 class="text-danger">{{booking.totalPrice | currency}}</h3>
+                  </div>
+                </div>
+
+                <!-- معلومات الدفع والحالة -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-receipt me-2"></i> Booking ID: {{booking.id}}</p>
+                    <p class="mb-1"><i class="fas fa-credit-card me-2"></i> Payment:
+                      <span
+                        [ngClass]="{'text-success': booking.paymentStatus === 'Paid', 'text-danger': booking.paymentStatus !== 'Paid'}">
+                        {{booking.paymentStatus}}
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-id-card me-2"></i> Payment ID: {{booking.paymentIntentId |
+                      maskStringPipe}}</p>
+
+                  </div>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                  @if (booking.paymentStatus !== 'Paid') {
+                  <button class="btn btn-primary px-4" [routerLink]="['/payment', booking.id]">
+                    <i class="fas fa-credit-card me-2"></i> Complete Payment
+                  </button>
+                  <button class="btn btn-outline-danger px-4" (click)="deleteBooking(booking.id)">
+                    <i class="fas fa-trash-alt me-2"></i> Cancel Booking
+                  </button>
+                  }
+
+                  <button class="btn-outline-secondary px-4"
+                    [routerLink]="['/hotel-details', booking.agencyDetails.hotelCompanyId]">
+                    <i class="fas fa-eye me-2"></i> View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+        @if(booking.bookingType === 'Tour') {
+        <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden" data-aos="flip-down" data-aos-delay="100">
+          <div class="row g-0">
+            <!-- صورة الفندق -->
+            <div class="col-md-4 position-relative">
+              <img [src]="booking.agencyDetails.imageUrl || 'img/Tour.jpg'"
+                class="img-fluid h-100 w-100 object-fit-cover" alt="{{booking.agencyDetails.name}}">
+              <div class="position-absolute top-0 start-0 p-3 bg-dark bg-opacity-50 text-white">
+                <i class="fas fa-hotel me-2"></i> Tour
+              </div>
+            </div>
+
+            <!-- تفاصيل الحجز -->
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <h4 class="card-title mb-2">{{booking.agencyDetails.name}}</h4>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-calendar-day me-1"></i>
+                        {{booking.startDate | date:'mediumDate'}} - {{booking.endDate | date:'mediumDate'}}
+                      </span>
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-moon me-1"></i>
+                        {{ calculateNights(booking.startDate, booking.endDate) }} Days
+                      </span>
+                      <span class="badge bg-light text-dark">
+                        <i class="fas fa-ticket-alt me-1"></i>
+                        {{ booking.agencyDetails.tickets.length }}
+                      </span>
+                    </div>
+                  </div>
+
+
+
+                  <div class="text-end">
+                    <div class="text-muted small">Total Price</div>
+                    <h3 class="text-danger">{{booking.totalPrice | currency}}</h3>
+                  </div>
+                </div>
+
+                <!-- معلومات الدفع والحالة -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-receipt me-2"></i> Booking ID: {{booking.id}}</p>
+                    <p class="mb-1"><i class="fas fa-credit-card me-2"></i> Payment:
+                      <span
+                        [ngClass]="{'text-success': booking.paymentStatus === 'Paid', 'text-danger': booking.paymentStatus !== 'Paid'}">
+                        {{booking.paymentStatus}}
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-id-card me-2"></i> Payment ID: {{booking.paymentIntentId |
+                      maskStringPipe}}</p>
+
+                  </div>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                  @if (booking.paymentStatus !== 'Paid') {
+                  <button class="btn btn-primary px-4" [routerLink]="['/payment', booking.id]">
+                    <i class="fas fa-credit-card me-2"></i> Complete Payment
+                  </button>
+                  <button class="btn btn-outline-danger px-4" (click)="deleteBooking(booking.id)">
+                    <i class="fas fa-trash-alt me-2"></i> Cancel Booking
+                  </button>
+                  }
+
+                  <button class="btn-outline-secondary px-4"
+                    [routerLink]="['/hotel-details', booking.agencyDetails.hotelCompanyId]">
+                    <i class="fas fa-eye me-2"></i> View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+
+        }
+      </div>
+      }

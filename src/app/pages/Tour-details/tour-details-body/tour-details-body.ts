@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject, signal } from '@angular/core';
-import { ITourCompany, Tours } from '../../../Models/tourModel';
+import { ITourCompany, Tours, TourTickets } from '../../../Models/tourModel';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ShareButtons } from 'ngx-sharebuttons/buttons';
 import { TourCompanyService } from '../../../Service/tour-company-service';
@@ -45,12 +45,13 @@ private toastr = inject(ToastrService);
 
   tourCompanyId: number = 0;
 
-  hotelService = inject(TourBookingService);
   reviewService = inject(ReviewService);
   authService = inject(Auth);
   router = inject(Router);
 
-
+  bookingService = inject(TourBookingService);
+  
+  
 
 
   // tourCompany = signal<ITourCompany | null>(null);
@@ -318,4 +319,24 @@ private checkUserReview(): void {
     }
   });
 }
+
+// confirmBooking(tickets: { type: string, quantity: number }[]): void  {
+//   if (!tickets.length) {
+//     this.toastr.error('Please select at least one ticket');
+//     return; // No tickets selected
+//   } 
+
+//   this.bookingService.bookTour(this.tourId, tickets).subscribe({
+//     next: (response) => {
+//       console.log('Booking successful:', response);
+//       this.loading = false;
+//       document.getElementById('openModalBtn')?.click();
+//       this.router.navigate(['/payment', response.BookingId]);
+//     },
+//     error: (err) => {
+//       this.loading = false;
+//       console.error('Booking failed:', err);
+//     }
+//   });
+// }
 }

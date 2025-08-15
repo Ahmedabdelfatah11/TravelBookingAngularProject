@@ -1,0 +1,14 @@
+.display-1 {   
+    font-weight: 500;
+}
+.text-container {
+  overflow: hidden;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw !important;
+  height: 100vh !important;
+  font-size: 50px;
+  font-weight: 700;
+}
