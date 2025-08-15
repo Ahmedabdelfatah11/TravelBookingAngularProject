@@ -1,26 +1,29 @@
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, signal } from '@angular/core';
 import { Car } from '../../../Models/car';
 import { CarService } from '../../../Service/carService';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Header } from "../../../shared/header/header";
+import { SortOptions } from "../sort-options/sort-options";
 
 @Component({
   selector: 'app-car-body',
-  imports: [FormsModule,CommonModule,RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, Header, SortOptions],
   templateUrl: './car-body.html',
   styleUrl: './car-body.css'
 })
 export class CarBody {
-cars: Car[] = [];
+
+  cars: Car[] = [];
   currentPage = 1;
   totalPages = 1;
   pageSize = 10;
   isLoading = false;
   errorMessage = '';
   searchModel = '';
-  location = ''; 
-  sort ='';
+  location = '';
+  Sort = signal<string>('');
   minPrice = 0;
   maxPrice = 10000000;
 
@@ -29,7 +32,7 @@ cars: Car[] = [];
     private router: Router,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCars();
@@ -38,7 +41,7 @@ cars: Car[] = [];
   loadCars(pageIndex: number = 1): void {
     this.isLoading = true;
     this.errorMessage = '';
-    this.cars= [];
+    this.cars = [];
     this.currentPage = pageIndex;
     this.cdr.detectChanges();
 
@@ -47,7 +50,7 @@ cars: Car[] = [];
       this.minPrice,
       this.maxPrice,
       this.location,
-      this.sort,
+      this.Sort(),
       this.currentPage,
       this.pageSize,
     ).subscribe({
@@ -88,8 +91,8 @@ cars: Car[] = [];
 
   resetFilters(): void {
     this.searchModel = '';
-    this.location = '';  
-    this.sort = ''; 
+    this.location = '';
+    this.Sort.set('');
     this.minPrice = 0;
     this.maxPrice = 10000000;
     this.currentPage = 1;
@@ -117,5 +120,13 @@ cars: Car[] = [];
         console.log('Navigation successful!');
       }
     });
+  }
+  onSortChange(sort: string) {
+    this.Sort.set(sort);
+    this.currentPage = 1;
+    this.ngZone.run(() => {
+      this.cdr.detectChanges();
+    });
+    this.loadCars();
   }
 }

@@ -12,17 +12,17 @@ export interface Tours {
   price: number;
   imageUrl: string;
   category: string;
-  languages: string;  
-  tourCompanyId: number;        
-  tourCompanyName: string;              
-  tourCompany: ITourCompany; 
+  languages: string;
+  tourCompanyId: number;
+  tourCompanyName: string;
+  tourCompany: ITourCompany;
   imageUrls: string[];
   tourImages: TourImages[];
   tourTickets: TourTicket[];
-    tickets: TourTicket[];
-  includedItems: string[];         
-  excludedItems: string[];         
-  questions: TourQuestion[];       
+  tickets: TourTicket[];
+  includedItems: string[];
+  excludedItems: string[];
+  questions: TourQuestion[];
 }
 export interface TourTicket {
   id: number;
@@ -31,8 +31,8 @@ export interface TourTicket {
   availableQuantity: number;
   isActive: boolean;
   tourId: number;
-    selectedQuantity: number; 
-    quantity: number;
+  selectedQuantity: number;
+  quantity: number;
 }
 export interface TourQuestion {
   id: number;
@@ -42,7 +42,7 @@ export interface TourQuestion {
 }
 
 export interface ITourCompany {
-  id:number;
+  id: number;
   name: string;
   description: string;
   imageUrl: string;
@@ -66,29 +66,29 @@ export interface ITourCompany {
 
 
 export interface TourImages {
-  id:number
-  imageUrl:string
-  tourId:number
+  id: number
+  imageUrl: string
+  tourId: number
 }
 export interface TourFilterParams {
-   tourId?: number;
-    SearchTerm?: string;
-    Sort?: string;          // "priceAsc", "priceDesc", etc.
-    PageIndex?: number;
-    PageSize?: number;
-    Destination?: string;
-     Category?: string[]; // ISO Date String
-    Price?: number;   // ISO Date String
-     minPrice?: number;
+  tourId?: number;
+  SearchTerm?: string;
+  Sort?: string;          // "priceAsc", "priceDesc", etc.
+  PageIndex?: number;
+  PageSize?: number;
+  Destination?: string;
+  Category?: string[]; // ISO Date String
+  Price?: number;   // ISO Date String
+  minPrice?: number;
   maxPrice?: number;
 
 }
 
 export interface TourResponse {
-    pageIndex: number;
-    pageSize: number;
-    count: number;
-    data: Tours[];
+  pageIndex: number;
+  pageSize: number;
+  count: number;
+  data: Tours[];
 }
 export interface PriceBounds {
   min: number;
@@ -102,3 +102,22 @@ interface TourDetails {
   getDurationInDays: (start?: string | Date, end?: string | Date) => number;
 }
 
+export interface TourTickets {
+  Tickets: Ticket[];
+}
+export interface Ticket {
+  type: string;
+  quantity: number;
+}
+export interface TourBookingResponse {
+  bookingId: number;
+  category: string;
+  status: string;
+  tourName: string;
+  tourId: number;
+  startDate: Date; // or Date if parsed
+  endDate: Date; // or Date if parsed
+  destination: number;
+  totalPrice: number;
+  tickets: Ticket[];
+}

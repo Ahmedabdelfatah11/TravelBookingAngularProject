@@ -18,7 +18,6 @@ import { Aboutus } from './pages/aboutus/aboutus';
 import { Contactus } from './pages/contactus/contactus';
 
 
-
 import { CarBody } from './pages/Car/car-body/car-body';
 import { CarDetails } from './pages/car-details/car-details';
 import { BookDetail } from './pages/book-detail/book-detail';

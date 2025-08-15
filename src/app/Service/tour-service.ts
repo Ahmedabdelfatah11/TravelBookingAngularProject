@@ -34,8 +34,8 @@ private buildQueryParams(filter: TourFilterParams): HttpParams {
   return params;
 }
 
-  getTourCompany(): Observable<ITourCompany[]> {
-    return this.http.get<ITourCompany[]>(this.tourCompanyUrl);
+  getTourCompany(): Observable<any> {
+    return this.http.get<any>(this.tourCompanyUrl);
   }
 
  getFilteredTours(params: TourFilterParams): Observable<TourResponse> {

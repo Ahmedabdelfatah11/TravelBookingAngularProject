@@ -13,6 +13,7 @@ import { Footer } from "../../../shared/footer/footer";
   styleUrl: './tour-details.css'
 })
 export class TourDetails implements OnInit {
+  
   tourData?: Tours;
 
   private route = inject(ActivatedRoute);
@@ -20,6 +21,11 @@ export class TourDetails implements OnInit {
   ngOnInit() {
     const data: Data = this.route.snapshot.data;
     this.tourData = data['tour'];
+    document.body.classList.add('home-body');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('home-body');
   }
 
   getDurationInDays(start?: string | Date, end?: string | Date): number {

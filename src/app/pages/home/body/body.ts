@@ -5,6 +5,10 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
+import { ChatBot } from "./chat-bot/chat-bot";
+import { TourService } from '../../../Service/tour-service';
+import { ITourCompany } from '../../../Models/tourModel';
+
 
 
 // إضافة SwiperModule إلى المكونات المستوردة    
@@ -42,15 +46,17 @@ export class Body implements OnInit {
     { title: 'Hotels', description: 'Book hotels in minutes', image: 'img/Hotels.jpg', sub: "Explore hotels", subimg: "img/Hotel.jpg", link: '/hotel' },
     { title: 'Flights', description: 'Find affordable flights', image: 'img/Flights.jpg', sub: "Explore Flights", subimg: "img/Flight.jpg", link: '/flight' },
     { title: 'Tours', description: 'Explore new cities', image: 'img/Tours.jpg', sub: "Explore Tours", subimg: "img/Tour.jpg", link: '/tour' },
-    { title: 'Cars', description: 'Explore new places easier ', image: 'img/Cars.jpg', sub: "Book Cars", subimg: "img/Car.jpg", link: '/car' },
+    { title: 'Cars', description: 'Explore new places easier ', image: 'img/Cars.jpg', sub: "Book Cars", subimg: "img/Car.jpg", link: '/cars' },
   ];
   flightCompany = signal<FlightCompany[]>([]);
+  TourCompany =signal<ITourCompany[]>([]);
   loading = signal(false);
   flightService = inject(FlightService);
-
+  tourService = inject(TourService);
   // تفعيل تحميل البيانات عند تغيير الفلاتر أو الصفحة
   ngOnInit(): void {
     this.loadFlights();
+    this.loadTours();
     AOS.init({
       duration: 1000, // مدة التأثير بالمللي ثانية
       once: false      // يشغّل الأنيميشن مرة واحدة فقط
@@ -59,9 +65,6 @@ export class Body implements OnInit {
 
   loadFlights() {
     this.loading.set(true);
-
-
-
     this.flightService.getFlightCompany().subscribe({
       next: (data) => {
         this.flightCompany.set(data);
@@ -74,6 +77,21 @@ export class Body implements OnInit {
       }
     });
   }
+  loadTours(){
+    this.loading.set(true);
+    this.tourService.getTourCompany().subscribe({
+      next:(data) => {
+        this.TourCompany.set(data.data);
+        console.log(data)
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error('Error fetching Tours:', err);
+        this.loading.set(false);
+      }
+    })
+
+  };
   trackById(index: number, item: any) {
     return item.id;
   }

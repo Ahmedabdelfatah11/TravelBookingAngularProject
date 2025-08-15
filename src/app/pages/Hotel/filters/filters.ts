@@ -7,11 +7,11 @@ import { Component, EventEmitter, Output, signal, WritableSignal } from '@angula
   styleUrl: './filters.css'
 })
 export class Filters {
-  search=signal('');
+  search = signal('');
   sort = signal('');
 
   @Output() filterChange = new EventEmitter<any>();
-  
+
   applyFilters() {
     const filters = {
       Search: this.search(),
@@ -22,5 +22,13 @@ export class Filters {
   updateSignal(signalVar: WritableSignal<string>, event: Event) {
     const input = event.target as HTMLInputElement;
     signalVar.set(input.value);
+  }
+  resetFilters() {
+    // Reset signals to default values
+    this.search.set('');
+    this.sort.set('');
+
+    // Emit empty filter object to parent
+    this.filterChange.emit({});
   }
 }

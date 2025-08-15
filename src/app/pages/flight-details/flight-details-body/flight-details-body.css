@@ -152,3 +152,24 @@
   color: white;
   border-color: transparent;
 }
+nav
+{
+    margin-top: 10px !important;
+    font-size: 20px;
+}
+nav .active
+{
+    color: var(--secondary-color);
+     font-weight: 600;
+}
+nav a
+{
+    cursor: pointer;
+    text-decoration: none !important;
+    color: gray;
+    transition: all .5s ease-in-out;
+}
+nav a:hover
+{
+    color: var(--secondary-color);
+}

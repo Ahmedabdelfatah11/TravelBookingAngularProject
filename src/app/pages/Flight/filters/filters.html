@@ -23,15 +23,17 @@
         <hr class="my-3" style="opacity: 0.3;">
         <div class="mb-3">
             <label>Arrival Time</label>
-            <input type="date" class="form-control" [value]="arrivalTime()"
-                (input)="updateSignal(arrivalTime, $event)">
+            <input type="date" class="form-control" [value]="arrivalTime()" (input)="updateSignal(arrivalTime, $event)">
         </div>
 
 
         <hr class="my-3" style="opacity: 0.3;">
-         <button class="btn w-100 mt-3 py-2 rounded-pill shadow-sm" (click)="applyFilters()">
+        <button class="btn w-100 mt-3 py-2 rounded-pill shadow-sm" (click)="applyFilters()">
             <i class="fas fa-check-circle me-2"></i>
             Apply Filters
+        </button>
+        <button class="btn btn-outline-secondary mt-3 w-100" (click)="resetFilters()">
+            Reset Filters
         </button>
     </div>
 </div>

@@ -14,11 +14,12 @@ import { CarService } from '../../Service/carService';
 import { ReviewService } from '../../Service/review-service';
 import { Auth } from '../../Service/auth';
 import { CreateReview, ReviewStats } from '../../Models/reviews';
+import { NavBar } from "../../shared/nav-bar/nav-bar";
 
 @Component({
   selector: 'app-car-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, NavBar],
   templateUrl: './car-details.html',
   styleUrls: ['./car-details.css']
 })
@@ -62,6 +63,10 @@ export class CarDetails implements OnInit {
         this.router.navigate(['/cars']);
       }
     });
+    document.body.classList.add('home-body');
+  }
+  ngOnDestroy() {
+    document.body.classList.remove('home-body');
   }
 
   loadCarDetails(id: number): void {

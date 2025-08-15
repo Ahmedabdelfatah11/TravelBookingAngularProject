@@ -37,7 +37,7 @@ export class CarService {
     minPrice: number = 0,
     maxPrice: number = 10000000,
     location: string = '',
-    sort: string = '',  
+    Sort: string = '',  
     pageIndex: number = 1,
     pageSize: number = 10
   ): Observable<{ data: Car[]; count: number }> {
@@ -60,8 +60,8 @@ export class CarService {
     if (location) {
       params = params.set('Location', location);
     }
-    if (sort) {
-      params = params.set('Sort', sort);
+    if (Sort) {
+      params = params.set('Sort', Sort);
     }
 
     return this.http.get<{ data: Car[]; count: number }>(this.apiUrl, { params }).pipe(
