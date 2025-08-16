@@ -3,6 +3,7 @@ import { Favorite } from '../../../Models/favorite';
 import { Favorites } from '../../../Service/favorites';
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hotel-favorites',
@@ -18,7 +19,7 @@ export class HotelFavorites {
   ngOnInit(): void {
     this.loadFavorites();
   }
-
+  constructor(private Toastr: ToastrService){}
   loadFavorites(): void {
     this.favouriteService.getFavoritebytype('hotel').subscribe({
       next: (data) => {
@@ -26,7 +27,7 @@ export class HotelFavorites {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.error.set('فشل تحميل المفضلة. يرجى المحاولة لاحقًا.');
+        this.error.set('Failed To Load Favorites. Please Try again later !');
         this.isLoading.set(false);
         console.error('Error loading favorites:', err);
       }
@@ -37,11 +38,11 @@ export class HotelFavorites {
       next: () => {
         // حذف العنصر من القائمة فورًا
         this.hotel.update(favs => favs.filter(f => f.id !== favId));
-        alert('تم الحذف من المفضلة!');
+        this.Toastr.warning('Item has been removed from favorites!');
       },
       error: (err) => {
         console.error('Error removing from favorites:', err);
-        alert('فشل الحذف. يرجى المحاولة مرة أخرى.');
+        this.Toastr.error('Failed to remove Item! Please Try again later ');
       }
     });
   }

@@ -140,20 +140,15 @@ export class ChatbotComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Send message to service
     this.chatbotService.sendMessage(messageToSend, messageType)
-      .subscribe({
-        next: (response) => {
-          console.log('Message sent successfully', response);
-          // If SignalR is not working, add response directly
-          if (!this.isTyping) {
-            this.addBotMessage(response);
-          }
-        },
-        error: (error) => {
-          console.error('Error sending message:', error);
-          this.isTyping = false;
-          this.addErrorMessage();
-        }
-      });
+  .subscribe({
+    next: () => console.log('Message sent successfully'),
+    error: (error) => {
+      console.error('Error sending message:', error);
+      this.isTyping = false;
+      this.addErrorMessage();
+    }
+  });
+
   }
 
   onSuggestionClick(suggestion: SuggestionButton): void {

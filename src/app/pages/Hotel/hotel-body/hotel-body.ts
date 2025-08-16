@@ -26,7 +26,7 @@ export class HotelBody {
   private router = inject(Router);
 
   constructor() {
-    // تهيئة الفلاتر الافتراضية
+    
     this.filters.set({
       Search: '',
       Sort: '',
@@ -37,21 +37,20 @@ if (state?.searchData) {
       this.searchData.set(state.searchData);
       console.log('Received search data:', state.searchData);
 
-      // تحويل البيانات إلى الفلاتر المطلوبة
+      
       this.filters.set({
         Search: this.searchData().NameOrLocation,
       });
       console.log('Filters set from search data:', this.filters());
-      // تحميل الرحلات بناء على بيانات البحث
+    
       this.loadHotels();
     }
     AOS.init({
-      duration: 1000, // مدة التأثير بالمللي ثانية
-      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+      duration: 1000, 
+      once: true     
     });
   }
   ngOnInit() {
-    // استقبال بيانات البحث من حالة الراوتر
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { searchData: any };
 
@@ -59,17 +58,14 @@ if (state?.searchData) {
       this.searchData.set(state.searchData);
       console.log('Received search data:', state.searchData);
 
-      // تحويل البيانات إلى الفلاتر المطلوبة
       this.filters.set({
         Search: this.searchData().NameOrLocation,
       });
       console.log('Filters set from search data:', this.filters());
-      // تحميل الرحلات بناء على بيانات البحث
       this.loadHotels();
     }
   }
   loadEffect = effect(() => {
-  // نربط الـ effect بالإشارات (signals) علشان يعيد التحميل عند التغيير
   const page = this.currentPage();
   const size = this.pageSize();
   const filters = this.filters();
@@ -99,7 +95,6 @@ if (state?.searchData) {
       }
     });
     console.log('Loading hotels with filters:', this.filters());
-    // محاكاة تحميل البيانات
   }
   nextPage() {
     if (this.currentPage() * this.pageSize() < this.hotelCount()) {

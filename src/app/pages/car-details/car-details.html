@@ -78,296 +78,260 @@
             </div>
         </div>
 
+
         <!--  Booking Form -->
-        <!-- <div class="col-12 col-lg-6 fade-in-right">
-            <div class="card booking-card h-100">
+        <div class="col-12 col-lg-6 fade-in-right">
+            <div class="card booking-card h-100 egyptian-booking-card">
                 <div class="booking-header">
-                    <h4 class="booking-title">
-                        <i class="fas fa-calendar-plus me-2"></i> Book This Car
+                    <div class="anubis-icon">𓃭</div>
+                    <h4 class="booking-title text-black">
+                        <i class="fas fa-calendar-plus me-2"></i> Car Reservation
                     </h4>
+                    <div class="papyrus-border"></div>
                 </div>
                 <div class="card-body p-4">
-                    <form #bookingForm="ngForm" (ngSubmit)="BookCar()">
-                        <div class="date-input-wrapper">
-                            <label for="startDate" class="form-label">
-                                <i class="fas fa-play me-2"></i>Start Date
-                            </label>
-                            <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate"
-                                class="form-control" required />
+                    <ng-container *ngIf="car?.isAvailable; else unavailableMsg">
+                        <form #bookingForm="ngForm" (ngSubmit)="BookCar()">
+                            <!-- Start Date -->
+                            <div class="date-input-wrapper mb-4">
+                                <div class="input-decoration start"></div>
+                                <label for="startDate" class="form-label egyptian-label">
+                                    <i class="fas fa-play me-2"></i>Start Your Journey
+                                </label>
+                                <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate"
+                                    [min]="todayString" class="form-control egyptian-input" required />
+                            </div>
+
+                            <!-- End Date -->
+                            <div class="date-input-wrapper mb-4">
+                                <div class="input-decoration end"></div>
+                                <label for="endDate" class="form-label egyptian-label">
+                                    <i class="fas fa-stop me-2"></i>Return Date
+                                </label>
+                                <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate"
+                                    [min]="startDate || todayString" class="form-control egyptian-input" required />
+                            </div>
+
+                            <!-- Book Button -->
+                            <button type="submit" class="btn book-btn pharaoh-btn w-100 mt-5">
+                                <span class="button-content">
+                                    <i class="fas fa-credit-card me-2"></i> Confirm Booking
+                                    <span class="seal">𓋹</span>
+                                </span>
+                                <div class="gold-overlay"></div>
+                            </button>
+                        </form>
+                    </ng-container>
+
+                    <!-- Template for unavailable -->
+                    <ng-template #unavailableMsg>
+                        <div class="unavailable-message text-center py-5">
+                            <i class="fas fa-exclamation-circle mb-3"
+                                style="font-size: 2.5rem; color: var(--danger-red);"></i>
+                            <h5 class="fw-bold text-danger">Not Available for Booking</h5>
+                            <p class="text-muted">This car is currently unavailable. Please check back later.</p>
                         </div>
+                    </ng-template>
 
-                        <div class="date-input-wrapper">
-                            <label for="endDate" class="form-label">
-                                <i class="fas fa-stop me-2"></i>End Date
-                            </label>
-                            <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" class="form-control"
-                                required />
-                        </div>
-
-                        <button type="submit" class="btn book-btn w-100 pulse mt-5" (click)="BookCar()">
-                            <i class="fas fa-credit-card me-2"></i> Book Now
-                        </button>
-                    </form>
-
-                    <div class="mt-4 text-center">
-                        <small class="text-muted">
-                            <i class="fas fa-shield-alt me-1"></i>
-                            Secure booking • No hidden fees • Free cancellation
-                        </small>
-                    </div>
                 </div>
             </div>
         </div>
-    </div> -->
-<!-- Enhanced Booking Form -->
-<div class="col-12 col-lg-6 fade-in-right">
-    <div class="card booking-card h-100 egyptian-booking-card">
-        <div class="booking-header">
-            <div class="anubis-icon">𓃭</div>
-            <h4 class="booking-title text-black">
-                <i class="fas fa-calendar-plus me-2"></i> Car Reservation
-            </h4>
-            <div class="papyrus-border"></div>
-        </div>
-        <div class="card-body p-4">
-            <form #bookingForm="ngForm" (ngSubmit)="BookCar()">
-                <!-- Date Selection with Hieroglyph Decor -->
-                <div class="date-input-wrapper mb-4">
-                    <div class="input-decoration start"></div>
-                    <label for="startDate" class="form-label egyptian-label">
-                        <i class="fas fa-play me-2"></i>Start Your Journey
-                    </label>
-                    <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate"
-                        class="form-control egyptian-input" required />
-                    <div class="calendar-icon">𓆣</div>
-                </div>
 
-                <div class="date-input-wrapper mb-4">
-                    <div class="input-decoration end"></div>
-                    <label for="endDate" class="form-label egyptian-label">
-                        <i class="fas fa-stop me-2"></i>Return Date
-                    </label>
-                    <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" 
-                        class="form-control egyptian-input" required />
-                    <div class="calendar-icon">𓆣</div>
-                </div>
-
-                <!-- Pharaoh's Seal Button -->
-                <button type="submit" class="btn book-btn pharaoh-btn w-100 mt-5" (click)="BookCar()">
-                    <span class="button-content">
-                        <i class="fas fa-credit-card me-2"></i> Confirm Booking
-                        <span class="seal">𓋹</span>
+        <!-- review Section -->
+        <div class="col-lg-12 col-md-12 mt-5">
+            <div class="reviews-section bg-white p-4 rounded-4 shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="m-0 d-flex align-items-center">
+                        <i class="fas fa-star text-warning me-2"></i>
+                        <span>Reviews</span>
+                    </h3>
+                    @if (reviewStats()) {
+                    <span class="badge rounded-pill bg-light text-dark fs-6">
+                        {{ reviewStats()?.totalReviews }} reviews
                     </span>
-                    <div class="gold-overlay"></div>
-                </button>
-            </form>
-
-            <!-- Protection Badge -->
-            <div class="protection-badge mt-4">
-                <div class="scarab-icon">𓆣</div>
-                <small class="text-muted">
-                    <i class="fas fa-shield-alt me-1"></i>
-                    Protected by Anubis • No hidden fees • Free cancellation
-                </small>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- review Section -->
-    <div class="col-lg-12 col-md-12 mt-5">
-        <div class="reviews-section bg-white p-4 rounded-4 shadow-sm h-100">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="m-0 d-flex align-items-center">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    <span>Reviews</span>
-                </h3>
-                @if (reviewStats()) {
-                <span class="badge rounded-pill bg-light text-dark fs-6">
-                    {{ reviewStats()?.totalReviews }} reviews
-                </span>
-                }
-            </div>
-
-            <!-- Overall Rating -->
-            @if (reviewStats()?.totalReviews ?? 0 > 0) {
-            <div class="overall-rating bg-light p-3 rounded-3 mb-4">
-                <div class="d-flex align-items-center">
-                    <div class="rating-circle text-black d-flex flex-column align-items-center justify-content-center me-3"
-                        style="width: 60px; height:60px;">
-                        <span class="display-6 fw-bold">{{ reviewStats()?.averageRating }}</span>
-                    </div>
-                    <div>
-                        <div class="star-rating mb-2 position-relative" style="height: 20px;">
-                            <div class="stars-empty" style="color: #e4e5e9;">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="stars-filled position-absolute top-0 start-0"
-                                [style.width.%]="(reviewStats()?.averageRating ?? 0) * 20" style="color: #ffc107;">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="text-muted mb-0">Based on {{ reviewStats()?.totalReviews }} traveler reviews</p>
-                    </div>
-                </div>
-            </div>
-            } @else {
-            <div class="no-reviews text-center py-4">
-                <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2rem;"></i>
-                <h5 class="text-muted">No Reviews Yet</h5>
-                <p class="text-muted">Be the first to share your experience!</p>
-            </div>
-            }
-
-            <!-- Reviews List -->
-            @if (isLoading().car) {
-            <div class="text-center py-4">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p class="mt-2">Loading reviews...</p>
-            </div>
-            } @else if (reviewStats()?.totalReviews ?? 0 > 0) {
-            <div class="reviews-list">
-                @for (review of reviewStats()?.recentReviews; track review.id) {
-                <div class="review-item bg-light p-3 rounded-3 mb-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="d-flex align-items-center">
-                            <div class="user-avatar text-black rounded-circle d-flex align-items-center justify-content-center me-3"
-                                style="width: 40px; height: 40px;">
-                                {{ review.userName?.charAt(0)?.toUpperCase() }}
-                            </div>
-                            <div>
-                                <h6 class="m-0 fw-bold">{{ review.userName }}</h6>
-                                <small class="text-muted"> {{ review.createdAt | date:'dd MMM yyyy' }}</small>
-                            </div>
-                        </div>
-                        <span class="badge bg-success text-black-50">
-                            <i class="fas fa-star me-1"></i> {{ review.rating }}
-                        </span>
-                    </div>
-                    <hr class="my-3" style="opacity: 0.3;">
-                    <div class="review-content py-2">
-                        <p class="m-0">{{ review.comment }}</p>
-                    </div>
-
-                </div>
-                }
-            </div>
-            }
-            <!-- Review Form Section -->
-            <!-- Login Required Message -->
-            @if (!authService.isLoggedIn()) {
-            <div class="alert alert-warning border-0 rounded-3">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-sign-in-alt me-3 text-warning"></i>
-                    <div>
-                        <strong>Want to share your experience?</strong><br>
-                        <small>Please <a [routerLink]="['/login']" class="alert-link fw-bold">login</a> to write a
-                            review.</small>
-                    </div>
-                </div>
-            </div>
-            }
-
-            <!-- Already Reviewed Message -->
-            @else if (hasReviewed()) {
-            <div class="alert alert-success border-0 rounded-3">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-check-circle me-3 text-success"></i>
-                    <div>
-                        <strong>Thank you for your review!</strong><br>
-                        <small>You have already reviewed this flight company.</small>
-                    </div>
-                </div>
-            </div>
-            }
-
-            <!-- Add Review Form -->
-            @else {
-            <div class="add-review-form border rounded-3 p-4 mt-4">
-                <h5 class="mb-3 d-flex align-items-center">
-                    <i class="fas fa-edit me-2 text-success"></i>
-                    Write a Review
-                </h5>
-
-                <!-- Error Message -->
-                @if (submitError()) {
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    {{ submitError() }}
-                    <button type="button" class="btn-close" (click)="submitError.set(null)" aria-label="Close"></button>
-                </div>
-                }
-
-                <!-- Rating Stars -->
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">
-                        Your Rating <span class="text-danger">*</span>
-                    </label>
-                    <div class="d-flex align-items-center">
-                        @for(star of [1,2,3,4,5]; track star) {
-                        <i class="fas fa-star me-1" (click)="rating.set(star)" [class.text-warning]="rating() >= star"
-                            [class.text-muted]="rating() < star"
-                            [style.cursor]="isSubmitting() ? 'not-allowed' : 'pointer'"
-                            [style.opacity]="isSubmitting() ? '0.5' : '1'"
-                            style="font-size: 1.5rem; transition: all 0.2s;" [attr.disabled]="isSubmitting()"></i>
-                        }
-                        @if (rating() > 0) {
-                        <span class="ms-2 text-muted small">({{ rating() }}/5)</span>
-                        }
-                    </div>
-                    @if (rating() === 0) {
-                    <small class="text-muted">Click on a star to rate</small>
                     }
                 </div>
 
-                <!-- Comment Textarea -->
-                <div class="mb-4">
-                    <label for="reviewComment" class="form-label fw-semibold">
-                        Your Comment <span class="text-muted">(optional)</span>
-                    </label>
-                    <textarea id="reviewComment" class="form-control" rows="4" [(ngModel)]="comment"
-                        [disabled]="isSubmitting()"
-                        placeholder="Share your experience with this flight company... What did you like? What could be improved?"
-                        maxlength="500" style="resize: none;"></textarea>
-                    <div class="form-text d-flex justify-content-between">
-                        <small>Help other travelers by sharing your honest feedback</small>
-                        <small class="text-muted">{{ comment.length }}/500</small>
+                <!-- Overall Rating -->
+                @if (reviewStats()?.totalReviews ?? 0 > 0) {
+                <div class="overall-rating bg-light p-3 rounded-3 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="rating-circle text-black d-flex flex-column align-items-center justify-content-center me-3"
+                            style="width: 60px; height:60px;">
+                            <span class="display-6 fw-bold">{{ reviewStats()?.averageRating }}</span>
+                        </div>
+                        <div>
+                            <div class="star-rating mb-2 position-relative" style="height: 20px;">
+                                <div class="stars-empty" style="color: #e4e5e9;">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stars-filled position-absolute top-0 start-0"
+                                    [style.width.%]="(reviewStats()?.averageRating ?? 0) * 20" style="color: #ffc107;">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">Based on {{ reviewStats()?.totalReviews }} traveler reviews</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Submit Buttons -->
-                <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-outline-secondary" (click)="resetReviewForm()"
-                        [disabled]="isSubmitting()">
-                        <i class="fas fa-undo me-2"></i> Reset
-                    </button>
-
-                    <button type="button" class="btn btn-outline-success d-flex align-items-center"
-                        (click)="submitReview(rating(), comment)" [disabled]="isSubmitting() || rating() === 0">
-                        @if (isSubmitting()) {
-                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                        Submitting...
-                        } @else {
-                        <i class="fas fa-paper-plane me-2"></i>
-                        Submit Review
-                        }
-                    </button>
+                } @else {
+                <div class="no-reviews text-center py-4">
+                    <i class="fas fa-comment-slash text-muted mb-3" style="font-size: 2rem;"></i>
+                    <h5 class="text-muted">No Reviews Yet</h5>
+                    <p class="text-muted">Be the first to share your experience!</p>
                 </div>
+                }
 
+                <!-- Reviews List -->
+                @if (isLoading().car) {
+                <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading reviews...</p>
+                </div>
+                } @else if (reviewStats()?.totalReviews ?? 0 > 0) {
+                <div class="reviews-list">
+                    @for (review of reviewStats()?.recentReviews; track review.id) {
+                    <div class="review-item bg-light p-3 rounded-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="user-avatar text-black rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 40px; height: 40px;">
+                                    {{ review.userName?.charAt(0)?.toUpperCase() }}
+                                </div>
+                                <div>
+                                    <h6 class="m-0 fw-bold">{{ review.userName }}</h6>
+                                    <small class="text-muted"> {{ review.createdAt | date:'dd MMM yyyy' }}</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-success text-black-50">
+                                <i class="fas fa-star me-1"></i> {{ review.rating }}
+                            </span>
+                        </div>
+                        <hr class="my-3" style="opacity: 0.3;">
+                        <div class="review-content py-2">
+                            <p class="m-0">{{ review.comment }}</p>
+                        </div>
+
+                    </div>
+                    }
+                </div>
+                }
+                <!-- Review Form Section -->
+                <!-- Login Required Message -->
+                @if (!authService.isLoggedIn()) {
+                <div class="alert alert-warning border-0 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-sign-in-alt me-3 text-warning"></i>
+                        <div>
+                            <strong>Want to share your experience?</strong><br>
+                            <small>Please <a [routerLink]="['/login']" class="alert-link fw-bold">login</a> to write a
+                                review.</small>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Already Reviewed Message -->
+                @else if (hasReviewed()) {
+                <div class="alert alert-success border-0 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-check-circle me-3 text-success"></i>
+                        <div>
+                            <strong>Thank you for your review!</strong><br>
+                            <small>You have already reviewed this flight company.</small>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- Add Review Form -->
+                @else {
+                <div class="add-review-form border rounded-3 p-4 mt-4">
+                    <h5 class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-edit me-2 text-success"></i>
+                        Write a Review
+                    </h5>
+
+                    <!-- Error Message -->
+                    @if (submitError()) {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {{ submitError() }}
+                        <button type="button" class="btn-close" (click)="submitError.set(null)"
+                            aria-label="Close"></button>
+                    </div>
+                    }
+
+                    <!-- Rating Stars -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Your Rating <span class="text-danger">*</span>
+                        </label>
+                        <div class="d-flex align-items-center">
+                            @for(star of [1,2,3,4,5]; track star) {
+                            <i class="fas fa-star me-1" (click)="rating.set(star)"
+                                [class.text-warning]="rating() >= star" [class.text-muted]="rating() < star"
+                                [style.cursor]="isSubmitting() ? 'not-allowed' : 'pointer'"
+                                [style.opacity]="isSubmitting() ? '0.5' : '1'"
+                                style="font-size: 1.5rem; transition: all 0.2s;" [attr.disabled]="isSubmitting()"></i>
+                            }
+                            @if (rating() > 0) {
+                            <span class="ms-2 text-muted small">({{ rating() }}/5)</span>
+                            }
+                        </div>
+                        @if (rating() === 0) {
+                        <small class="text-muted">Click on a star to rate</small>
+                        }
+                    </div>
+
+                    <!-- Comment Textarea -->
+                    <div class="mb-4">
+                        <label for="reviewComment" class="form-label fw-semibold">
+                            Your Comment <span class="text-muted">(optional)</span>
+                        </label>
+                        <textarea id="reviewComment" class="form-control" rows="4" [(ngModel)]="comment"
+                            [disabled]="isSubmitting()"
+                            placeholder="Share your experience with this flight company... What did you like? What could be improved?"
+                            maxlength="500" style="resize: none;"></textarea>
+                        <div class="form-text d-flex justify-content-between">
+                            <small>Help other travelers by sharing your honest feedback</small>
+                            <small class="text-muted">{{ comment.length }}/500</small>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-outline-secondary" (click)="resetReviewForm()"
+                            [disabled]="isSubmitting()">
+                            <i class="fas fa-undo me-2"></i> Reset
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success d-flex align-items-center"
+                            (click)="submitReview(rating(), comment)" [disabled]="isSubmitting() || rating() === 0">
+                            @if (isSubmitting()) {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Submitting...
+                            } @else {
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Submit Review
+                            }
+                        </button>
+                    </div>
+
+
+                </div>
+                }
 
             </div>
-            }
-
         </div>
     </div>
-</div>

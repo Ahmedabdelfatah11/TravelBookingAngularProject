@@ -14,4 +14,7 @@ import { ChatbotComponent } from "./chatbot/chatbot";
 })
 export class App {
   protected title = 'Travel Booking';
-}
+
+};
+
+

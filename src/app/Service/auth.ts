@@ -10,9 +10,9 @@ import { AuthModel } from '../Interfaces/i-auth-model';
   providedIn: 'root'
 })
 export class Auth {
-  
-   private baseUrl = 'https://localhost:7277/api/Auth';   
-  constructor(private http: HttpClient) {}
+
+  private baseUrl = 'https://localhost:7277/api/Auth';
+  constructor(private http: HttpClient) { }
   Register(model: Iregister): Observable<any> {
     return this.http.post(`${this.baseUrl}/Register`, model);
   }
@@ -27,10 +27,10 @@ export class Auth {
 
   ResendConfirmationEmail(email: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/ResendConfirmEmail`, { email });
-  } 
+  }
 
-  ForgetPassword(model:any):Observable<any>{
-    return this.http.post(`${this.baseUrl}/ForgetPassword`,model)
+  ForgetPassword(model: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/ForgotPassword`, model)
   }
 
   ResetPassword(model: IResetPassword): Observable<any> {
@@ -42,8 +42,8 @@ export class Auth {
       tap(response => {
         if (response.isAuthenticated && response.token) {
           localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userId', response.email!); 
-           
+          localStorage.setItem('userId', response.email!);
+
           localStorage.setItem('username', response.username!);
           localStorage.setItem('roles', JSON.stringify(response.roles));
         }

@@ -19,5 +19,8 @@ export class BookingService {
         
         return this.http.delete<void>(`${this.apiUrl}/${bookingId}`, { headers });
     }
+    GetBookById(id:number): Observable<Booking>{
+        return this.http.get<Booking>(`${this.apiUrl}/${id}`);
+    }
 
 }

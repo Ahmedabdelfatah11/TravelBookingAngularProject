@@ -1,5 +1,6 @@
 input[type="range"]:focus {
   z-index: 5;
+  color: var(--main-color);
 }
 
 .btn-primary
@@ -28,4 +29,19 @@ input[type="range"]:focus {
 {
      background-color: var(--third-color) !important; 
     border-color: var(--third-color) !important;
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer {
+  background-color: var(--secondary-color) !important; /* Green handle */
+  border: none !important;
+}
+
+
+
+::ng-deep .ngx-slider .ngx-slider-bar {
+  background-color: #d4edda !important; /* Light green track */
+}
+
+::ng-deep .ngx-slider .ngx-slider-bubble {
+  color: var(--third-color);
 }

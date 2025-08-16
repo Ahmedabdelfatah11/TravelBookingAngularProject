@@ -23,7 +23,6 @@ import { FormsModule } from '@angular/forms';
 export class TourDetailsBody implements OnInit {
   @Input() id!: number;
   @Input() tour!: Tours;
-  // tourCompany!: ITourCompany;
     private tourCompanyService = inject(TourCompanyService);
     private route = inject(ActivatedRoute);
     //favourite
@@ -108,32 +107,6 @@ addToWishlist(): void {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
 
-  // private setupCollapseIcons(): void {
-  //   const sections = [
-  //     { id: 'overview', iconId: 'overviewIcon' },
-  //     { id: 'Included/Excluded', iconId: 'includedIcon' },
-  //     { id: 'Questions', iconId: 'questionsIcon' }
-  //   ];
-
-  //   sections.forEach(({ id, iconId }) => {
-  //     const collapse = document.getElementById(id);
-  //     const icon = document.getElementById(iconId);
-
-  //     if (collapse && icon) {
-  //       icon.classList.add('rotate-up');
-
-  //       collapse.addEventListener('show.bs.collapse', () => {
-  //         icon.classList.remove('rotate-down');
-  //         icon.classList.add('rotate-up');
-  //       });
-
-  //       collapse.addEventListener('hide.bs.collapse', () => {
-  //         icon.classList.remove('rotate-up');
-  //         icon.classList.add('rotate-down');
-  //       });
-  //     }
-  //   });
-  // }
 
   // ✅ Load Review Stats
   private loadReviewStats(): void {
@@ -183,17 +156,17 @@ private checkUserReview(): void {
   // ✅ Submit Review
   submitReview(rating: number, comment: string): void {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to submit a review');
+      this.toastr.warning('Please login to submit a review');
       return;
     }
 
     if (!this.tourCompanyId) {
-      alert('Tour company information not available');
+      this.toastr.warning('Tour company information not available');
       return;
     }
 
     if (rating === 0) {
-      alert('Please select a rating');
+      this.toastr.warning('Please select a rating');
       return;
     }
 
@@ -239,7 +212,7 @@ private checkUserReview(): void {
         this.comment = '';
         this.isSubmitting.set(false);
 
-        alert('Review submitted successfully!');
+        this.toastr.success('Review submitted successfully!');
       },
       error: (err) => {
         console.error('❌ Review submit error:', err);
@@ -258,7 +231,7 @@ private checkUserReview(): void {
         }
 
         this.submitError.set(errorMessage);
-        alert(errorMessage);
+        this.toastr.error(errorMessage);
       }
     });
   }
@@ -320,23 +293,5 @@ private checkUserReview(): void {
   });
 }
 
-// confirmBooking(tickets: { type: string, quantity: number }[]): void  {
-//   if (!tickets.length) {
-//     this.toastr.error('Please select at least one ticket');
-//     return; // No tickets selected
-//   } 
 
-//   this.bookingService.bookTour(this.tourId, tickets).subscribe({
-//     next: (response) => {
-//       console.log('Booking successful:', response);
-//       this.loading = false;
-//       document.getElementById('openModalBtn')?.click();
-//       this.router.navigate(['/payment', response.BookingId]);
-//     },
-//     error: (err) => {
-//       this.loading = false;
-//       console.error('Booking failed:', err);
-//     }
-//   });
-// }
 }
