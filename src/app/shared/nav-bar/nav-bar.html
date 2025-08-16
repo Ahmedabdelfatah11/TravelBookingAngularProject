@@ -16,27 +16,13 @@
                 <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/tour']">Trips</a></li>
                 <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/about']">About Us</a></li>
                 <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/contact']">Contact Us</a></li>
-                <!-- <li class="nav-item dropdown position-relative me-3">
-                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-bell fs-5"></i>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow rounded-4 mt-2">
-                        <li><a class="dropdown-item" href="#">🔔 Flight to Paris confirmed</a></li>
-                        <li><a class="dropdown-item" href="#">🚗 Car booking received</a></li>
-                        <li><a class="dropdown-item" href="#">🏨 Hotel reservation approved</a></li>
-                    </ul>
-                </li> -->
+                
             </ul>
 
             <!-- Centered Brand -->
-            <a class="navbar-brand text-white d-flex align-items-center justify-content-center flex-grow-1"
+            <a class="title navbar-brand text-white d-flex align-items-center justify-content-center flex-grow-1"
                 [routerLink]="['/home']">
-                Live & Travel
+                Pyramigo
             </a>
 
             <!-- Right Side: Buttons -->
@@ -48,7 +34,7 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="text">Welcome {{ auth.getUsername() }}</span>
                 </a>
-
+                
                 <ul class="dropdown-menu shadow border-0 rounded-4 mt-2 custom-dropdown" aria-labelledby="userDropdown">
                     <li class="px-3 py-2">
                         <div class="d-flex align-items-center">
@@ -68,13 +54,13 @@
                                 class="bi bi-heart fs-5 me-2"></i> Favorites</a></li>
                     <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/bookings']"><i
                                 class="bi bi-credit-card me-2"></i>Bookings</a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i
-                                class="bi bi-gear me-2"></i>Settings</a></li>
+                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="#"><i
+                                class="bi bi-gear me-2"></i>Settings</a></li> -->
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i
-                                class="bi bi-life-preserver me-2"></i>Support</a></li>
+                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="#"><i
+                                class="bi bi-life-preserver me-2"></i>Support</a></li> -->
                     <li><a class="dropdown-item d-flex align-items-center text-danger" href="#" (click)="logout()"><i
                                 class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                 </ul>

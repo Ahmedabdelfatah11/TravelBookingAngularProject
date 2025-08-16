@@ -206,17 +206,17 @@ export class HotelDetailsBody {
 
   submitReview(rating: number, comment: string): void {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to submit a review');
+      this.toastr.warning('Please login to submit a review');
       return;
     }
 
     if (!this.hotelCompanyId) {
-      alert('hotel information not available');
+      this.toastr.warning('hotel information not available');
       return;
     }
 
     if (rating === 0) {
-      alert('Please select a rating');
+      this.toastr.warning('Please select a rating');
       return;
     }
 
@@ -266,7 +266,7 @@ export class HotelDetailsBody {
         this.comment = '';
         this.isSubmitting.set(false);
 
-        alert('Review submitted successfully!');
+        this.toastr.success('Review submitted successfully!');
       },
       error: (err) => {
         console.error('Review submit error:', err);
@@ -286,7 +286,7 @@ export class HotelDetailsBody {
         }
 
         this.submitError.set(errorMessage);
-        alert(errorMessage);
+        this.toastr.error(errorMessage);
       }
     });
   }
@@ -373,7 +373,7 @@ export class HotelDetailsBody {
         let errorMessage = 'Failed to book room';
         if (err.error?.message) errorMessage = err.error.message;
         this.bookingError.set(errorMessage);
-        alert(errorMessage);
+        this.toastr.error(errorMessage);
       }
     });
   }

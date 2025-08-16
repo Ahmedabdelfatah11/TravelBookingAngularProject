@@ -2,8 +2,8 @@
     <h1 class="mb-4 text-sm-center">Top Travel Partners</h1>
 
     <!-- Section: FLIGHT -->
-    <section class="my-5 " data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <h1 class="text-center text-gradient m-0" id="flight" data-aos="fade-down">Flights</h1>
+    <section class="my-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <h1 class="text-center text-gradient m-0 p-2" style="z-index: 221;" id="flight" data-aos="fade-down">Flights</h1>
 
         <swiper-container slides-per-view="4" space-between="20" loop="true" autoplay-delay="2500"
             autoplay-disable-on-interaction="false"
@@ -19,7 +19,7 @@
             }
 
         </swiper-container>
-        <div class="row gap-1">
+        <div class="row gap-1" >
             <div class="col-md-6 card border-0 mt-5 rounded-4 overflow-hidden" data-aos="fade-left"
                 style="max-width: 600px; margin: auto;">
                 <div class="card-body d-flex flex-column align-items-center text-center p-4">
@@ -44,7 +44,7 @@
                 data-aos="fade-right" style="background-image: url('https://i.pinimg.com/736x/77/c0/65/77c06567f2bf6d407cebebcc113d7951.jpg');
             background-size: cover;
             background-position: center;
-            height: 310px; border-radius: 1rem;">
+            min-height: 335px; border-radius: 1rem;">
                 <div class="position-absolute bottom-0 start-0 p-4 bg-dark bg-opacity-50 w-100 rounded-bottom-4">
                     <h4 class="mb-0">Cairo International Airport</h4>
                     <p class="mb-0 small">The largest and busiest airport in Egypt.</p>
@@ -68,7 +68,7 @@
                         we've got the travel tools to get you to your destination.
                     </p>
                 </div>
-                <button class="btn btn-outline-dark btn-sm">See All</button>
+                <button class="btn btn-outline-dark btn-sm" [routerLink]="['/hotel']">See All</button>
             </div>
 
             <!-- Content Grid -->

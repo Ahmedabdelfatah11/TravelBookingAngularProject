@@ -13,7 +13,7 @@ bootstrapApplication(App, {
     importProvidersFrom(
       BrowserAnimationsModule,
       ToastrModule.forRoot({
-         positionClass: 'toast-bottom-right', 
+         positionClass: 'toast-bottom-center', 
       })
     )
   ]

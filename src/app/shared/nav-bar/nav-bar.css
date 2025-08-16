@@ -3,7 +3,11 @@
 .home-body :host .navbar .btn-outline-light {
     color: black !important;
 }
-
+.title{
+    font-family: "Pacifico", cursive;
+  font-weight: 500;
+  font-style: normal;
+}
 /* خلي الزرار أبيض مع حدود سوداء في الصفحة الرئيسية */
 .home-body :host .btn-outline-light {
     background-color: white;

@@ -3,16 +3,31 @@
 :root {
     --main-color: #a0d9cb;
     --secondary-color: #0eb39d;
-    --third-color:#31dac3;
+    --third-color: #31dac3;
+    --primary-green: #2d5a3d;
+    --accent-green: #4a7c59;
+    --light-green: #5a8d6b;
+    --success-green: #28a745;
+    --gradient-primary: linear-gradient(135deg, #2d5a3d 0%, #4a7c59 100%);
+    --gradient-accent: linear-gradient(135deg, #4a7c59 0%, #5a8d6b 100%);
+    --gradient-light: linear-gradient(135deg, #5a8d6b 0%, #6fa076 100%);
+    --shadow-primary: 0 10px 40px rgba(45, 90, 61, 0.15);
+    --shadow-hover: 0 20px 60px rgba(45, 90, 61, 0.25);
+    --shadow-light: 0 5px 20px rgba(45, 90, 61, 0.1);
 }
 
 body,
 button,
 input,
 select,
-textarea {
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 textarea {
+    font-family: "Michroma", sans-serif;
+    font-weight: 300;
     font-style: normal;
     margin: 0px;
     padding: 0px;
@@ -39,10 +54,11 @@ textarea {
 }
 
 body.modal-open {
-  overflow: auto !important;
-  padding-right: 0 !important;
+    overflow: auto !important;
+    padding-right: 0 !important;
 }
+
 .app-container {
-  position: relative;
-  min-height: 100vh;
+    position: relative;
+    min-height: 100vh;
 }

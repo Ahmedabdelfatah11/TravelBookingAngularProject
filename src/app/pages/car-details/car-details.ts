@@ -15,6 +15,7 @@ import { ReviewService } from '../../Service/review-service';
 import { Auth } from '../../Service/auth';
 import { CreateReview, ReviewStats } from '../../Models/reviews';
 import { NavBar } from "../../shared/nav-bar/nav-bar";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-detail',
@@ -42,6 +43,8 @@ export class CarDetails implements OnInit {
   comment: string = '';
   isSubmitting = signal(false);
   submitError = signal<string | null>(null);
+  todayString = '';
+
 
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -50,9 +53,10 @@ export class CarDetails implements OnInit {
   authService = inject(Auth);
 
   constructor(
+    private Toastr: ToastrService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ngZone.run(() => {
@@ -78,7 +82,8 @@ export class CarDetails implements OnInit {
         console.log('Car Details:', car);
         this.car = car;
         this.carCompanyId = car.rentalCompanyId;
-        
+        this.todayString = new Date().toISOString().split('T')[0];
+
         this.isLoading.update(s => ({ ...s, car: false }));
         this.cdr.detectChanges();
 
@@ -88,6 +93,7 @@ export class CarDetails implements OnInit {
       error: (error) => {
         console.error('Error loading car details:', error);
         this.errorMessage = 'Failed to load car details';
+        this.Toastr.error(this.errorMessage);
         this.isLoading.update(s => ({ ...s, car: false }));
         this.cdr.detectChanges();
       }
@@ -95,7 +101,7 @@ export class CarDetails implements OnInit {
   }
 
   // ==================== Reviews ====================
- private loadReviewStats(): void {
+  private loadReviewStats(): void {
     if (!this.carCompanyId) {
       console.error('Car Company ID not available for reviews');
       return;
@@ -114,6 +120,7 @@ export class CarDetails implements OnInit {
       },
       error: (err) => {
         console.error('Error loading reviews:', err);
+        this.Toastr.error('Error loading reviews:', err)
         this.isLoading.update(s => ({ ...s, reviews: false }));
         // Don't show error to user, just log it
       }
@@ -144,17 +151,17 @@ export class CarDetails implements OnInit {
 
   submitReview(rating: number, comment: string): void {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to submit a review');
+      this.Toastr.warning('Please login to submit a review');
       return;
     }
 
     if (!this.carCompanyId) {
-      alert('Car information not available');
+      this.Toastr.warning('Car information not available');
       return;
     }
 
     if (rating === 0) {
-      alert('Please select a rating');
+      this.Toastr.warning('Please select a rating');
       return;
     }
 
@@ -204,7 +211,7 @@ export class CarDetails implements OnInit {
         this.comment = '';
         this.isSubmitting.set(false);
 
-        alert('Review submitted successfully!');
+        this.Toastr.success('Review submitted successfully!');
       },
       error: (err) => {
         console.error('Review submit error:', err);
@@ -224,7 +231,7 @@ export class CarDetails implements OnInit {
         }
 
         this.submitError.set(errorMessage);
-        alert(errorMessage);
+        this.Toastr.error(errorMessage);
       }
     });
   }
@@ -243,15 +250,32 @@ export class CarDetails implements OnInit {
   }
 
   BookCar(): void {
-    if (!this.startDate || !this.endDate) return;
+    // Parse to Date objects for comparison
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // normalize to midnight
 
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
+
+    // ✅ Check 1: Start date provided and is today or in future
+    if (!this.startDate || start < today) {
+      this.Toastr.error('Start date must be today or later.');
+      return;
+    }
+    if (!this.endDate || end <= start) {
+      this.Toastr.error('End date must be after the start date.');
+      return;
+    }
     this.carService.bookcar(Number(this.carId), this.startDate, this.endDate).subscribe({
       next: (response) => {
         console.log('Booking Response:', response);
         this.carSignal.set(response);
-        this.router.navigate([`/payment/${response.id}`], { state: { booking: response } });
+        this.router.navigate([`/payment/${response.id}`]);
       },
-      error: (error) => console.error('Error booking car:', error)
+      error: (error) => {
+        console.error('Error booking car:', error)
+        this.Toastr.error('Error booking car:', error)
+      }
     });
   }
 }

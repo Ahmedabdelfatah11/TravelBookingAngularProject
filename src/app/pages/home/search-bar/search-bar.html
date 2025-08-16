@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" formControlName="searchType" id="searchCars"
-                            value="car">
+                            value="cars">
                         <label class="form-check-label" for="searchCars"><i class="fas fa-car me-1"></i>Car
                             Rental</label>
                     </div>
@@ -56,9 +56,10 @@
             </div>
             }
             <!-- Location -->
-            @if(showLocation()){
+            @if(showLocationOrname()){
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Location Or Hotel Name Or Description" formControlName="NameOrLocation">
+                <input type="text" class="form-control" placeholder="Location Or Hotel Name Or Description"
+                    formControlName="NameOrLocation">
                 @if (f['NameOrLocation'].touched && f['NameOrLocation'].invalid) {
                 <div class="text-danger mt-1">
                     Location or Hotel Name is required
@@ -66,18 +67,46 @@
                 }
             </div>
             }
-
+            @if(showLocation()){
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Location" formControlName="Location">
+                @if (f['Location'].touched && f['Location'].invalid) {
+                <div class="text-danger mt-1">
+                    Location is required
+                </div>
+                }
+            </div>
+            }
+            @if(showModel()){
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Car Model" formControlName="Model">
+                @if (f['Model'].touched && f['Model'].invalid) {
+                <div class="text-danger mt-1">
+                    Model is required
+                </div>
+                }
+            </div>
+            }
+            @if(showDestination()){
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Destination" formControlName="NameOrLocation">
+                @if (f['Destination'].touched && f['Destination'].invalid) {
+                <div class="text-danger mt-1">
+                    Destination is required
+                </div>
+                }
+            </div>
+            }
             <!-- Departure Date -->
             @if(showDepartureDate() ){
             <div class="col-md-3">
-                <input type="date" class="form-control" placeholder="Departure"
-                    formControlName="departureDate">      
+                <input type="date" class="form-control" placeholder="Departure" formControlName="departureDate">
             </div>
             }
             <!-- Return Date -->
             @if(showReturnDate() ){
             <div class="col-md-3">
-                <input type="date" class="form-control" placeholder="Return" formControlName="returnDate">     
+                <input type="date" class="form-control" placeholder="Return" formControlName="returnDate">
             </div>
             }
 

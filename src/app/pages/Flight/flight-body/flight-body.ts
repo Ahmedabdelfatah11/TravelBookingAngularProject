@@ -19,13 +19,12 @@ export class FlightBody implements OnInit {
   flightcount = signal(0);
   loading = signal(false);
   filters = signal<FlightFilterParams>({});
-  searchData = signal<any>(null); // سيتم تعبئتها من حالة الراوتر
+  searchData = signal<any>(null); 
 
   flightService = inject(FlightService);
   private router = inject(Router);
 
   constructor() {
-    // تهيئة الفلاتر الافتراضية
     this.filters.set({
       DepartureAirport: '',
       ArrivalAirport: '',
@@ -40,7 +39,6 @@ export class FlightBody implements OnInit {
       this.searchData.set(state.searchData);
       console.log('Received search data:', state.searchData);
 
-      // تحويل البيانات إلى الفلاتر المطلوبة
       this.filters.set({
         DepartureAirport: this.searchData().DepatureAirport,
         ArrivalAirport: this.searchData().ArrivalAirport,
@@ -48,12 +46,10 @@ export class FlightBody implements OnInit {
         ArrivalTime: this.searchData().ArrivalTime
       });
       console.log('Filters set from search data:', this.filters());
-      // تحميل الرحلات بناء على بيانات البحث
       this.loadFlights();
     }
   }
   ngOnInit() {
-    // استقبال بيانات البحث من حالة الراوتر
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { searchData: any };
 
@@ -61,7 +57,6 @@ export class FlightBody implements OnInit {
       this.searchData.set(state.searchData);
       console.log('Received search data:', state.searchData);
 
-      // تحويل البيانات إلى الفلاتر المطلوبة
       this.filters.set({
         DepartureAirport: this.searchData().DepatureAirport,
         ArrivalAirport: this.searchData().ArrivalAirport,
@@ -69,12 +64,11 @@ export class FlightBody implements OnInit {
         ArrivalTime: this.searchData().ArrivalTime
       });
       console.log('Filters set from search data:', this.filters());
-      // تحميل الرحلات بناء على بيانات البحث
       this.loadFlights();
     }
     AOS.init({
-      duration: 1000, // مدة التأثير بالمللي ثانية
-      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+      duration: 1000, 
+      once: true      
     });
   }
   loadEffect = effect(() => {
@@ -106,7 +100,6 @@ export class FlightBody implements OnInit {
     });
   }
 
-  // باقي الدوال كما هي...
   nextPage() {
     if (this.currentPage() * this.pageSize() < this.flightcount()) {
       this.currentPage.update(p => p + 1);

@@ -5,7 +5,6 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
-import { ChatBot } from "./chat-bot/chat-bot";
 import { TourService } from '../../../Service/tour-service';
 import { ITourCompany } from '../../../Models/tourModel';
 
@@ -59,7 +58,7 @@ export class Body implements OnInit {
     this.loadTours();
     AOS.init({
       duration: 1000, // مدة التأثير بالمللي ثانية
-      once: false      // يشغّل الأنيميشن مرة واحدة فقط
+      once: true      // يشغّل الأنيميشن مرة واحدة فقط
     });
   }
 

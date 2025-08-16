@@ -10,3 +10,7 @@ export interface Car {
   rentalCompanyId: number;
   name?: string;
 }
+export interface CarSearchData {
+  model?: string;
+  location?: string;
+}

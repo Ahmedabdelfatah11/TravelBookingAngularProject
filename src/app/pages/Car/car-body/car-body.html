@@ -16,12 +16,12 @@
             <div>
               <label class="form-label fw-semibold">Model</label>
               <input type="text" [(ngModel)]="searchModel" name="searchModel" (input)="onSearchChange()"
-                class="form-control" placeholder="Departure Airport" />
+                class="form-control" placeholder="Model" />
             </div>
             <div>
               <label class="form-label fw-semibold">Location</label>
               <input type="text" [(ngModel)]="location" name="location" (input)="onSearchChange()" class="form-control"
-                placeholder="Arrival Airport" />
+                placeholder="Location" />
             </div>
             <div>
               <label class="form-label fw-semibold">Min Price</label>
@@ -128,3 +128,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

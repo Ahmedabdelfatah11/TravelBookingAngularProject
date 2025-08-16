@@ -1,15 +1,16 @@
 import { ChangeDetectorRef, Component, NgZone, signal } from '@angular/core';
-import { Car } from '../../../Models/car';
+import { Car, CarSearchData } from '../../../Models/car';
 import { CarService } from '../../../Service/carService';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Header } from "../../../shared/header/header";
 import { SortOptions } from "../sort-options/sort-options";
+import { Footer } from "../../../shared/footer/footer";
 
 @Component({
   selector: 'app-car-body',
-  imports: [FormsModule, CommonModule, RouterLink, Header, SortOptions],
+  imports: [FormsModule, CommonModule, Header, SortOptions, Footer],
   templateUrl: './car-body.html',
   styleUrl: './car-body.css'
 })
@@ -21,18 +22,35 @@ export class CarBody {
   pageSize = 10;
   isLoading = false;
   errorMessage = '';
-  searchModel = '';
+  searchModel : string = '';
   location = '';
   Sort = signal<string>('');
   minPrice = 0;
   maxPrice = 10000000;
+  searchData: CarSearchData | null = null;
+
 
   constructor(
     private carService: CarService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private ngZone: NgZone
-  ) { }
+    private ngZone: NgZone,
+
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { searchData: CarSearchData };
+    if (state?.searchData) {
+  this.searchData = state.searchData;
+  console.log('Received search data:', state.searchData);
+
+if (this.searchData !== null) {
+  this.searchModel = this.searchData.model ?? '';
+  this.location = this.searchData.location ?? '';
+}
+}
+
+
+  }
 
   ngOnInit(): void {
     this.loadCars();

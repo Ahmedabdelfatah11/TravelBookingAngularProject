@@ -8,6 +8,7 @@ import { CreateReview, ReviewStats } from '../../../Models/reviews';
 import { ReviewService } from '../../../Service/review-service';
 import { Auth } from '../../../Service/auth';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flight-details-body',
@@ -42,10 +43,10 @@ export class FlightDetailsBody {
   authService = inject(Auth);
   reviewService = inject(ReviewService);
   router = inject(Router);
- 
+
   readonly isSubmitting = signal(false);
   readonly submitError = signal<string | null>(null);
-
+  constructor(private Toastr: ToastrService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.flightId = +params['id']; // This is the flight ID from route
@@ -55,7 +56,7 @@ export class FlightDetailsBody {
 
   private loadFlightDetails(): void {
     if (isNaN(this.flightId)) {
-      this.error.set('Invalid flight ID');
+      this.Toastr.error('Invalid flight ID');
       this.isLoading.update(s => ({ ...s, flight: false }));
       return;
     }
@@ -64,18 +65,18 @@ export class FlightDetailsBody {
       next: (data) => {
         this.flight.set(data);
         this.isLoading.update(s => ({ ...s, flight: false }));
-        
+
         // Set the flight company ID for reviews (this is what we need for the review API)
         if (data.flightCompany && data.flightCompany.id) {
           this.flightCompanyId = data.flightCompany.id;
           console.log('Flight Company ID for reviews:', this.flightCompanyId);
-          
+
           // Load reviews and check user review only after we have the company ID
           this.loadReviewStats();
           this.checkUserReview();
         } else {
           console.error('Flight company information not available');
-          this.error.set('Flight company information not available');
+          this.Toastr.error('Flight company information not available');
         }
       },
       error: (err) => {
@@ -88,12 +89,12 @@ export class FlightDetailsBody {
 
   private loadReviewStats(): void {
     if (!this.flightCompanyId) {
-      console.error('Flight Company ID not available for reviews');
+      this.Toastr.error('Flight Company ID not available for reviews');
       return;
     }
 
     console.log('Loading reviews for Flight Company ID:', this.flightCompanyId);
-    
+
     this.reviewService.getCompanyReviewStats({
       companyType: 'flight',
       flightId: this.flightCompanyId // Use flight company ID for reviews
@@ -105,6 +106,7 @@ export class FlightDetailsBody {
       },
       error: (err) => {
         console.error('Error loading reviews:', err);
+        this.Toastr.error('Error loading reviews:', err)
         this.isLoading.update(s => ({ ...s, reviews: false }));
         // Don't show error to user, just log it
       }
@@ -135,17 +137,17 @@ export class FlightDetailsBody {
 
   submitReview(rating: number, comment: string): void {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to submit a review');
+      this.Toastr.warning('Please login to submit a review');
       return;
     }
 
     if (!this.flightCompanyId) {
-      alert('Flight company information not available');
+      this.Toastr.error('Flight company information not available');
       return;
     }
 
     if (rating === 0) {
-      alert('Please select a rating');
+      this.Toastr.warning('Please select a rating');
       return;
     }
 
@@ -164,7 +166,7 @@ export class FlightDetailsBody {
     this.reviewService.createReview(reviewData).subscribe({
       next: (newReview) => {
         console.log('Review submitted successfully:', newReview);
-        
+
         // Update review stats after successful submission
         this.reviewStats.update(stats => {
           if (!stats) {
@@ -175,12 +177,12 @@ export class FlightDetailsBody {
               recentReviews: [newReview]
             };
           }
-          
+
           const newTotal = stats.totalReviews + 1;
           const newAverage = parseFloat(
             ((stats.averageRating * stats.totalReviews + rating) / newTotal).toFixed(1)
           );
-          
+
           return {
             ...stats,
             totalReviews: newTotal,
@@ -188,19 +190,19 @@ export class FlightDetailsBody {
             recentReviews: [newReview, ...stats.recentReviews].slice(0, 5)
           };
         });
-        
+
         this.hasReviewed.set(true);
         this.showReviewForm.set(false);
         this.rating.set(0);
         this.comment = '';
         this.isSubmitting.set(false);
-        
-        alert('Review submitted successfully!');
+
+        this.Toastr.success('Review submitted successfully!');
       },
       error: (err) => {
         console.error('Review submit error:', err);
         this.isSubmitting.set(false);
-        
+
         let errorMessage = 'Failed to submit review';
         if (err.error) {
           if (typeof err.error === 'string') {
@@ -213,9 +215,9 @@ export class FlightDetailsBody {
             errorMessage = errors.join(', ');
           }
         }
-        
+
         this.submitError.set(errorMessage);
-        alert(errorMessage);
+        this.Toastr.error(errorMessage);
       }
     });
   }
@@ -230,7 +232,7 @@ export class FlightDetailsBody {
   // Booking Methods
   openBookingForm() {
     if (!this.authService.isLoggedIn()) {
-      alert('Please login to book a flight');
+      this.Toastr.warning('Please login to book a flight');
       return;
     }
     this.showBookingForm.set(true);
@@ -245,42 +247,42 @@ export class FlightDetailsBody {
     this.bookingSuccess.set(false);
   }
 
-confirmBooking() {
-  if (this.isBooking()) return;
+  confirmBooking() {
+    if (this.isBooking()) return;
 
-  this.isBooking.set(true);
-  this.bookingError.set(null);
+    this.isBooking.set(true);
+    this.bookingError.set(null);
 
-  const flight = this.flight();
-  if (!flight) {
-    this.bookingError.set("Flight details are not available.");
-    this.isBooking.set(false);
-    return;
-  }
-
-  this.flightService.bookFlight(this.flightId, this.bookingSeatClass()).subscribe({
-    next: (response) => {
-      console.log('Booking successful:', response);
-      this.bookingId.set(response.bookingId);
-      this.bookingSuccess.set(true);
+    const flight = this.flight();
+    if (!flight) {
+      this.bookingError.set("Flight details are not available.");
       this.isBooking.set(false);
-
-      // ✅ انتقل لصفحة الدفع بعد نجاح الحجز
-      this.router.navigate(['/payment', response.bookingId]);
-    },
-    error: (err) => {
-      console.error('Booking error:', err);
-      this.isBooking.set(false);
-      let errorMessage = 'Failed to book flight';
-      if (err.error && typeof err.error === 'string') {
-        errorMessage = err.error;
-      } else if (err.error && err.error.message) {
-        errorMessage = err.error.message;
-      }
-      this.bookingError.set(errorMessage);
-      alert(errorMessage);
+      return;
     }
-  });
-}
+
+    this.flightService.bookFlight(this.flightId, this.bookingSeatClass()).subscribe({
+      next: (response) => {
+        console.log('Booking successful:', response);
+        this.bookingId.set(response.bookingId);
+        this.bookingSuccess.set(true);
+        this.isBooking.set(false);
+
+        // ✅ انتقل لصفحة الدفع بعد نجاح الحجز
+        this.router.navigate(['/payment', response.bookingId]);
+      },
+      error: (err) => {
+        console.error('Booking error:', err);
+        this.isBooking.set(false);
+        let errorMessage = 'Failed to book flight';
+        if (err.error && typeof err.error === 'string') {
+          errorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          errorMessage = err.error.message;
+        }
+        this.bookingError.set(errorMessage);
+        this.Toastr.error(errorMessage);
+      }
+    });
+  }
 
 }

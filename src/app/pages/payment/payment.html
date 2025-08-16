@@ -1,57 +1,328 @@
+<app-nav-bar [isSpecialPage]="true"></app-nav-bar>
 <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-5 col-md-8">
+  <div class="row g-4">
+    <!-- Booking Details Column (Left) -->
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm rounded-3 h-100">
+        <div class="card-body p-4">
+          <!-- Booking Type Header -->
+          <div class="d-flex align-items-center mb-4">
+            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+              style="width:48px;height:48px;">
+              <i class="bi bi-{{bookingDetails()!.bookingType}} fs-5"></i>
+            </div>
+            <div class="ms-3">
+              <h3 class="h5 fw-bold mb-0">{{bookingDetails()!.bookingType}} Booking</h3>
+              <p class="text-muted small mb-0">Booking #{{bookingDetails()!.id}}</p>
+            </div>
+          </div>
 
-      <!-- Payment Card -->
-      <div class="card border-0 shadow-lg rounded-4 p-4 bg-white">
-        
-        <!-- Header -->
+          <!-- Booking Content - Different for each type -->
+          <ng-container [ngSwitch]="bookingDetails()!.bookingType">
+
+            <!-- Flight Booking -->
+            <div *ngSwitchCase="'Flight'" class="booking-content">
+              <div class="d-flex align-items-center mb-4">
+                <img [src]="bookingDetails()!.agencyDetails.imageUrl" class="rounded-3 me-3"
+                  style="width:80px;height:80px;object-fit:cover">
+                <div>
+                  <h4 class="h6 fw-bold mb-1">{{bookingDetails()!.agencyDetails.airlineName}}</h4>
+                  <div class="text-success small fw-semibold">Flight Confirmation</div>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-4">
+                <div class="col-6">
+                  <div class="bg-light p-3 rounded-2">
+                    <div class="small text-muted mb-1">Departure</div>
+                    <div class="fw-bold">{{bookingDetails()!.agencyDetails.departureAirport}}</div>
+                    <div class="text-muted small">{{bookingDetails()!.startDate | date:'short'}}</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="bg-light p-3 rounded-2">
+                    <div class="small text-muted mb-1">Arrival</div>
+                    <div class="fw-bold">{{bookingDetails()!.agencyDetails.arrivalAirport}}</div>
+                    <div class="text-muted small">{{bookingDetails()!.endDate | date:'short'}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-light p-3 rounded-2 mb-3">
+                <div class="row g-2">
+                  <div class="col-4">
+                    <div class="small text-muted">Class</div>
+                    <div class="fw-semibold">Business</div>
+                  </div>
+                  <div class="col-8">
+                    <div class="small text-muted">Duration</div>
+                    <div class="fw-semibold">{{ flightDuration }}
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+        </div>
+
+        <!-- Room Booking -->
+        <div *ngSwitchCase="'Room'" class="booking-content">
+          <div class="d-flex align-items-center mb-4">
+            <img [src]="bookingDetails()!.agencyDetails.roomImages[0].imageUrl" class="rounded-3 me-3"
+              style="width:80px;height:80px;object-fit:cover">
+            <div>
+              <h4 class="h6 fw-bold mb-1">{{bookingDetails()!.agencyDetails.hotelCompanyName}}</h4>
+              <div class="text-success small fw-semibold">{{bookingDetails()!.agencyDetails.roomType}} Room</div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">Check-in</div>
+                <div class="fw-bold">{{bookingDetails()!.startDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">After 2:00 PM</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">Check-out</div>
+                <div class="fw-bold">{{bookingDetails()!.endDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">Before 12:00 PM</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-light p-3 rounded-2 mb-3">
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="small text-muted">Nights</div>
+                <div class="fw-semibold">{{ nights }}</div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="small">
+            <h6 class="fw-bold mb-2">Room Amenities</h6>
+            <ul class="list-unstyled row g-2">
+              <li class="col-6"><i class="bi bi-wifi text-primary me-1"></i> Free WiFi</li>
+              <li class="col-6"><i class="bi bi-cup-hot text-primary me-1"></i> Breakfast</li>
+              <li class="col-6"><i class="bi bi-tv text-primary me-1"></i> Smart TV</li>
+              <li class="col-6"><i class="bi bi-snow text-primary me-1"></i> Air Conditioning</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Car Booking -->
+        <div *ngSwitchCase="'Car'" class="booking-content">
+          <div class="d-flex align-items-center mb-4">
+            <img [src]="bookingDetails()!.agencyDetails.imageUrl" class="rounded-3 me-3"
+              style="width:80px;height:80px;object-fit:cover">
+            <div>
+              <h4 class="h6 fw-bold mb-1">{{bookingDetails()!.agencyDetails.model}}</h4>
+              <div class="text-success small fw-semibold">{{bookingDetails()!.agencyDetails.name}}</div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">Pick-up</div>
+                <div class="fw-bold">{{bookingDetails()!.startDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">{{bookingDetails()!.agencyDetails.location}}</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">Drop-off</div>
+                <div class="fw-bold">{{bookingDetails()!.endDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">Same location</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-light p-3 rounded-2 mb-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <div class="small text-muted">Days</div>
+                <div class="fw-semibold">{{ nights }}</div>
+              </div>
+              <div class="col-4">
+                <div class="small text-muted">Capacity</div>
+                <div class="fw-semibold">{{bookingDetails()!.agencyDetails.capacity}} People</div>
+              </div>
+              <div class="col-4">
+                <div class="small text-muted">Type</div>
+                <div class="fw-semibold">Automatic</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="small">
+            <h6 class="fw-bold mb-2">Included</h6>
+            <ul class="list-unstyled row g-2">
+              <li class="col-6"><i class="bi bi-check-circle text-success me-1"></i> Unlimited mileage</li>
+              <li class="col-6"><i class="bi bi-check-circle text-success me-1"></i> Collision insurance</li>
+              <li class="col-6"><i class="bi bi-check-circle text-success me-1"></i> Roadside assistance</li>
+              <li class="col-6"><i class="bi bi-check-circle text-success me-1"></i> GPS navigation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tour Booking -->
+        <div *ngSwitchCase="'Tour'" class="booking-content">
+          <div class="d-flex align-items-center mb-4">
+            <img [src]="bookingDetails()!.agencyDetails.imageUrl" class="rounded-3 me-3"
+              style="width:80px;height:80px;object-fit:cover">
+            <div>
+              <h4 class="h6 fw-bold mb-1">{{bookingDetails()!.agencyDetails.name}}</h4>
+              <div class="text-success small fw-semibold">{{bookingDetails()!.agencyDetails.tourCompanyName}}</div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">Start Date</div>
+                <div class="fw-bold">{{bookingDetails()!.startDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">{{bookingDetails()!.startDate | date:'shortTime'}}</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="bg-light p-3 rounded-2">
+                <div class="small text-muted mb-1">End Date</div>
+                <div class="fw-bold">{{bookingDetails()!.endDate | date:'mediumDate'}}</div>
+                <div class="text-muted small">{{bookingDetails()!.endDate | date:'shortTime'}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-light p-3 rounded-2 mb-3">
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="small text-muted">Duration</div>
+                <div class="fw-semibold">{{nights}} Days</div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="small">
+            <h6 class="fw-bold mb-2">What's Included</h6>
+            <ul class="list-unstyled">
+              <li *ngFor="let item of bookingDetails()!.agencyDetails.includedItems" class="mb-1">
+                <i class="bi bi-check-circle text-success me-1"></i> {{item}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        </ng-container>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="card-footer bg-transparent border-top">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="fw-bold">Total Amount</div>
+          <div class="h5 fw-bold text-success">{{bookingDetails()!.totalPrice | currency:'USD':'symbol':'1.0-0'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Column (Right) -->
+  <div class="col-lg-4">
+    <div class="card border-0 shadow-sm rounded-3">
+      <div class="card-body p-4">
+
+        <!-- Payment Header -->
         <div class="text-center mb-4">
-          <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px;height:60px;">
+          <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center"
+            style="width:60px;height:60px;">
             <i class="bi bi-credit-card fs-3"></i>
           </div>
-          <h3 class="mt-3 fw-bold text-dark">Enter Payment Details</h3>
+          <h3 class="mt-3 h5 fw-bold text-dark">Enter Payment Details</h3>
           <p class="text-muted small">Secure and encrypted payment powered by Stripe</p>
         </div>
 
         <!-- Stripe Card Element -->
-        <div class="mb-4 p-3 border rounded bg-light">
-          <ngx-stripe-card
-            [options]="cardOptions"
-            [elementsOptions]="elementsOptions">
-          </ngx-stripe-card>
+        <div class="mb-4">
+          <label class="form-label small text-uppercase text-muted fw-bold mb-2">Card Details</label>
+          <div class="p-3 border rounded-2 bg-light">
+            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+            </ngx-stripe-card>
+          </div>
         </div>
 
         <!-- Pay Button -->
-        <button 
-          class="btn btn-gradient w-100 py-2 fs-5 fw-semibold text-white" 
-          (click)="pay()"
+        <button class="btn btn-success w-100 py-3 fw-semibold rounded-1" (click)="pay()"
           [disabled]="paymentProcessing || paymentSuccess">
-          
-          <ng-container *ngIf="paymentProcessing">
-            <i class="spinner-border spinner-border-sm me-2"></i>
-            Processing...
-          </ng-container>
 
-          <ng-container *ngIf="!paymentProcessing && !paymentSuccess">
-            💳 Pay Now
-          </ng-container>
+          <span *ngIf="paymentProcessing" class="d-flex align-items-center justify-content-center">
+            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+            Processing Payment...
+          </span>
 
-          <ng-container *ngIf="paymentSuccess">
-            ✅ Payment Successful
-          </ng-container>
+          <span *ngIf="!paymentProcessing && !paymentSuccess" class="d-flex align-items-center justify-content-center">
+            <i class="bi bi-credit-card me-2"></i>
+            Pay {{bookingDetails()!.totalPrice | currency:'USD':'symbol':'1.0-0'}}
+          </span>
+
+          <span *ngIf="paymentSuccess" class="d-flex align-items-center justify-content-center">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            Payment Successful
+          </span>
         </button>
 
         <!-- Status Messages -->
-        <div *ngIf="paymentSuccess" class="alert alert-success mt-4 mb-0 rounded-3">
-          ✅ Payment succeeded and booking confirmed! Redirecting...
+        <div *ngIf="paymentSuccess" class="alert alert-success alert-dismissible fade show mt-4 rounded-1">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <div>
+              <strong>Payment successful!</strong> Your booking is confirmed. You'll be redirected shortly.
+            </div>
+          </div>
         </div>
 
-        <div *ngIf="paymentProcessing && !paymentSuccess" class="alert alert-info mt-4 mb-0 rounded-3">
-          🔄 Processing your payment, please wait...
+        <div *ngIf="paymentProcessing && !paymentSuccess" class="alert alert-info mt-4 rounded-1">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-arrow-repeat me-2"></i>
+            <div>
+              <strong>Processing your payment</strong> - this may take a moment
+            </div>
+          </div>
         </div>
 
+        <!-- Booking Summary (Collapsed on mobile) -->
+        <div class="d-none d-lg-block mt-4 pt-3 border-top">
+          <h6 class="fw-bold mb-3">Booking Summary</h6>
+          <ul class="list-unstyled small">
+            <li class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Booking Type:</span>
+              <span class="fw-semibold">{{bookingDetails()!.bookingType}}</span>
+            </li>
+            <li class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Dates:</span>
+              <span class="fw-semibold">{{bookingDetails()!.startDate | date:'shortDate'}} -
+                {{bookingDetails()!.endDate | date:'shortDate'}}</span>
+            </li>
+            <li class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Subtotal:</span>
+              <span class="fw-semibold">{{bookingDetails()!.totalPrice | currency:'USD':'symbol':'1.0-0'}}</span>
+            </li>
+            <li class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Taxes:</span>
+              <span class="fw-semibold">$0.00</span>
+            </li>
+            <li class="d-flex justify-content-between fw-bold pt-2 mt-2 border-top">
+              <span>Total:</span>
+              <span class="text-success">{{bookingDetails()!.totalPrice | currency:'USD':'symbol':'1.0-0'}}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
+</div>
+<app-footer></app-footer>

@@ -21,6 +21,9 @@ export class SearchBarComponent {
       departureDate: [''],
       returnDate: [''],
       NameOrLocation: [''],
+      Model:[''],
+      Location:[''],
+      destination:['']
     });
   }
 
@@ -37,19 +40,27 @@ export class SearchBarComponent {
   }
 
   showToSection(): boolean {
-    return ['flight', 'tour', 'car'].includes(this.searchType);
+    return ['flight'].includes(this.searchType);
   }
 
   showDepartureDate(): boolean {
-    return ['flight', 'car', 'tour'].includes(this.searchType);
+    return ['flight'].includes(this.searchType);
   }
-  showLocation(): boolean {
+  showLocationOrname(): boolean {
     return ['hotel'].includes(this.searchType);
   }
-  showReturnDate(): boolean {
-    return ['flight', 'car'].includes(this.searchType);
+  showLocation(): boolean {
+    return ['cars'].includes(this.searchType);
   }
-
+  showModel(): boolean {
+    return ['cars'].includes(this.searchType);
+  }
+  showReturnDate(): boolean {
+    return ['flight'].includes(this.searchType);
+  }
+  showDestination(): boolean{
+    return ['tour'].includes(this.searchType)
+  }
   onSubmit() {
     if (this.searchForm.invalid) {
       this.searchForm.markAllAsTouched();
@@ -62,8 +73,14 @@ export class SearchBarComponent {
       ArrivalAirport: raw.to,
       DepartureTime: raw.departureDate,
       ArrivalTime: raw.returnDate,
+      NameOrLocation: raw.NameOrLocation,
+      model:raw.Model,
+      location:raw.Location,
+      Destination:raw.destination,
+
       searchType: raw.searchType,
-      NameOrLocation: raw.NameOrLocation
+      
+
     };
 
     // حفظ البيانات باستخدام signal
@@ -77,8 +94,8 @@ export class SearchBarComponent {
   }
 
   ngOnInit() {
-   
+
   }
 
-  
+
 }
