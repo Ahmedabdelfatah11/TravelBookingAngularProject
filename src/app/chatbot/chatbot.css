@@ -12,14 +12,14 @@
   height: 60px;
   border-radius: 50% !important;
   font-size: 24px;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 63, 19, 0.3);
   transition: all 0.3s ease;
   z-index: 1001;
 }
 
 .chat-toggle-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(1, 238, 183, 0.4);
 }
 
 .chat-toggle-btn.chat-open {
@@ -53,7 +53,7 @@
 /* Chat Header */
 .chat-header {
   border-bottom: none;
-  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  background: linear-gradient(135deg, #03ffd1, #07100c) !important;
   border-radius: 15px 15px 0 0 !important;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .bot-message .avatar {
-  background: linear-gradient(135deg, #007bff, #6610f2);
+  background: linear-gradient(135deg, #03ffd1, #07100c);
   color: white;
 }
 
@@ -163,7 +163,7 @@
 }
 
 .user-bubble {
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, #03ffd1, #186a45);
   color: white;
   border-bottom-right-radius: 6px;
 }

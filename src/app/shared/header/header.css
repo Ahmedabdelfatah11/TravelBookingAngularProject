@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw !important;
+  /* width: 100vw !important; */
   height: 100vh !important;
   font-size: 50px;
   font-weight: 700;
