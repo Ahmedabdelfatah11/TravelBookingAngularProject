@@ -20,11 +20,15 @@ export class TourBookingComponent {
   router = inject(Router);
   private bookingService = inject(TourBookingService);
   private toastr = inject(ToastrService);
+  today = new Date();
 
   get activeTickets(): TourTicket[] {
     return this.tour?.tourTickets?.filter(t => t.isActive) ?? [];
   }
-
+  isPast(startDate: string): boolean {
+    console.log(this.today)
+    return new Date(startDate).getDay <= this.today.getDay ;
+  }
   ngOnInit() {
     if (this.tour?.tickets) {
       this.tour.tourTickets = this.tour.tickets.map(t => ({

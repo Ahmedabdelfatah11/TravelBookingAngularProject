@@ -1,5 +1,6 @@
 <section>
-  <div class="shadow-sm border border-1 card">
+  @if (!isPast(tour.startDate)){
+<div class="shadow-sm border border-1 card">
     <div class="card-body w-100 p-0">
       <h5 class="card-title mb-3 p-4 text-white w-100">Booking Form</h5>
       <div class="p-3">
@@ -77,4 +78,25 @@
       </div>
     </div>
   </div>
+  }
+  @else{
+   <div class="shadow-sm border border-danger card bg-light">
+    <div class="card-body text-center p-5">
+      <h3 class="text-danger mb-3">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Tour Expired
+      </h3>
+      <p class="text-muted mb-4">
+        Sorry, this tour started on 
+        <strong>{{ tour.startDate | date:'fullDate' }}</strong>
+        and is no longer available for booking.
+      </p>
+      <a routerLink="/tours" class="btn btn-outline-success">
+        Browse Other Tours
+      </a>
+    </div>
+  </div>
+  }
+  
+  
 </section>

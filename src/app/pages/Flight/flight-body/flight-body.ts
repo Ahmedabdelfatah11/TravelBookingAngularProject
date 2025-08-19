@@ -19,7 +19,7 @@ export class FlightBody implements OnInit {
   flightcount = signal(0);
   loading = signal(false);
   filters = signal<FlightFilterParams>({});
-  searchData = signal<any>(null); 
+  searchData = signal<any>(null);
 
   flightService = inject(FlightService);
   private router = inject(Router);
@@ -67,15 +67,19 @@ export class FlightBody implements OnInit {
       this.loadFlights();
     }
     AOS.init({
-      duration: 1000, 
-      once: true      
+      duration: 1000,
+      once: true
     });
   }
   loadEffect = effect(() => {
     // this.LoadsearchData();
     this.loadFlights();
   });
-
+  // today = new Date();
+  // isPast(startDate: string): boolean {
+  //   // console.log(this.today, startDate)
+  //   return new Date(startDate).getDay <= this.today.getDay;
+  // }
 
   loadFlights() {
     this.loading.set(true);
