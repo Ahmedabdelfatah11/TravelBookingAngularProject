@@ -26,9 +26,9 @@ h3,
 h4,
 h5,
 h6 textarea {
-  font-family: "Stardos Stencil", system-ui;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Stardos Stencil", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .card {
