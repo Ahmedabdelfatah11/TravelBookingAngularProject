@@ -10,7 +10,7 @@ import { AuthModel } from '../Interfaces/i-auth-model';
   providedIn: 'root'
 })
 export class Auth {
-  private baseUrl = 'https://localhost:7277/api/Auth';
+  private baseUrl = 'http://pyramigo.runasp.net/api/Auth';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 

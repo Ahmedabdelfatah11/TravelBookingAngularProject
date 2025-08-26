@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'https://localhost:7277/api/userProfile';
+  private apiUrl = 'http://pyramigo.runasp.net/api/userProfile';
 
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {

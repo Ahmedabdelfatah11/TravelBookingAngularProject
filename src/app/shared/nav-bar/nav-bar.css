@@ -62,9 +62,9 @@ nav {
     transition: all .3s ease-in-out;
 }
 
-.text-black:hover {
+/* .text-black:hover {
     color: var(--secondary-color) !important;
-}
+} */
 
 /* لما الشاشة تصغر جدًا (موبايل)، خليها تحت بالكامل */
 @media (max-width: 768px) {
@@ -83,5 +83,5 @@ nav {
 .navbar .nav-link:hover,
 .home-body :host .navbar .nav-link:hover {
     color: var(--secondary-color) !important;
-    /* اللون اللي انت عايزه */
+   
 }

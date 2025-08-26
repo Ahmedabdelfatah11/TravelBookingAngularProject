@@ -30,15 +30,15 @@ export class ConfirmEmail {
     });
     // Clear query parameters from the URL after patching the form
     if (queryParams['userId'] && queryParams['code']) {
-    this.router.navigate([], {
-      replaceUrl: true,
-      queryParams: {} // Clear query parameters from the URL
-    });
-    // Automatically submit confirmation if userId and code are present
-    // this.submitConfirmation(); 
+      this.router.navigate([], {
+        replaceUrl: true,
+        queryParams: {} // Clear query parameters from the URL
+      });
+      // Automatically submit confirmation if userId and code are present
+      // this.submitConfirmation(); 
+    }
   }
-  }
-  
+
 
   submitConfirmation() {
     if (this.confirmForm.invalid) {
@@ -55,7 +55,7 @@ export class ConfirmEmail {
         this.isLoading = false; // Stop loading spinner
         // Navigate after a delay
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
         }, 1000);
       },
       error: err => {

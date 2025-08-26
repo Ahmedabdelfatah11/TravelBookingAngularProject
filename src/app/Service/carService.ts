@@ -9,7 +9,7 @@ import { start } from '@popperjs/core';
   providedIn: 'root',
 })
 export class CarService {
-  private apiUrl = 'https://localhost:7277/api/Car';
+  private apiUrl = 'http://pyramigo.runasp.net/api/Car';
   
 
   constructor(private http: HttpClient) {}

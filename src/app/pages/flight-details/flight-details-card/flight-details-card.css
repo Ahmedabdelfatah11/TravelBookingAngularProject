@@ -259,8 +259,7 @@
     display: none;
 }
 
-/* Responsive adjustments */
-/* @media (max-width: 768px) {
+ @media (max-width: 768px) {
     .flight-header {
         flex-direction: column;
         align-items: flex-start;
@@ -281,8 +280,12 @@
             margin: 0.5rem 0;
         }
     }
-
+    .duration{
+        text-align: center;
+        color: var(--secondary-color) !important;
+        margin-top: 8px;
+    }
     .info-cards {
         grid-template-columns: 1fr;
     }
-} */
+} 

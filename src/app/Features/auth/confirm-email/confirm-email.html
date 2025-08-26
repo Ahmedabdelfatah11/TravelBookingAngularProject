@@ -10,7 +10,7 @@
         <form [formGroup]="confirmForm" (ngSubmit)="submitConfirmation()">
           <div class="mb-3">
             <label class="form-label">User ID</label>
-            <input type="text" formControlName="userId" class="form-control" placeholder="Your User ID" />
+            <input type="text" formControlName="userId" class="form-control" placeholder="Your User ID" [disabled]="true" hidden/>
           @if(confirmForm.get('userId')?.touched && confirmForm.get('userId')?.invalid) {
             <div class="text-danger small">
               User ID is required.
@@ -21,7 +21,7 @@
 
           <div class="mb-3">
             <label class="form-label">Verification Code</label>
-            <input type="text" formControlName="code" class="form-control" placeholder="Enter the code" />
+            <input type="text" formControlName="code" class="form-control" placeholder="Enter the code" [disabled]="true" hidden/>
           @if(confirmForm.get('code')?.touched && confirmForm.get('code')?.invalid) {
             <div class="text-danger small">
               Verification code is required.

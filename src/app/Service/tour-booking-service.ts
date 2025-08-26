@@ -14,7 +14,7 @@ export interface TourBookingPayload {
   providedIn: 'root'
 })
 export class TourBookingService {
-  private apiUrl = 'https://localhost:7277/api/Tour';
+  private apiUrl = 'http://pyramigo.runasp.net/api/Tour';
 
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {

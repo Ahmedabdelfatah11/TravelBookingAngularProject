@@ -7,8 +7,8 @@ import { DateRange, HotelFilterParams, HotelResponse, Room } from '../Models/hot
   providedIn: 'root'
 })
 export class HotelService {
-  private apiUrl = 'https://localhost:7277/api/HotelCompany';
-  private apiRoomUrl = 'https://localhost:7277/api/room';
+  private apiUrl = 'http://pyramigo.runasp.net/api/HotelCompany';
+  private apiRoomUrl = 'http://pyramigo.runasp.net/api/room';
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');

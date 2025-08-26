@@ -8,7 +8,7 @@ import { Hotel } from '../pages/Hotel/hotel/hotel';
   providedIn: 'root'
 })
 export class Favorites {
-  private apiUrl = 'https://localhost:7277/api/favorite';
+  private apiUrl = 'http://pyramigo.runasp.net/api/favorite';
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');

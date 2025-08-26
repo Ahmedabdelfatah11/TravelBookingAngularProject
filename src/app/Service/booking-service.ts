@@ -7,7 +7,7 @@ import { Booking } from '../Models/booking';
   providedIn: 'root'
 })
 export class BookingService {
-    private apiUrl = 'https://localhost:7277/api/Booking';
+    private apiUrl = 'http://pyramigo.runasp.net/api/Booking';
     constructor(private http: HttpClient) { }
     GetAllBookings() : Observable<Booking[]>{
      return this.http.get<Booking[]>(`${this.apiUrl}`);

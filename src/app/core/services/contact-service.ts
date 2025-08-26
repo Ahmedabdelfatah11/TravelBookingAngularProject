@@ -13,7 +13,7 @@ export interface ContactDto {
   providedIn: 'root'
 })
 export class ContactService {
-  private baseUrl = 'https://localhost:7277/api/Contact';  
+  private baseUrl = 'http://pyramigo.runasp.net/api/Contact';  
 
   constructor(private http: HttpClient) {}
 

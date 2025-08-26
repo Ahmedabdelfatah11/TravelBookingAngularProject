@@ -8,8 +8,8 @@ import { FlightFilterParams, FlightResponse } from '../Models/flight-model';
 })
 
 export class FlightService {
-  private apiUrl = 'https://localhost:7277/Flight';
-  private flightCompanyUrl = 'https://localhost:7277/FlightCompany';
+  private apiUrl = 'http://pyramigo.runasp.net/Flight';
+  private flightCompanyUrl = 'http://pyramigo.runasp.net/FlightCompany';
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');

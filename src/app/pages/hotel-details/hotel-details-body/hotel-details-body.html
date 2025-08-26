@@ -110,18 +110,19 @@
             <div class="col-md-1 d-flex align-items-start justify-content-center mb-1">
                 <div class="Room-image-container ">
                     <img [src]="room?.roomImages?.[0]?.imageUrl" alt="{{ room?.roomType }}"
-                        class="img-fluid rounded h-100 w-100 object-fit-cover">
+                    (click)="openImageModal(room?.roomImages?.[0]?.imageUrl!)"
+                        class="img-fluid rounded-5 h-100 w-100 object-fit-cover" style="cursor: pointer;">
                 </div>
             </div>
             <div class="col-md-7 align-content-center text-black-50">
                 <p>{{room.description}} - {{room.roomType}}
-                    <label class="form-label fw-semibold">Available Periods</label>
+                    <label class="form-label fw-semibold d-block">Available Periods</label>
                     @for (gap of availableGaps().get(room.id) || []; track $index) {
-                <div class="alert alert-success p-2 mb-2 small d-flex align-items-center">
+                <div class="alert alert-success p-2 m-2 small d-flex align-items-center">
                     <i class="fas fa-calendar-check me-2"></i>
                     <strong>{{ gap.start | date:'dd-MM-yyyy' }}</strong>
-                    <-- To -->
-                        <strong>{{ gap.end | date:'dd-MM-yyyy' }}</strong>
+                     <i class="fas fa-arrow-right mx-2" ></i>
+                       <i class="fas fa-calendar-check me-2"></i> <strong>{{ gap.end | date:'dd-MM-yyyy' }}</strong>
                 </div>
                 }
                 @if (room.id && availableGaps().has(room.id) &&

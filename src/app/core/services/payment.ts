@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 }) 
 export class PaymentService {
-  private baseUrl = 'https://localhost:7277/api/Payment';   
+  private baseUrl = 'http://pyramigo.runasp.net/api/Payment';   
   constructor(private http: HttpClient) {}
   
    private getAuthHeaders(): HttpHeaders {
