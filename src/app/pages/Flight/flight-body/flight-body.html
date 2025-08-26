@@ -7,7 +7,7 @@
             <app-sort-options (sortChange)="onSortChange($event)"></app-sort-options>
             <div class="row g-4 opacity-100" [class.opacity-25]="loading()">
                 @for (flight of flights(); track flight.flightNumber) {
-                <app-flight-card [flight]="flight" data-aos="fade-left" data-aos-delay="120"></app-flight-card>
+                <app-flight-card [flight]="flight" data-aos="fade-left" data-aos-delay="120" ></app-flight-card>
                 }
             </div>
             @if(loading()){

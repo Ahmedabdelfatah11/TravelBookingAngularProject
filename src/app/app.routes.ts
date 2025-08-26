@@ -27,6 +27,7 @@ import { TourDetails } from './pages/Tour-details/tour-details/tour-details';
 import { TourResolver } from './pages/Tour-details/tour.resolver';
 import { ChatbotComponent } from './chatbot/chatbot';
 import { Bookings } from './pages/bookings/bookings';
+import { GoogleCallback } from './Features/auth/google-callback/google-callback';
 
 
 export const routes: Routes =
@@ -56,6 +57,7 @@ export const routes: Routes =
     { path: 'ToursDetails/:id', component: TourDetails, title: 'Tour Details'  , resolve: { tour: TourResolver }},
       { path: 'chat', component:ChatbotComponent},
       { path: 'bookings',component:Bookings,title:'Booking'},
+      { path: 'google-callback', component: GoogleCallback },
     { path: 'invalid', component: Invalid },
     { path: '**', redirectTo: '/invalid', pathMatch: 'full' }
   ]

@@ -13,7 +13,10 @@ import { RouterLink } from '@angular/router';
 export class FlightCard {
 
   @Input() flight: Flight | undefined;
+  
 
+
+  @Input() isPast(num:string):any{};
   constructor() {
   }
 
