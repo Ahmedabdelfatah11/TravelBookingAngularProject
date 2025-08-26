@@ -24,18 +24,18 @@
       <div class="col-lg-4">
         <div class="row gy-3 gx-3 h-100">
           <div class="col-lg-12 col-sm-6 ">
-            @if (tour.imageUrls.length > 0) {
+            @if (getAllImageUrls().length > 0) {
               <img
-                [src]="tour.imageUrls[0]"
+                [src]="getAllImageUrls()[0]"
                 [alt]="'Tour Image 1 for Tour ' + tour.id"
                 class="img-fluid rounded shadow-sm w-100 h-100"
               />
             }
           </div>
           <div class="col-lg-12 col-sm-6 ">
-            @if (tour.imageUrls.length > 1) {
+            @if (getAllImageUrls().length > 1) {
               <img
-                [src]="tour.imageUrls[1]"
+                [src]="getAllImageUrls()[1]"
                 [alt]="'Tour Image 2 for Tour ' + tour.id"
                 class="img-fluid rounded shadow-sm w-100 h-100"
               />
@@ -44,9 +44,9 @@
         </div>
       </div>
       <div class="col-lg-4 ">
-        @if (tour.imageUrls.length > 2) {
+        @if (getAllImageUrls().length > 2) {
           <img
-            [src]="tour.imageUrls[2]"
+            [src]="getAllImageUrls()[2]"
             [alt]="'Tour Image 3 for Tour ' + tour.id"
             class="img-fluid rounded shadow-sm w-100 h-100"
           />
@@ -55,27 +55,27 @@
         <div class="col-lg-4">
         <div class="row gy-1 gx-3 h-100 w-100">
           <div class="col-lg-6 col-sm-6 ">
-            @if (tour.imageUrls.length > 0) {
+            @if (getAllImageUrls().length > 0) {
               <img
-                [src]="tour.imageUrls[3]"
+                [src]="getAllImageUrls()[3]"
                 [alt]="'Tour Image 1 for Tour ' + tour.id"
                 class="img-fluid rounded shadow-sm w-100 h-100"
               />
             }
           </div>
           <div class="col-lg-6 col-sm-6 gy-2">
-            @if (tour.imageUrls.length > 1) {
+            @if (getAllImageUrls().length > 1) {
               <img
-                [src]="tour.imageUrls[4]"
+                [src]="getAllImageUrls()[4]"
                 [alt]="'Tour Image 2 for Tour ' + tour.id"
                 class="img-fluid rounded shadow-sm w-100 h-100"
               />
             }
           </div>
           <div class="col-12 pt-3">
-            @if (tour.imageUrls.length > 1) {
+            @if (getAllImageUrls().length > 1) {
               <img
-                [src]="tour.imageUrls[4]"
+                [src]="getAllImageUrls()[4]"
                 [alt]="'Tour Image 2 for Tour ' + tour.id"
                 class="img-fluid rounded shadow-sm w-100 "
               />

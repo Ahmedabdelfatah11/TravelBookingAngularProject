@@ -18,6 +18,7 @@ export class TourDetails implements OnInit {
 
   private route = inject(ActivatedRoute);
 
+  
   ngOnInit() {
     const data: Data = this.route.snapshot.data;
     this.tourData = data['tour'];
@@ -34,4 +35,5 @@ export class TourDetails implements OnInit {
     const endDate = new Date(end);
     return Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
   }
+
 }

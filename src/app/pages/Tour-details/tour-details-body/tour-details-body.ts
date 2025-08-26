@@ -12,6 +12,8 @@ import { Favorites } from '../../../Service/favorites';
 import { TourBookingComponent } from '../tour-booking/tour-booking';
 import { TourBookingService } from '../../../Service/tour-booking-service';
 import { FormsModule } from '@angular/forms';
+import { TourService } from '../../../Service/tour-service';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-tour-details-body',
@@ -293,5 +295,45 @@ private checkUserReview(): void {
   });
 }
 
+private baseUrl = environment.baseUrl || 'https://localhost:7277';
+
+  /**
+   * Returns a deduplicated array of all image URLs with full base URL applied
+   */
+  protected getAllImageUrls(): string[] {
+    if (!this.tour) return [];
+
+    const urls: string[] = [];
+    const seen = new Set<string>();
+
+    // Helper to add unique URLs
+    const addUrl = (url: string | null | undefined) => {
+      if (!url || seen.has(url)) return;
+      seen.add(url);
+      // Prepend base URL if it's a relative path
+      if (url.startsWith('/')) {
+        urls.push(`${this.baseUrl}${url}`);
+      } else if (url.startsWith('http://') || url.startsWith('https://')) {
+        urls.push(url);
+      } else {
+        urls.push(`${this.baseUrl}/${url}`);
+      }
+    };
+
+    // Add main image
+    addUrl(this.tour.imageUrl);
+
+    // Add gallery images
+    if (this.tour.imageUrls?.length) {
+      this.tour.imageUrls.forEach(addUrl);
+    }
+
+    // Fallback
+    if (urls.length === 0) {
+      return ['https://via.placeholder.com/400x300?text=No+Images+Available'];
+    }
+
+    return urls;
+  }
 
 }

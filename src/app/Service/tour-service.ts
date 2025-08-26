@@ -52,5 +52,6 @@ private buildQueryParams(filter: TourFilterParams): HttpParams {
       headers: this.getAuthHeaders()
     });
   }
+  
 
 }

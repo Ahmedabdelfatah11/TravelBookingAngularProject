@@ -39,7 +39,7 @@
 .dropdown-item {
     display: flex;
     align-items: center;
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem 1rem;
     color: #495057;
     transition: all 0.2s;
 }
