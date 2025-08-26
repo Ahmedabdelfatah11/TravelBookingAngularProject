@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../Service/auth';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-nav-bar',
   imports: [RouterLink, CommonModule],

@@ -8,6 +8,7 @@ export class TourService {
   private apiUrl = 'http://pyramigo.runasp.net/api/Tour';
   private tourCompanyUrl = 'http://pyramigo.runasp.net/api/TourCompany';
 
+
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
