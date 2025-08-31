@@ -59,4 +59,7 @@ addToWishlist(id: number | undefined): void {
     }
   });
 }
+ scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

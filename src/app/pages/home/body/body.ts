@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { FlightCompany } from '../../../Models/flight-model';
 import { FlightService } from '../../../Service/flightService';
 import { TourService } from '../../../Service/tour-service';
-import { ITourCompany } from '../../../Models/tourModel';
+import { ITourCompany, TourFilterParams, Tours } from '../../../Models/tourModel';
 
 
 
@@ -47,8 +47,12 @@ export class Body implements OnInit {
     { title: 'Tours', description: 'Explore new cities', image: 'img/Tours.jpg', sub: "Explore Tours", subimg: "img/Tour.jpg", link: '/tour' },
     { title: 'Cars', description: 'Explore new places easier ', image: 'img/Cars.jpg', sub: "Book Cars", subimg: "img/Car.jpg", link: '/cars' },
   ];
+  Tours = signal<Tours[]>([]);
+  currentPage = signal(1);
+  pageSize = signal(6);
+  filters = signal<TourFilterParams>({});
   flightCompany = signal<FlightCompany[]>([]);
-  TourCompany =signal<ITourCompany[]>([]);
+  TourCompany = signal<ITourCompany[]>([]);
   loading = signal(false);
   flightService = inject(FlightService);
   tourService = inject(TourService);
@@ -56,12 +60,35 @@ export class Body implements OnInit {
   ngOnInit(): void {
     this.loadFlights();
     this.loadTours();
+    this.loadTour();
     AOS.init({
       duration: 1000, // مدة التأثير بالمللي ثانية
       once: true      // يشغّل الأنيميشن مرة واحدة فقط
     });
   }
+  loadTour() {
+    this.loading.set(true);
 
+    const params = {
+      ...this.filters(),
+      PageIndex: this.currentPage(),
+      PageSize: this.pageSize()
+    };
+
+    this.tourService.getFilteredTours(params).subscribe({
+      next: (data: any) => {
+        const tours = data.pagination?.data;
+        const count = data.pagination?.count;
+
+        this.Tours.set(tours || []);
+        this.loading.set(false);
+      },
+      error: (err: any) => {
+        console.error('Error fetching tours:', err);
+        this.loading.set(false);
+      }
+    });
+  }
   loadFlights() {
     this.loading.set(true);
     this.flightService.getFlightCompany().subscribe({
@@ -76,10 +103,10 @@ export class Body implements OnInit {
       }
     });
   }
-  loadTours(){
+  loadTours() {
     this.loading.set(true);
     this.tourService.getTourCompany().subscribe({
-      next:(data) => {
+      next: (data) => {
         this.TourCompany.set(data.data);
         console.log(data)
         this.loading.set(false);
@@ -98,4 +125,7 @@ export class Body implements OnInit {
   getSlidesPerView(): number {
     return window.innerWidth < 576 ? 2 : 5;
   }
+  scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

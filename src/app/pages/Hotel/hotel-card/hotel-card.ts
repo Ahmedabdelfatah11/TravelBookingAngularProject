@@ -97,5 +97,7 @@ export class HotelCard {
     const numericRating = Number(rating);
     return Array(5 - Math.floor(numericRating)).fill(0);
   }
-  
+  scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

@@ -26,7 +26,6 @@ export class TourBookingComponent {
     return this.tour?.tourTickets?.filter(t => t.isActive) ?? [];
   }
   isPast(startDate: string): boolean {
-    console.log(this.today)
     return new Date(startDate).getDay <= this.today.getDay ;
   }
   ngOnInit() {

@@ -30,6 +30,38 @@ h6 textarea {
     font-weight: 400;
     font-style: normal;
 }
+body {
+  cursor: default;
+}
+
+/* Custom cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  /* border: 2px solid rgb(0, 13, 13); */
+  border-radius: 50%;
+  pointer-events: none;
+  background: var(--third-color);
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background 0.3s ease;
+  z-index: 9999;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.6;
+  }
+}
+
 
 .card {
     border: none;

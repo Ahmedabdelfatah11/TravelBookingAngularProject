@@ -64,7 +64,7 @@
             <i class="far fa-heart"></i>
           </button>
           }
-          <button [routerLink]="['/hotel-details', hotel?.id]" class="btn btn-success border-0 w-100">
+          <button [routerLink]="['/hotel-details', hotel?.id]" (click)="scrollToTop()" class="btn btn-success border-0 w-100">
             View Rooms
           </button>
         </div>
