@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CarRentalService {
-    private apiUrl = 'https://localhost:7277/api/CarRental';
-  private apicarUrl = 'https://localhost:7277/api/Car';
+    private apiUrl = 'http://pyramigo.runasp.net/api/CarRental';
+  private apicarUrl = 'http://pyramigo.runasp.net/api/Car';
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');

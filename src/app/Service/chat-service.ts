@@ -50,8 +50,8 @@ export enum ChatMessageType {
   providedIn: 'root'
 })
 export class ChatbotService {
-  private readonly apiUrl = 'https://localhost:7277/api/chatbot'; // Update with your API URL
-  private readonly hubUrl = 'https://localhost:7277/chatHub'; // Update with your SignalR hub URL
+  private readonly apiUrl = 'http://pyramigo.runasp.net/api/chatbot'; // Update with your API URL
+  private readonly hubUrl = 'http://pyramigo.runasp.net/chatHub'; // Update with your SignalR hub URL
   
   private hubConnection: signalR.HubConnection | null = null;
   private messagesSubject = new Subject<ChatResponse>();

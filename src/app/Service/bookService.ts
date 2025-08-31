@@ -23,7 +23,7 @@ export class BookService {
 
   bookCar(id: number, booking: any): Observable<CarBookingResultDto> {
     return this.http.post<CarBookingResultDto>(
-      `https://localhost:7277/api/Car/${id}/book`,
+      `http://pyramigo.runasp.net/api/Car/${id}/book`,
       booking,
       { headers: this.getAuthHeaders() }
     ).pipe(

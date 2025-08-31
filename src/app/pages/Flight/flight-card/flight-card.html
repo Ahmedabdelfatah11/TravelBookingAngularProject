@@ -39,7 +39,8 @@
 
                 <!-- Buttons -->
                 <div class="d-flex align-items-center">
-                    <button [routerLink]="['/FlightDetails',flight?.flightId]" class="btn btn-success w-100 text-black">
+                    <button [routerLink]="['/FlightDetails',flight?.flightId]" (click)="scrollToTop()"
+                        class="btn btn-success w-100 text-black">
                         View Deals
                     </button>
                 </div>

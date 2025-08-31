@@ -5,7 +5,7 @@ import { ITourCompany } from '../Models/tourModel';
 
 @Injectable({ providedIn: 'root' })
 export class TourCompanyService {
-  private apiUrl = 'https://localhost:7277/api/tourCompany';
+  private apiUrl = 'http://pyramigo.runasp.net/api/tourCompany';
 
   constructor(private http: HttpClient) {}
 

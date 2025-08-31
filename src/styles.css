@@ -26,10 +26,42 @@ h3,
 h4,
 h5,
 h6 textarea {
-   font-family: "Fugaz One", sans-serif;
-  font-weight: 200;
-  font-style: normal;
+    font-family: "Stardos Stencil", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
+body {
+  cursor: default;
+}
+
+/* Custom cursor */
+.cursor {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px; */
+  /* border: 2px solid rgb(0, 13, 13); */
+  /* border-radius: 50%;
+  pointer-events: none;
+  background: var(--third-color);
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background 0.3s ease;
+  z-index: 9999;
+  animation: pulse 1s infinite alternate; */
+}
+
+@keyframes pulse {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.6;
+  }
+}
+
 
 .card {
     border: none;
@@ -45,6 +77,20 @@ h6 textarea {
     margin-top: -50px;
     z-index: 1000;
     position: relative;
+}
+
+.src {
+    background-color: var(--main-color);
+}
+
+body.modal-open {
+    overflow: auto !important;
+    padding-right: 0 !important;
+}
+
+.app-container {
+    position: relative;
+    min-height: 100vh;
 }
 
 .src {

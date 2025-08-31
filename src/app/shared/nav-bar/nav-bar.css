@@ -3,12 +3,13 @@
 .home-body :host .navbar .btn-outline-light {
     color: black !important;
 }
-.title{
+
+.title {
     font-family: "Pacifico", cursive;
-  font-weight: 500;
-  font-style: normal;
+    font-weight: 500;
+    font-style: normal;
 }
-/* خلي الزرار أبيض مع حدود سوداء في الصفحة الرئيسية */
+
 .home-body :host .btn-outline-light {
     background-color: white;
     border-color: white;
@@ -42,7 +43,6 @@
 
 .dropdown-menu.custom-shift {
     transform: translateX(-100px);
-    /* عدل حسب الحاجة */
 }
 
 nav {
@@ -55,18 +55,16 @@ nav {
     top: 100% !important;
     transform: none !important;
     min-width: 220px;
-    /* تأكد إنها فوق أي عنصر تاني */
 }
 
 .text-black {
     transition: all .3s ease-in-out;
 }
 
-.text-black:hover {
+/* .text-black:hover {
     color: var(--secondary-color) !important;
-}
+} */
 
-/* لما الشاشة تصغر جدًا (موبايل)، خليها تحت بالكامل */
 @media (max-width: 768px) {
     .custom-dropdown {
         left: 50% !important;
@@ -83,5 +81,5 @@ nav {
 .navbar .nav-link:hover,
 .home-body :host .navbar .nav-link:hover {
     color: var(--secondary-color) !important;
-    /* اللون اللي انت عايزه */
+
 }

@@ -96,7 +96,6 @@ export class TourBody implements OnInit {
     });
   }
 
-  // باقي الدوال كما هي...
   nextPage() {
     if (this.currentPage() * this.pageSize() < this.Tourcount()) {
       this.currentPage.update(p => p + 1);

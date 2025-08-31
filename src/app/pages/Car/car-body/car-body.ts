@@ -22,7 +22,7 @@ export class CarBody {
   pageSize = 10;
   isLoading = false;
   errorMessage = '';
-  searchModel : string = '';
+  searchModel: string = '';
   location = '';
   Sort = signal<string>('');
   minPrice = 0;
@@ -40,14 +40,14 @@ export class CarBody {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { searchData: CarSearchData };
     if (state?.searchData) {
-  this.searchData = state.searchData;
-  console.log('Received search data:', state.searchData);
+      this.searchData = state.searchData;
+      console.log('Received search data:', state.searchData);
 
-if (this.searchData !== null) {
-  this.searchModel = this.searchData.model ?? '';
-  this.location = this.searchData.location ?? '';
-}
-}
+      if (this.searchData !== null) {
+        this.searchModel = this.searchData.model ?? '';
+        this.location = this.searchData.location ?? '';
+      }
+    }
 
 
   }
@@ -130,6 +130,7 @@ if (this.searchData !== null) {
   }
 
   navigateToDetails(carId: number): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     console.log('Navigating to car details:', carId);
     this.router.navigate(['cars', carId]).then(success => {
       if (!success) {

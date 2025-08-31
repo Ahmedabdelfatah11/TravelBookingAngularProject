@@ -7,7 +7,7 @@ import { CreateReview, ReviewFilterParams, ReviewStats, Reviews } from '../Model
   providedIn: 'root'
 })
 export class ReviewService {
-  private apiUrl = 'https://localhost:7277/api/review'; // Changed to lowercase
+  private apiUrl = 'http://pyramigo.runasp.net/api/review'; // Changed to lowercase
   
   constructor(private http: HttpClient) { }
 

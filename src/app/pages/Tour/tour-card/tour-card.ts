@@ -5,7 +5,6 @@ import { Tour } from '../tour/tour';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Favorites } from '../../../Service/favorites';
-import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-tour-card',
@@ -60,24 +59,7 @@ addToWishlist(id: number | undefined): void {
     }
   });
 }
-// Define base URL (can come from environment.ts)
-  private baseUrl = environment.baseUrl;
-
-// Helper: Ensure URL is absolute
-getSafeImageUrl(imageUrl: string | null | undefined): string {
-    if (!imageUrl) {
-      return 'https://via.placeholder.com/400x300?text=No+Image+Available';
-    }
-
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-      return imageUrl;
-    }
-
-    return imageUrl.startsWith('/')
-      ? `${this.baseUrl}${imageUrl}`
-      : `${this.baseUrl}/${imageUrl}`;
-  }
-
-  // ... rest of your code
-
+ scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

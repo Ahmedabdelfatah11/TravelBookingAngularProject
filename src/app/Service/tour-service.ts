@@ -5,8 +5,9 @@ import { TourFilterParams, TourImages, TourResponse, Tours, ITourCompany } from 
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
-  private apiUrl = 'https://localhost:7277/api/Tour';
-  private tourCompanyUrl = 'https://localhost:7277/api/TourCompany';
+  private apiUrl = 'http://pyramigo.runasp.net/api/Tour';
+  private tourCompanyUrl = 'http://pyramigo.runasp.net/api/TourCompany';
+
 
   constructor(private http: HttpClient) {}
 
